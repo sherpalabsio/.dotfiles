@@ -1,13 +1,4 @@
-# This generates the following prompt:
-# - When in a Git repository:
-#   - Normal mode: "{top-level-directory} [{git-branch}] ❯ "
-#     - For example: "dotfiles [main] ❯ "
-#     - It also adds a star after the branch name if there is any change
-#   - Interactive rebase mode: "{top-level-directory} rebase-i > {target-sha} | {picked-commit-name} ❯ "
-#     - For example: "dotfiles rebase-i > 1234567890 | Fix typo in README ❯ "
-# - When not in a Git repository:
-#   - "{top-level-directory} ❯ "
-#     - For example: "awesome-project ❯ "
+# For more info see the readme
 
 autoload -Uz vcs_info
 precmd() { vcs_info }
@@ -15,8 +6,8 @@ precmd() { vcs_info }
 # Define format for Git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' get-revision true
-zstyle ':vcs_info:*' unstagedstr '*' # Add star after the branch name if there are unstaged changes
-zstyle ':vcs_info:*' stagedstr '*' # Add star after the branch name if there are staged changes
+zstyle ':vcs_info:*' unstagedstr '*' # Add a star after the branch name if there are unstaged changes
+zstyle ':vcs_info:*' stagedstr '*' # Add a star after the branch name if there are staged changes
 zstyle ':vcs_info:git:*' formats '[%b%m] '
 zstyle ':vcs_info:git:*' actionformats '%a > %6.6i%m '
 zstyle ':vcs_info:git*+set-message:*' hooks git-changes
