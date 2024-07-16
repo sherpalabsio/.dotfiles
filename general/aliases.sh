@@ -55,3 +55,6 @@ alias st='sherpa trust'
 
 alias upgrade_sherpa='git -C $DOTFILES_PATH/lib/local_sherpa pull'
 alias upgrade_sherpa_f='git -C $DOTFILES_PATH/lib/local_sherpa reset origin/main --hard'
+
+alias screenshot_enable_shadow='defaults write com.apple.screencapture disable-shadow -bool false && killall SystemUIServer'
+alias screenshot_disable_shadow='defaults write com.apple.screencapture disable-shadow -bool true && killall SystemUIServer'
