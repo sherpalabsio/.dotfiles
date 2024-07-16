@@ -11,4 +11,16 @@
 		"prefix": "pp",
 		"body": ["echo \"${1}: $${1}\""],
   },
+	"debug puts3": {
+		"prefix": "ppp",
+		"body": [
+			"echo '-------------------------------'",
+			"echo \"${1}: $${1}\"",
+			"echo '-------------------------------'"
+		],
+  },
+	"disable shellcheck": {
+		"prefix": "dis",
+		"body": ["# shellcheck disable=${1:SC2154}"],
+  },
 }
