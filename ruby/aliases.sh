@@ -51,5 +51,7 @@ alias cop='rubocop'
 alias cop_fix='rubocop --autocorrect-all'
 
 # Other
+alias lint='rubocop'
+alias lint_fix='rubocop -a'
 
 # alias rest='pumactl restart'
