@@ -1,30 +1,28 @@
-alias grbi2='grbi HEAD~2'
-alias grbi3='grbi HEAD~3'
-alias grbi4='grbi HEAD~4'
-alias grbi5='grbi HEAD~5'
-alias grbi6='grbi HEAD~6'
-alias grbi7='grbi HEAD~7'
-alias grbi8='grbi HEAD~8'
-alias grbi9='grbi HEAD~9'
+alias grbi2='grbi HEAD~2 --autostash'
+alias grbi3='grbi HEAD~3 --autostash'
+alias grbi4='grbi HEAD~4 --autostash'
+alias grbi5='grbi HEAD~5 --autostash'
+alias grbi6='grbi HEAD~6 --autostash'
+alias grbi7='grbi HEAD~7 --autostash'
+alias grbi8='grbi HEAD~8 --autostash'
+alias grbi9='grbi HEAD~9 --autostash'
 
-# Rebase to master iteratively
-alias grbmi='grbi main'
+# Git rebase master
+alias grbm='git rebase $(git_main_branch) --autostash'
 
 # Squash fixup commits
 alias grb_fixup='git rebase -i --autosquash $(git_main_branch)'
 
-# Rebase all commits in the current branch iteratively
-alias grbia='git rebase -i $(git_main_branch)'
+# Rebase all commits in the current feature branch iteratively
+alias grbia='git rebase -i $(git_main_branch) --autostash'
 
 # Update = sync changes from the remote master to the current branch
 alias gupd='gplm && grbm && gfa'
-# Update iteratively
-alias gupdi='gplm && grbmi'
 # Update remote = sync changes from the current branch to its remote counterpart
 alias gupdr='gplm && grbm && gpf && gfa'
 
 # Commit for lazy devs like myself
-alias gc='git commit -m'
+alias gc='git add . && git commit -m'
 # Fixup commit | brew install fzf
 alias gc_fixup="git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | awk \"{ print \$1 }\" | xargs -o git commit --fixup"
 # Ammend all changes to the last commit
