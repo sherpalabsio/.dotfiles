@@ -11,6 +11,6 @@
 # Ruby
 .byebug_history
 
-.sherparc
+.envrc
 
 /lib/generators
