@@ -115,6 +115,12 @@
     "when": "editorTextFocus && resourceLangId == javascript"
   },
   {
+    "key": "cmd+r t",
+    "command": "workbench.action.tasks.runTask",
+    "args": "run_test_file_in_iterm2",
+    "when": "editorTextFocus && resourceLangId == shellscript"
+  },
+  {
     "key": "ctrl+down",
     "command": "editor.action.revealDefinition",
     "when": "editorHasDefinitionProvider && editorTextFocus"

@@ -48,6 +48,21 @@
         "reveal": "never",
         "focus": false
       }
-    }
+    },
+    // Run the current file as a JS test (AppleScript)
+    {
+      "label": "run_test_file_in_iterm2",
+      "type": "shell",
+      "command": "osascript",
+      "args": [
+        "~/.dotfiles/iTerm/run_command.scpt",
+        "t", // alias for running tests
+        "${relativeFile}"
+      ],
+      "presentation": {
+        "reveal": "never",
+        "focus": false
+      }
+    },
   ]
 }
