@@ -60,3 +60,12 @@ alias gxl='lazygit'
 
 alias gpc='git -C ~/.dotfiles push' # Git push config
 alias gpcl='git -C ~/.dotfiles/local push' # Git push config local
+
+# Git bisect start
+alias gbss="gbs_start"
+# Git bisect abort
+alias gbsa="git bisect reset"
+# Git bisect good
+alias gbsg="git bisect old"
+# Git bisect bad
+alias gbsb="git bisect new"
