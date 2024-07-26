@@ -16,10 +16,17 @@ alias grb_fixup='git rebase -i --autosquash $(git_main_branch)'
 # Rebase all commits in the current feature branch iteratively
 alias grbia='git rebase -i $(git_main_branch) --autostash'
 
+alias git_clean_branches='git_clean_not_my_branches && git_clean_merged_branches'
+alias git_clean_not_my_branches='git branch --format "%(refname:short)" | grep -v "peter-" | grep -v "$(git_main_branch)" | xargs -r git branch -D'
+alias git_clean_merged_branches="git branch --format '%(refname:short) %(upstream:track)' | awk '\$2 == \"[gone]\" { print \$1 }' | xargs -r git branch -D"
+
+# Git prune
+alias gpr='gfa && git_clean_branches'
+
 # Update = sync changes from the remote master to the current branch
-alias gupd='gplm && grbm && gfa'
+alias gupd='gplm && grbm && git_clean_merged_branches'
 # Update remote = sync changes from the current branch to its remote counterpart
-alias gupdr='gplm && grbm && gpf && gfa'
+alias gupdr='gupd && gpf'
 
 # Commit for lazy devs like myself
 alias gc='git add . && git commit -m'
@@ -38,7 +45,7 @@ alias gplr='git pull --rebase origin $(git_current_branch)'
 # Pull force = overwrite local branch with its remote counterpart
 alias gplf='git reset origin/$(git_current_branch) --hard'
 # Pull master = update the local main branch, without the need to switch to it
-alias gplm='git fetch origin $(git_main_branch):$(git_main_branch)'
+alias gplm='git fetch origin $(git_main_branch):$(git_main_branch) --prune'
 # Discard all changes
 alias nah='git reset --hard && git clean -df'
 # Undo = removes the last commit while keeping its changes
