@@ -9,16 +9,13 @@ export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export DOTFILES_PATH=$HOME/.dotfiles
 
-_zsh_path=$HOME/.oh-my-zsh
-_dropbox_path="/Volumes/DriveD/Dropbox"
-
 # Zsh Settings
 plugins=(git zsh-syntax-highlighting)
 COMPLETION_WAITING_DOTS="true"
 
 # Zsh history
 # Save it to Dropbox if it is set up
-_history_file="$_dropbox_path/work/system/.zsh_history"
+_history_file="/Volumes/DriveD/Dropbox/work/system/.zsh_history"
 [[ -f $_history_file ]] && export HISTFILE=$_history_file
 
 export HISTSIZE=50000
@@ -32,7 +29,7 @@ setopt HIST_SAVE_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries before unique ones when trimming history
 
 # Load Oh-My-Zsh
-source $_zsh_path/oh-my-zsh.sh
+source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 
 # asdf config
 asdf_sh_path="$(brew --prefix asdf)/libexec/asdf.sh" # (homebrew install)
