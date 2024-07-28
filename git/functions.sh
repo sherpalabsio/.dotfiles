@@ -32,3 +32,14 @@ gbs_start() {
   git bisect old "$target_commit"
   git bisect new
 }
+
+unalias gco
+gco() {
+  if [ -n "$1" ]; then
+    # Fallback to the default behavior if no arguments are provided
+    git checkout $@
+  else
+    # Otherwise, list all the branches and let the user select one
+    git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout
+  fi
+}
