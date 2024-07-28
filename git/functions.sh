@@ -1,8 +1,19 @@
-# Git rebase interactive N
-# Rebase the last N commits interactively
-# $ grbin 11 # Rebase the last 11 commits
-grbin() {
-  grbi "HEAD~$1"
+# grbi - Git rebase interactive
+#
+# Usage:
+#   grbi <number> - Starts an interactive rebase for the last <n> commits
+#   grbi <args>   - Calls 'git rebase -i' with the provided arguments
+#
+# If the first argument is a number, it rebases interactively the last <n> commits.
+# Otherwise, it passes all arguments to 'git rebase -i' for standard behavior.
+
+unalias grbi
+grbi() {
+  if [[ $1 =~ ^[0-9]+$ ]]; then
+    grbi "HEAD~$1"
+  else
+    git rebase -i $@
+  fi
 }
 
 # Git diff remote
