@@ -15,6 +15,8 @@ alias grb_fixup='git rebase -i --autosquash $(git_main_branch)'
 
 # Rebase all commits in the current feature branch iteratively
 alias grbia='git rebase -i $(git_main_branch) --autostash'
+# Git rebase continue all - continue the rebase without editing the commit message
+alias grbca='git add --all && GIT_EDITOR=true git rebase --continue'
 
 alias git_clean_branches='git_clean_not_my_branches && git_clean_merged_branches'
 alias git_clean_not_my_branches='git branch --format "%(refname:short)" | grep -v "peter-" | grep -v "$(git_main_branch)" | xargs -r git branch -D'
