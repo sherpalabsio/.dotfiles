@@ -35,7 +35,10 @@ alias gc_fixup="git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | awk \"
 # Ammend all changes to the last commit
 alias gam='git add . && git commit --amend --no-edit'
 
-alias gl='git log --oneline --graph --all --decorate'
+# Git log
+alias gl='git log --oneline --graph'
+# Git log all
+alias gla='git log --oneline --graph --all --decorate'
 # List the remotes
 alias gr='git remote -v'
 alias gs='git status'
