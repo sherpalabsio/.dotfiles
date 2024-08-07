@@ -55,3 +55,18 @@ gco() {
     git checkout $@
   fi
 }
+
+# Git cherry-pick
+unalias gcp
+gcp() {
+  if [ -z "$1" ]; then
+    # List all the branches and let the user select one if no arguments are provided
+    git log -n 200 --oneline --graph --all | \
+      fzf --height=20% --reverse --info=inline | \
+      grep -o "[a-f0-9]\{7\}" | sed -n "1p" | \
+      xargs git cherry-pick
+  else
+    # Otherwise, fallback to the default behavior
+    git cherry-pick $@
+  fi
+}
