@@ -44,13 +44,14 @@ gbs_start() {
   git bisect new
 }
 
+# Git checkout
 unalias gco
 gco() {
-  if [ -n "$1" ]; then
-    # Fallback to the default behavior if no arguments are provided
-    git checkout $@
-  else
-    # Otherwise, list all the branches and let the user select one
+  if [ -z "$1" ]; then
+    # List all the branches and let the user select one if no arguments are provided
     git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout
+  else
+    # Otherwise, fallback to the default behavior
+    git checkout $@
   fi
 }
