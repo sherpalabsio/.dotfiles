@@ -39,6 +39,9 @@ asdf_sh_path="$(brew --prefix asdf)/libexec/asdf.sh" # (homebrew install)
 typeset -U _my_variables
 _my_variables=($DOTFILES_PATH/**/variables.sh)
 
+typeset -U _my_main_files
+_my_main_files=($DOTFILES_PATH/**/main.sh)
+
 typeset -U _my_aliases
 _my_aliases=($DOTFILES_PATH/**/aliases.sh)
 
@@ -48,7 +51,7 @@ _my_functions=($DOTFILES_PATH/**/functions.sh)
 typeset -U _my_widgets
 _my_widgets=($DOTFILES_PATH/zsh/widgets/**/*.plugin.zsh)
 
-_my_files=($_my_variables $_my_aliases $_my_functions $_my_widgets)
+_my_files=($_my_variables $_my_main_files $_my_aliases $_my_functions $_my_widgets)
 
 for file in ${_my_files} ; do
   source $file
