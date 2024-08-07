@@ -1,5 +1,5 @@
 alias ec='code ~/.dotfiles' # Edit config
-alias eh='code $_history_file' # Edit history
+alias eh='code $HISTFILE' # Edit history
 alias erh='code ~/.irb_history' # Edit Rails history
 alias ehr='code ~/.irb_history' # Edit history Rails
 

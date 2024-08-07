@@ -1,23 +1,16 @@
 #!/bin/zsh
 
-# Sample
-# - https://github.com/sheharyarn/dotfiles
-# - https://github.com/holman/dotfiles
-
-# Paths and Variables
+# Paths and variables
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export DOTFILES_PATH=$HOME/.dotfiles
 
-# Zsh Settings
+# Zsh settings
 plugins=(git zsh-syntax-highlighting)
 COMPLETION_WAITING_DOTS="true"
 
 # Zsh history
-# Save it to Dropbox if it is set up
-_history_file="/Volumes/DriveD/Dropbox/work/system/.zsh_history"
-[[ -f $_history_file ]] && export HISTFILE=$_history_file
-
+export HISTFILE="/Volumes/DriveD/Dropbox/work/system/.zsh_history"
 export HISTSIZE=50000
 export SAVEHIST=$HISTSIZE
 setopt INC_APPEND_HISTORY # Don't wait until the shell exits to append to the history file
@@ -35,20 +28,11 @@ source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 asdf_sh_path="$(brew --prefix asdf)/libexec/asdf.sh" # (homebrew install)
 [[ -s $asdf_sh_path ]] && source $asdf_sh_path
 
-# Load all of my aliases and shortcuts
-typeset -U _my_variables
+# Load my custom files
 _my_variables=($DOTFILES_PATH/**/variables.sh)
-
-typeset -U _my_main_files
 _my_main_files=($DOTFILES_PATH/**/main.sh)
-
-typeset -U _my_aliases
 _my_aliases=($DOTFILES_PATH/**/aliases.sh)
-
-typeset -U _my_functions
 _my_functions=($DOTFILES_PATH/**/functions.sh)
-
-typeset -U _my_widgets
 _my_widgets=($DOTFILES_PATH/zsh/widgets/**/*.plugin.zsh)
 
 _my_files=($_my_variables $_my_main_files $_my_aliases $_my_functions $_my_widgets)
@@ -56,6 +40,8 @@ _my_files=($_my_variables $_my_main_files $_my_aliases $_my_functions $_my_widge
 for file in ${_my_files} ; do
   source $file
 done
+
+unset _my_variables _my_main_files _my_aliases _my_functions _my_widgets _my_files
 
 source $DOTFILES_PATH/zsh/prompt.zsh
 
@@ -73,7 +59,7 @@ include ~/.fzf.zsh
 zle -N find_alias
 bindkey '^f' 'find_alias'
 
-run_lazygit() { lazygit }
+run_lazygit() { lazygit; }
 zle -N run_lazygit
 bindkey '^G' 'run_lazygit'
 
