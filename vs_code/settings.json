@@ -128,7 +128,7 @@
     "**/log": true
   },
   "workbench.editor.empty.hint": "hidden",
-  "cSpell.enabled": false,
+  "cSpell.enabled": true,
   "cSpell.userWords": [
     "Silverfin",
     "Unreview"
@@ -140,5 +140,14 @@
   "workbench.sideBar.location": "right",
   "workbench.editor.editorActionsLocation": "hidden",
   "workbench.layoutControl.enabled": false,
+  "cSpell.enableFiletypes": [
+    "!cpp",
+    "!csharp",
+    "!handlebars",
+    "!haskell",
+    "!jade",
+    "!java",
+    "ruby"
+  ],
   "workbench.activityBar.location": "hidden"
 }
