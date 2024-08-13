@@ -18,11 +18,11 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-changes
 
   hook_com[misc]=''
 
-  # Include the commit subject in the prompt where we paused during the interactive rebase
-  commit_line=$(git status | sed -n '3p')
-  pattern='^[[:space:]]*(edit|pick)[[:space:]][[:alnum:]]*[[:space:]]'
-  if [[ $commit_line =~ $pattern ]]; then
-    commit_message=$(echo "$commit_line" | sed -E "s/$pattern//")
+  # Include the commit subject in the prompt where we stopped at
+  # This is useful when a rebase stops because of conflicts or because
+  # the commit was picked for editing
+  if [[ -f .git/rebase-merge/message ]]; then
+    local -r commit_message=$(head -n 1 .git/rebase-merge/message)
     hook_com[misc]=" | $commit_message"
     return
   fi
