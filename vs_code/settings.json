@@ -10,9 +10,9 @@
   "commands.commands": [
     {
       "command": "workbench.action.toggleActivityBarVisibility",
-      "text": "$(chevron-right)",
+      "text": "$(chevron-left)",
       "tooltip": "Toggle activity bar visibility",
-      "alignment": "left",
+      "alignment": "right",
       "color": "#fff"
     },
     {
