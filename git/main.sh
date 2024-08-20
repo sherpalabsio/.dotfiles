@@ -50,7 +50,7 @@ alias gupdr='gupd && gpf'
 # Commit for lazy devs like myself
 alias gc='git add . && git commit -m'
 # Fixup commit
-alias gc_fixup="git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | awk \"{ print \$1 }\" | xargs -o git commit --fixup"
+alias gc_fixup="git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | awk '{ print \$1 }' | xargs -o git commit --fixup"
 # Ammend - Ammend all changes to the last commit
 alias gam='git add . && git commit --amend --no-edit'
 
