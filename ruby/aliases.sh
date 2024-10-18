@@ -22,6 +22,7 @@ function r() {
 
 alias rc='r console'
 alias rcs='r console --sandbox'
+alias rrun='r runner'
 
 alias routes='r routes'
 alias rr_update='r routes > tmp/routes.txt' # Rails routes update
