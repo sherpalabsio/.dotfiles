@@ -85,12 +85,12 @@
   "defi": {
     "scope": "ruby",
     "prefix": "defi",
-    "body": ["def initialize", "  ${0}", "end"]
+    "body": ["def initialize", "  $0", "end"]
   },
   "defss": {
     "scope": "ruby",
     "prefix": "defss",
-    "body": ["def self.${1:item}", "  ${0}", "end"]
+    "body": ["def self.${1:item}", "  $0", "end"]
   },
   "rubocop disable": {
     "scope": "ruby",
@@ -110,12 +110,12 @@
   ".each": {
     "scope": "ruby",
     "prefix": ".each",
-    "body": [".each do |${1:item}|", "\t${0}", "end"]
+    "body": [".each do |${1:item}|", "\t$0", "end"]
   },
   "each": {
     "scope": "ruby",
     "prefix": "each",
-    "body": ["${1:item}s.each do |${1:item}|", "\t${0}", "end"]
+    "body": ["${1:item}s.each do |${1:item}|", "\t$0", "end"]
   },
   // ================ Rails ================
   "params[:id]": {
@@ -171,7 +171,7 @@
       "${1:const props = }defineProps({",
 			"  ${2}: {",
 			"${3:  required: true,}",
-			"		type: ${0},",
+			"		type: $0,",
 			"	}",
 			"})",
     ],
@@ -191,7 +191,7 @@
   "log2": {
     "scope": "javascript,typescript,vue",
     "prefix": "pp",
-    "body": ["console.log('----------------------', ${0})"]
+    "body": ["console.log('----------------------', $0)"]
   },
   "log3": {
     "scope": "javascript,typescript,vue",
