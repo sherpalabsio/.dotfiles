@@ -57,10 +57,20 @@
     "prefix": "p6",
     "body": ["p '-------------------------------6'"]
   },
-  "print line": {
+  "print variable with 1 separator": {
     "scope": "ruby",
     "prefix": "pp",
-    "body": ["p '-------------------------------'", "p ${0}"]
+    "body": [
+      "p '-------------------------------'",
+      "p $0"]
+  },
+  "print variable with 2 separators": {
+    "scope": "ruby",
+    "prefix": "ppp",
+    "body": [
+      "p '-------------------------------'",
+      "p $0",
+      "p '-------------------------------'"]
   },
   "TODO": {
     "scope": "ruby",
