@@ -44,7 +44,7 @@ alias git_clean_merged_branches="git branch --format '%(refname:short) %(upstrea
 alias git_clean='gfa && git_clean_branches'
 
 # Update - Sync changes from the remote master to the current branch
-alias gupd='gplm && grbm && git_clean_merged_branches && gfa'
+alias gupd='gplm && grbm && gfa && git_clean_merged_branches'
 # Update remote - Sync changes from the remote master to the current branch and push the changes
 alias gupdr='gupd && gpf'
 
