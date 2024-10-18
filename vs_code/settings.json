@@ -129,7 +129,10 @@
   "workbench.editor.empty.hint": "hidden",
   "cSpell.enabled": true,
   "cSpell.userWords": [
+    "ollama",
     "Silverfin",
+    "testid",
+    "todos",
     "Unreview"
   ],
   "[json]": {
