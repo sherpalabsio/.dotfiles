@@ -123,9 +123,14 @@
     "prefix": "pa",
     "body": ["params[${1::id}]"]
   },
-  "Rails.logger.error '--'": {
+  "Rails.logger.info '--'": {
     "scope": "ruby",
     "prefix": "log",
+    "body": ["Rails.logger.info '-----------------------------------------'"]
+  },
+  "Rails.logger.error '--'": {
+    "scope": "ruby",
+    "prefix": "loge",
     "body": ["Rails.logger.error '-----------------------------------------'"]
   },
 
