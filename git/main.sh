@@ -161,3 +161,15 @@ gcp() {
     git cherry-pick $@
   fi
 }
+
+# Rename the current branch locally and remotely
+# Usage:
+#   gb_rename <new_branch>
+gb_rename() {
+  local -r current_branch=$(git_current_branch)
+  local -r new_branch=$1
+
+  git branch -m $new_branch
+  git push origin :$current_branch $new_branch
+  git push origin -u $new_branch
+}
