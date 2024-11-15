@@ -15,6 +15,10 @@
 		"prefix": "e",
     "body": ["echo ${1:\"$0\"}"]
   },
+	"echo \"\"": {
+		"prefix": "e2",
+    "body": ["echo $($0)"]
+  },
 	"echo ${array[@]}": {
 		"prefix": "ea",
     "body": ["echo ${${0:array}[@]}"]
