@@ -1,6 +1,7 @@
 alias be='bundle exec'
 
 alias rs='rspec'
+alias t='rspec'
 
 alias edit_arb='code ~/projects/a.rb'
 alias c_arb='code ~/projects/a.rb'
