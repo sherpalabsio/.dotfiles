@@ -14,7 +14,8 @@ alias tmp_ubuntu="docker run --rm -it ubuntu"
 docker_start_container() {
   local -r container_name="${1:-$DOCKER_CONTAINER_NAME}"
 
-  if ! docker ps | grep -q "$container_name"; then
+  # Skip if the container is already running
+  if [ ! "$(docker ps -a -q -f name=$container_name)" ]; then
     echo "Starting the container..."
     docker-compose up -d
   fi
