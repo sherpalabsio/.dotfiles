@@ -129,11 +129,17 @@
   "workbench.editor.empty.hint": "hidden",
   "cSpell.enabled": true,
   "cSpell.userWords": [
+    "chpwd",
+    "envrc",
+    "mktemp",
     "ollama",
+    "rubocop",
     "Silverfin",
+    "subproject",
     "testid",
     "todos",
-    "Unreview"
+    "Unreview",
+    "unstash"
   ],
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
