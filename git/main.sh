@@ -27,7 +27,17 @@ alias grbi8='grbi HEAD~8 --autostash'
 alias grbi9='grbi HEAD~9 --autostash'
 
 # Rebase interactive all - Rebase all commits of the current feature branch interactively
-alias grbia='git rebase -i $(git_main_branch) --autostash'
+grbia() {
+  # If the current branch is the main branch, then return
+  if [ "$(git_current_branch)" = "$(git_main_branch)" ]; then
+    echo "You are on the main branch"
+    return 1
+  fi
+
+  local -r commit_count=$(git rev-list --count HEAD ^$(git_main_branch))
+  git rebase -i HEAD~$commit_count --autostash
+}
+
 
 # Rebase master
 alias grbm='git rebase $(git_main_branch) --autostash'
