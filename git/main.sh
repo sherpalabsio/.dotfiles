@@ -58,8 +58,24 @@ alias gupd='gplm && git_clean_merged_branches && grbm'
 # Update remote - Sync changes from the remote master to the current branch and push the changes
 alias gupdr='gupd && gpf'
 
-# Commit for lazy devs like myself
-alias gc='git add . && git commit -m'
+# Commit
+#
+# Stages all the changes then commits them with the provided message.
+# (no quotes are needed for the message)
+# Usage:
+#   gc <message> - Commit the changes with the provided message
+unalias gc
+gc() {
+  # Check if the commit message is provided
+  if [ -z "$1" ]; then
+    echo "Please provide a commit message"
+    return 1
+  fi
+
+  git add --all
+  git commit -m "$*"
+}
+
 # Fixup commit
 alias gc_fixup="git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | awk '{ print \$1 }' | xargs -o git commit --fixup"
 # Ammend - Ammend all changes to the last commit
