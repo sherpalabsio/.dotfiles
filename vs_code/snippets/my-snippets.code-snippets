@@ -156,28 +156,6 @@
   //   "body": ["= link_to '$1', '${2:#}'${3:, class: '$4'}"]
   // },
 
-  // ================ Elixir ================
-  "IO.puts \"-----\"": {
-    "scope": "elixir",
-    "prefix": "p",
-    "body": ["IO.puts \"----------------------\""]
-  },
-  "IO.inspect": {
-    "scope": "elixir",
-    "prefix": "i",
-    "body": ["IO.inspect "]
-  },
-  "=> ": {
-    "scope": "elixir",
-    "prefix": "=",
-    "body": ["=> "]
-  },
-  "->": {
-    "scope": "elixir",
-    "prefix": "-",
-    "body": ["->"]
-  },
-
   // ================ JavaScript ================
   "Proprs for a componenet": {
 		"scope": "javascript,typescript,vue",

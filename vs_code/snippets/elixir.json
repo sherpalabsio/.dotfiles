@@ -1,0 +1,27 @@
+{
+	"IO.puts \"-----\"": {
+    "prefix": "p",
+    "body": ["IO.puts \"----------------------\""]
+  },
+  // "IO.inspect": {
+  //   "prefix": "i",
+  //   "body": ["IO.inspect "]
+  // },
+  "=> ": {
+    "prefix": "=",
+    "body": ["=> "]
+  },
+  "->": {
+    "prefix": "-",
+    "body": ["->"]
+  },
+  "%{}": {
+    "prefix": "%",
+    "body": ["%{$0}"]
+  },
+
+	"Inspect variable": {
+		"prefix": "pp",
+		"body": [ "dbg(${1:params})" ]
+	},
+}
