@@ -11,6 +11,10 @@
 		"prefix": "p",
     "body": ["echo \"-------------------------------\""]
   },
+	"alias": {
+		"prefix": "a",
+    "body": ["alias ${1:alias}='${2:command}'"]
+  },
 	"echo \"\"": {
 		"prefix": "e",
     "body": ["echo ${1:\"$0\"}"]
