@@ -124,16 +124,6 @@ alias gbsg="git bisect old"
 # Bisect bad
 alias gbsb="git bisect new"
 
-
-# Diff remote
-#
-# Compare the current branch with its remote counterpart after fixing conflicts.
-# This filters out files that I didn't, but others changed.
-gdr() {
-  local current_branch=$(git_current_branch)
-  git diff origin/$current_branch $current_branch -- $(git diff $git_main_branch $current_branch --name-only)
-}
-
 # Bisect start - Start a bisect session
 #
 # Usage:
@@ -149,6 +139,15 @@ gbs_start() {
   git bisect start
   git bisect old "$target_commit"
   git bisect new
+}
+
+# Diff remote
+#
+# Compare the current branch with its remote counterpart after fixing conflicts.
+# This filters out files that I didn't, but others changed.
+gdr() {
+  local current_branch=$(git_current_branch)
+  git diff origin/$current_branch $current_branch -- $(git diff $git_main_branch $current_branch --name-only)
 }
 
 # Checkout
