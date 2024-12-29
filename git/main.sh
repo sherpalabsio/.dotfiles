@@ -62,18 +62,19 @@ alias gupdr='gupd && gpf'
 #
 # Stages all the changes then commits them with the provided message.
 # (no quotes are needed for the message)
+# If no message is provided, it opens the default editor to write one.
 # Usage:
 #   gc <message> - Commit the changes with the provided message
 unalias gc
 gc() {
-  # Check if the commit message is provided
-  if [ -z "$1" ]; then
-    echo "Please provide a commit message"
-    return 1
-  fi
-
   git add --all
-  git commit -m "$*"
+
+  # Is commit message is provided?
+  if [ -n "$1" ]; then
+    git commit -m "$*"
+  else
+    git commit
+  fi
 }
 
 # Fixup commit
