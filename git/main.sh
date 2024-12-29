@@ -78,7 +78,7 @@ gc() {
 
 # Fixup commit
 alias gc_fixup="git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | awk '{ print \$1 }' | xargs -o git commit --fixup"
-# Ammend - Ammend all changes to the last commit
+# Amend - Amend all changes to the last commit
 alias gam='git add . && git commit --amend --no-edit'
 
 # Log
