@@ -79,6 +79,10 @@
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[phoenix-heex]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "JakeBecker.elixir-ls"
+  },
   "editor.formatOnSave": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.singleQuote": true,
@@ -98,6 +102,7 @@
 
   "emmet.includeLanguages": {
     "erb": "html",
+    "phoenix-heex": "html",
   },
   "emmet.showAbbreviationSuggestions": true,
   "emmet.showSuggestionsAsSnippets": true,
