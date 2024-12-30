@@ -12,7 +12,7 @@ alias up="docker-compose up -d"
 alias upb="docker-compose up --build -d"
 alias down="docker-compose down"
 
-alias tmp_ubuntu="docker run --rm -it ubuntu"
+alias d_tmp_ubuntu="docker run --rm -it ubuntu"
 
 # Start the container if it's not running
 docker_start_container() {
