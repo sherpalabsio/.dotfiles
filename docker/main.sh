@@ -4,23 +4,41 @@ alias d_nukem='docker system prune --all --volumes -f'
 alias dps='docker ps'
 
 # Execute a command in the main container
-alias de='docker_start_container && docker exec -it ${DOCKER_CONTAINER_NAME:-$(basename $(pwd))}'
+alias de='docker_compose_up && docker exec -it ${DOCKER_CONTAINER_NAME:-$(basename $(pwd))}'
 # Connect to the main container
 alias con='de /bin/bash'
 
-alias up="docker-compose up -d"
-alias upb="docker-compose up --build -d"
+alias up="docker_start_daemon && docker-compose up -d"
+alias upb="docker_start_daemon && docker-compose up --build -d"
 alias down="docker-compose down"
 
 alias d_tmp_ubuntu="docker run --rm -it ubuntu"
 
-# Start the container if it's not running
-docker_start_container() {
+# Start the Docker daemon if it is not running
+docker_start_daemon() {
+  # Skip if Docker is already running
+  pgrep -x "Docker" > /dev/null && return
+
+  echo -n "Starting the Docker daemon"
+  open -a Docker
+
+  # Wait for Docker to start
+  while ! docker ps &> /dev/null; do
+    sleep 0.3
+    echo -n "."
+  done
+  echo ""
+}
+
+# Start the container(s) if they are not running
+docker_compose_up() {
+  docker_start_daemon
+
   local -r container_name="${1:-$DOCKER_CONTAINER_NAME}"
 
   # Skip if the container(s) are already running
   [ "$(docker ps -q -f name=$container_name)" ] && return
 
-  echo "Starting the container..."
+  echo "Starting the container(s)..."
   docker-compose up -d
 }
