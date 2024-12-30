@@ -19,7 +19,7 @@ docker_start_container() {
   local -r container_name="${1:-$DOCKER_CONTAINER_NAME}"
 
   # Skip if the container is already running
-  if [ ! "$(docker ps -a -q -f name=$container_name)" ]; then
+  if [ ! "$(docker ps -q -f name=$container_name)" ]; then
     echo "Starting the container..."
     docker-compose up -d
   fi
