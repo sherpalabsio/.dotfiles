@@ -1,7 +1,11 @@
 # Docker Nukem to remove all containers, images, volumes, and networks
 alias d_nukem='docker system prune --all --volumes -f'
 
-alias de='docker_start_container ; docker exec -it ${DOCKER_CONTAINER_NAME:-$(basename $(pwd))}'
+alias dps='docker ps'
+
+# Execute a command in the main container
+alias de='docker_start_container && docker exec -it ${DOCKER_CONTAINER_NAME:-$(basename $(pwd))}'
+# Connect to the main container
 alias con='de /bin/bash'
 
 alias up="docker-compose up -d"
