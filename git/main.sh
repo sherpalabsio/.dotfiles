@@ -30,8 +30,13 @@ alias grbi9='grbi HEAD~9 --autostash'
 grbia() {
   # If the current branch is the main branch, then return
   if [ "$(git_current_branch)" = "$(git_main_branch)" ]; then
-    echo "You are on the main branch"
-    return 1
+    # Are there less than 50 commits?
+    if [ $(git rev-list --count HEAD) -lt 50 ]; then
+      git rebase -i --root --autostash
+    else
+      git rebase -i HEAD~50 --autostash
+    fi
+    return 0
   fi
 
   local -r commit_count=$(git rev-list --count HEAD ^$(git_main_branch))
