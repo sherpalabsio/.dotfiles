@@ -22,7 +22,12 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-changes
   # This is useful when a rebase stops because of conflicts or because
   # the commit was picked for editing
   if [[ -f .git/rebase-merge/message ]]; then
-    local -r commit_message=$(head -n 1 .git/rebase-merge/message)
+    local commit_message=$(head -n 1 .git/rebase-merge/message)
+
+    if [[ $commit_message == '# This is a combination of'* ]]; then
+      commit_message=$(sed -n '4p' .git/rebase-merge/message)
+    fi
+
     hook_com[misc]=" | $commit_message"
     return
   fi
