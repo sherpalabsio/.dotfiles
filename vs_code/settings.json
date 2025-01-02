@@ -158,15 +158,6 @@
     "subproject",
     "unstash"
   ],
-  "cSpell.enableFiletypes": [
-    "!cpp",
-    "!csharp",
-    "!handlebars",
-    "!haskell",
-    "!jade",
-    "!java",
-    "ruby"
-  ],
 
   "git.openRepositoryInParentFolders": "never",
 
