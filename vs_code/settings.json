@@ -86,7 +86,6 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
   },
-  "editor.formatOnSave": false,
   "editor.defaultFormatter": "esbenp.prettier-vscode",
   "prettier.singleQuote": true,
   "editor.tabSize": 2,
