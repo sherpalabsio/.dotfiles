@@ -41,7 +41,7 @@
       "command": "osascript",
       "args": [
         "~/.dotfiles/iTerm/run_command.scpt",
-        "js_test", // alias for `yarn test`
+        "tjs", // alias for `yarn test`
         "${relativeFile}"
       ],
       "presentation": {
