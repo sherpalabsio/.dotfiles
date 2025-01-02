@@ -42,14 +42,14 @@
       "text": "$(github)",
       "tooltip": "GH Copilot",
       "alignment": "left",
-      "color": "#fff",
+      "color": "#fff"
     },
     {
       "command": "workbench.action.openChat.copilot",
       "text": "$(github)",
       "tooltip": "GH Copilot",
       "alignment": "left",
-      "color": "#fff",
+      "color": "#fff"
     },
     {
       "command": "rails-go-to-spec-2.railsGoToSpec",
@@ -69,7 +69,7 @@
       "text": "Vim",
       "command": "toggleVim",
       "tooltip": "Toggle Vim mode"
-    },
+    }
   ],
   "workbench.startupEditor": "none",
   "editor.rulers": [80],
@@ -104,7 +104,7 @@
 
   "emmet.includeLanguages": {
     "erb": "html",
-    "phoenix-heex": "html",
+    "phoenix-heex": "html"
   },
   "emmet.showAbbreviationSuggestions": true,
   "emmet.showSuggestionsAsSnippets": true,
