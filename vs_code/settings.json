@@ -74,6 +74,7 @@
   "workbench.startupEditor": "none",
   "editor.rulers": [80],
   "[javascript]": {
+    "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
   "[jsonc]": {
