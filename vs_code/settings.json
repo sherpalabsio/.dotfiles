@@ -141,11 +141,7 @@
     "mktemp",
     "ollama",
     "rubocop",
-    "Silverfin",
     "subproject",
-    "testid",
-    "todos",
-    "Unreview",
     "unstash"
   ],
   "[json]": {

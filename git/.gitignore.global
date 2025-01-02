@@ -14,3 +14,6 @@
 .envrc
 
 /lib/generators
+
+# Project specific cSpell configuration
+.vscode/cspell.json
