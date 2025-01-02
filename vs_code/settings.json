@@ -1,11 +1,45 @@
 {
-  "vim.disableExtension": true,
+  "workbench.activityBar.location": "hidden",
   "workbench.colorTheme": "One Dark Pro Flat",
-  "editor.minimap.enabled": false,
+  "workbench.editor.decorations.colors": false,
+  "workbench.editor.editorActionsLocation": "hidden",
+  "workbench.editor.empty.hint": "hidden",
   "workbench.iconTheme": "file-icons",
-  "files.trimTrailingWhitespace": true,
-  "editor.tabCompletion": "onlySnippets",
+  "workbench.layoutControl.enabled": false,
+  "workbench.sideBar.location": "right",
+  "workbench.startupEditor": "none",
+
+  "editor.copyWithSyntaxHighlighting": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode",
+  "editor.fontSize": 14,
+  "editor.inlineSuggest.enabled": true,
+  "editor.minimap.enabled": false,
+  "editor.rulers": [80],
   "editor.snippetSuggestions": "top",
+  "editor.tabCompletion": "onlySnippets",
+  "editor.tabSize": 2,
+
+  "explorer.autoReveal": "focusNoScroll",
+  "explorer.confirmDragAndDrop": false,
+
+  "breadcrumbs.symbolPath": "off",
+  "liveServer.settings.fullReload": true,
+
+  "search.exclude": {
+    "**/.git": true,
+    "**/log": true
+  },
+
+  "files.exclude": {
+    "**/.tags": true
+  },
+  "files.insertFinalNewline": true,
+  "files.trimFinalNewlines": true,
+  "files.trimTrailingWhitespace": true,
+
+  "extensions.ignoreRecommendations": true,
+  "security.workspace.trust.untrustedFiles": "open",
+
 
   "commands.commands": [
     {
@@ -71,15 +105,24 @@
       "tooltip": "Toggle Vim mode"
     }
   ],
-  "workbench.startupEditor": "none",
-  "editor.rulers": [80],
+
+
+  "vim.disableExtension": true,
+
   "[javascript]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "[vue]": {
+    "editor.defaultFormatter": "octref.vetur"
+  },
+  "[json]": {
+    "editor.defaultFormatter": "vscode.json-language-features"
+  },
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+
   "[elixir]": {
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
   },
@@ -87,21 +130,10 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
   },
-  "editor.defaultFormatter": "esbenp.prettier-vscode",
-  "prettier.singleQuote": true,
-  "editor.tabSize": 2,
-  "workbench.editor.decorations.colors": false,
-  "extensions.ignoreRecommendations": true,
-  "files.insertFinalNewline": true,
-  "files.exclude": {
-    "**/.tags": true
-  },
-  "security.workspace.trust.untrustedFiles": "open",
   "[feature]": {
     "editor.defaultFormatter": "siumennel.turnip"
   },
-  "git.openRepositoryInParentFolders": "never",
-  "editor.inlineSuggest.enabled": true,
+
 
   "emmet.includeLanguages": {
     "erb": "html",
@@ -109,32 +141,13 @@
   },
   "emmet.showAbbreviationSuggestions": true,
   "emmet.showSuggestionsAsSnippets": true,
-  "explorer.confirmDragAndDrop": false,
-  "github.copilot.enable": {
-    "*": true,
-    "plaintext": true,
-    "markdown": true,
-    "scminput": false
-  },
-  "[vue]": {
-    "editor.defaultFormatter": "octref.vetur"
-  },
+
+  "css.lint.unknownAtRules": "ignore",
+  "prettier.singleQuote": true,
 
   "code-runner.showRunCommandInExplorerContextMenu": false,
   "code-runner.clearPreviousOutput": true,
 
-  "liveServer.settings.fullReload": true,
-  "css.lint.unknownAtRules": "ignore",
-  "files.trimFinalNewlines": true,
-  "editor.fontSize": 14,
-  "breadcrumbs.symbolPath": "off",
-  "editor.copyWithSyntaxHighlighting": false,
-  "explorer.autoReveal": "focusNoScroll",
-  "search.exclude": {
-    "**/.git": true,
-    "**/log": true
-  },
-  "workbench.editor.empty.hint": "hidden",
   "cSpell.enabled": true,
   "cSpell.userWords": [
     "chpwd",
@@ -145,13 +158,6 @@
     "subproject",
     "unstash"
   ],
-  "[json]": {
-    "editor.defaultFormatter": "vscode.json-language-features"
-  },
-  "github.copilot.editor.enableAutoCompletions": true,
-  "workbench.sideBar.location": "right",
-  "workbench.editor.editorActionsLocation": "hidden",
-  "workbench.layoutControl.enabled": false,
   "cSpell.enableFiletypes": [
     "!cpp",
     "!csharp",
@@ -161,5 +167,14 @@
     "!java",
     "ruby"
   ],
-  "workbench.activityBar.location": "hidden"
+
+  "git.openRepositoryInParentFolders": "never",
+
+  "github.copilot.enable": {
+    "*": true,
+    "plaintext": true,
+    "markdown": true,
+    "scminput": false
+  },
+  "github.copilot.editor.enableAutoCompletions": true,
 }
