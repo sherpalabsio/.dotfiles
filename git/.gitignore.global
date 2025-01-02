@@ -5,13 +5,11 @@
 .Spotlight-V100
 .Trashes
 
-# direnv
+# Direnv and Local Sherpa
 .envrc
 
 # Ruby
 .byebug_history
-
-.envrc
 
 /lib/generators
 
