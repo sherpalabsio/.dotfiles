@@ -1,14 +1,3 @@
-// Place your key bindings in this file to override the defaults
-// Old ones
-// 'ctrl-shift-.': 'erb-snippets:erb_tags'
-// 'ctrl-up': 'emmet:increment-number-by-1'
-// 'ctrl-down': 'emmet:decrement-number-by-1'
-// 'ctrl-alt-enter': 'emmet:wrap-with-abbreviation'
-// 'alt-cmd-enter': 'emmet:wrap-with-abbreviation'
-// 'cmd-shift-y': 'calc:evaluate'
-// 'alt-ctrl-r': 'rails-rspec:toggle-spec-file'
-// 'cmd-shift-m': 'rails-latest-migration:list'
-// 'alt-cmd-down': 'goto-definition:go'
 [
   {
     "key": "cmd+k cmd+c",
@@ -53,13 +42,6 @@
   { "key": "cmd+3", "command": "workbench.action.openEditorAtIndex3" },
   { "key": "cmd+4", "command": "workbench.action.openEditorAtIndex4" },
   { "key": "cmd+5", "command": "workbench.action.openEditorAtIndex5" },
-  { "key": "cmd+6", "command": "workbench.action.openEditorAtIndex6" },
-  { "key": "cmd+7", "command": "workbench.action.openEditorAtIndex7" },
-  { "key": "cmd+8", "command": "workbench.action.openEditorAtIndex8" },
-  {
-    "key": "cmd+9",
-    "command": "workbench.action.openEditorAtIndex9"
-  },
   {
     "key": "shift+cmd+d",
     "command": "editor.action.copyLinesDownAction",
