@@ -137,6 +137,10 @@
   "[feature]": {
     "editor.defaultFormatter": "siumennel.turnip"
   },
+  "[shellscript]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "foxundermoon.shell-format"
+  },
 
 
   "emmet.includeLanguages": {
