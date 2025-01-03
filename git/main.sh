@@ -155,6 +155,9 @@ gdr() {
   git diff origin/$current_branch $current_branch -- $(git diff $git_main_branch $current_branch --name-only)
 }
 
+# Checkout main
+alias gcm='git checkout $(git_main_branch) > /dev/null'
+
 # Checkout
 #
 # Usage:
