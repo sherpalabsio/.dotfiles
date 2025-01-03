@@ -6,8 +6,6 @@ precmd() { vcs_info }
 # Define format for Git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' get-revision true
-zstyle ':vcs_info:*' unstagedstr '*' # Add a star after the branch name if there are unstaged changes
-zstyle ':vcs_info:*' stagedstr '*' # Add a star after the branch name if there are staged changes
 zstyle ':vcs_info:git:*' formats '[%b%m] '
 zstyle ':vcs_info:git:*' actionformats '%a%m '
 zstyle ':vcs_info:git*+set-message:*' hooks git-changes
