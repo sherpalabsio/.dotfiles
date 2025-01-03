@@ -55,7 +55,7 @@ $ grb_fixups
 
 ### Super secret stuff
 
-Put any *.sh file into the folder named `local` and they will be loaded recursively.
+Put any \*.sh file into the folder named `local` and they will be loaded recursively.
 
 ### Run the active RSpec file or example in the current iTerm2 tab from VS Code by pressing a keystroke
 
@@ -151,6 +151,7 @@ In SourceTree: Right click on a commit > Custom Actions > Fixup. It will create 
 for the selected commit using the files added to staging.
 
 Create a new SourceTree custom action
+
 - Menu caption: Fixup
 - Script to run: ~/.dotfiles/git/sourcetree_custom_actions/create_fixup_commit.sh
 - Parameters: $SHA
@@ -161,10 +162,10 @@ In SourceTree: Right click on a commit > Custom Actions > Amend all. It will ame
 all the changes to the selected commit.
 
 SourceTree custom action settings:
+
 - Menu caption: Amend all
 - Script to run: ~/.dotfiles/git/sourcetree_custom_actions/amend_all.sh
 - Parameters: $SHA
-
 
 ## Install
 
@@ -300,7 +301,6 @@ gem install rails
 gem install bundler
 ```
 
-
 ## Other tools
 
 ```shell
@@ -319,6 +319,7 @@ git clone git@github.com:tothpeter/local_sherpa.git ~/.dotfiles/lib/local_sherpa
 mv -v ~/Library/Preferences/org.videolan.vlc/vlcrc ~/.dotfiles/others/vlc/vlcrc
 ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc
 ```
+
 ## OSX Shortcuts
 
 To check what we have:

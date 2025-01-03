@@ -6,7 +6,7 @@ readonly _DESIRED_DOCK_SIZE=71
 
 screen_cast_env__activate() {
   # Change the background
-  osascript -e 'tell application "System Events" to picture of every desktop' > $_ORIGINAL_BACKGROUND_PATH
+  osascript -e 'tell application "System Events" to picture of every desktop' >$_ORIGINAL_BACKGROUND_PATH
   osascript -e 'tell application "System Events" to set picture of every desktop to "'"$_NEW_BACKGROUND_PATH"'"'
 }
 

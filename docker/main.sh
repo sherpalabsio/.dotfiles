@@ -17,13 +17,13 @@ alias d_tmp_ubuntu="docker run --rm -it ubuntu"
 # Start the Docker daemon if it is not running
 docker_start_daemon() {
   # Skip if Docker is already running
-  pgrep -x "Docker" > /dev/null && return
+  pgrep -x "Docker" >/dev/null && return
 
   echo -n "Starting the Docker daemon"
   open -a Docker
 
   # Wait for Docker to start
-  while ! docker ps &> /dev/null; do
+  while ! docker ps &>/dev/null; do
     sleep 0.3
     echo -n "."
   done

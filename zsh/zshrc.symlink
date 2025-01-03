@@ -13,11 +13,11 @@ COMPLETION_WAITING_DOTS="true"
 export HISTFILE="/Volumes/DriveD/Dropbox/work/system/.zsh_history"
 export HISTSIZE=50000
 export SAVEHIST=$HISTSIZE
-setopt INC_APPEND_HISTORY # Don't wait until the shell exits to append to the history file
-setopt HIST_FIND_NO_DUPS # When searching for history entries, show matching lines once
+setopt INC_APPEND_HISTORY   # Don't wait until the shell exits to append to the history file
+setopt HIST_FIND_NO_DUPS    # When searching for history entries, show matching lines once
 setopt HIST_IGNORE_ALL_DUPS # Remove duplicates before adding a new entry
-setopt HIST_IGNORE_SPACE # Don't save commands starting with a space
-setopt HIST_IGNORE_DUPS # Don't save the command if it was just run
+setopt HIST_IGNORE_SPACE    # Don't save commands starting with a space
+setopt HIST_IGNORE_DUPS     # Don't save the command if it was just run
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries before unique ones when trimming history
 
@@ -37,7 +37,7 @@ _my_widgets=($DOTFILES_PATH/zsh/widgets/**/*.plugin.zsh)
 
 _my_files=($_my_variables $_my_main_files $_my_aliases $_my_functions $_my_widgets)
 
-for file in ${_my_files} ; do
+for file in ${_my_files}; do
   source $file
 done
 
@@ -46,11 +46,11 @@ unset _my_variables _my_main_files _my_aliases _my_functions _my_widgets _my_fil
 source $DOTFILES_PATH/zsh/prompt.zsh
 
 # Load super secret stuff
-for file in $DOTFILES_PATH/local/**/*.sh ; do
+for file in $DOTFILES_PATH/local/**/*.sh; do
   source $file
 done
 
-include () {
+include() {
   [ -f "$1" ] && source "$1"
 }
 

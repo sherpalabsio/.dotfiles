@@ -27,8 +27,8 @@ alias rrun='r runner'
 
 alias routes='r routes'
 alias rr_update='r routes > tmp/routes.txt' # Rails routes update
-alias rr='cat tmp/routes.txt' # Rails routes
-alias rrf='rr | fzf' # Rails routes find (fuzzy search)
+alias rr='cat tmp/routes.txt'               # Rails routes
+alias rrf='rr | fzf'                        # Rails routes find (fuzzy search)
 
 alias logd='tail -f log/development.log'
 alias logt='tail -f log/test.log'

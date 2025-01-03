@@ -109,9 +109,9 @@ alias gu="git reset --soft 'HEAD^'"
 
 # GitX: Open repository in SourceTree (don't ask why I associate GitX with SourceTree)
 alias gx='open -a SourceTree $(git rev-parse --show-toplevel || echo .)'
- # GitX config
+# GitX config
 alias gxc='open -a SourceTree ~/.dotfiles'
- # GitX config local
+# GitX config local
 alias gxcl='open -a SourceTree ~/.dotfiles/local'
 alias gxl='gxcl'
 
@@ -186,9 +186,9 @@ unalias gcp
 gcp() {
   if [ -z "$1" ]; then
     # List all the branches and let the user select one if no arguments are provided
-    git log -n 200 --oneline --graph --all | \
-      fzf --height=20% --reverse --info=inline | \
-      grep -o "[a-f0-9]\{7\}" | sed -n "1p" | \
+    git log -n 200 --oneline --graph --all |
+      fzf --height=20% --reverse --info=inline |
+      grep -o "[a-f0-9]\{7\}" | sed -n "1p" |
       xargs git cherry-pick
   else
     # Otherwise, fallback to the original behavior
