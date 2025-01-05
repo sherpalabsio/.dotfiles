@@ -19,7 +19,7 @@
   "editor.tabCompletion": "onlySnippets",
   "editor.tabSize": 2,
 
-  "explorer.autoReveal": "focusNoScroll",
+  "explorer.autoReveal": false,
   "explorer.confirmDragAndDrop": false,
 
   "breadcrumbs.symbolPath": "off",
