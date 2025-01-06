@@ -17,42 +17,42 @@
   // }
 
   // ================ Ruby ================
-  "print spearator line": {
+  "print separator line": {
     "scope": "ruby",
     "prefix": "p",
     "body": ["p '-------------------------------'"]
   },
-  "print spearator line 1": {
+  "print separator line 1": {
     "scope": "ruby",
     "prefix": "p1",
     "body": ["p '-------------------------------1'"]
   },
-  "print spearator line 0": {
+  "print separator line 0": {
     "scope": "ruby",
     "prefix": "p0",
     "body": ["p '-------------------------------0'"]
   },
-  "print spearator line 2": {
+  "print separator line 2": {
     "scope": "ruby",
     "prefix": "p2",
     "body": ["p '-------------------------------2'"]
   },
-  "print spearator line 3": {
+  "print separator line 3": {
     "scope": "ruby",
     "prefix": "p3",
     "body": ["p '-------------------------------3'"]
   },
-  "print spearator line 4": {
+  "print separator line 4": {
     "scope": "ruby",
     "prefix": "p4",
     "body": ["p '-------------------------------4'"]
   },
-  "print spearator line 5": {
+  "print separator line 5": {
     "scope": "ruby",
     "prefix": "p5",
     "body": ["p '-------------------------------5'"]
   },
-  "print spearator line 6": {
+  "print separator line 6": {
     "scope": "ruby",
     "prefix": "p6",
     "body": ["p '-------------------------------6'"]
@@ -102,7 +102,7 @@
     "prefix": "defss",
     "body": ["def self.${1:item}", "  $0", "end"]
   },
-  "rubocop disable": {
+  "RuboCop disable": {
     "scope": "ruby",
     "prefix": "rd",
     "body": [
@@ -111,7 +111,7 @@
     ]
   },
   // RSpec
-  "defs": {
+  "described_class": {
     "scope": "ruby",
     "prefix": "descc",
     "body": ["described_class"]
@@ -157,7 +157,7 @@
   // },
 
   // ================ JavaScript ================
-  "Proprs for a componenet": {
+  "Props for a component": {
 		"scope": "javascript,typescript,vue",
     "prefix": "props",
     "body": [
