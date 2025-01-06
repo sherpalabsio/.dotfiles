@@ -152,7 +152,7 @@ gbs_start() {
 # This filters out files that I didn't, but others changed.
 gdr() {
   local current_branch=$(git_current_branch)
-  git diff origin/$current_branch $current_branch -- $(git diff $git_main_branch $current_branch --name-only)
+  git diff origin/$current_branch $current_branch -- $(git diff $(git_main_branch) $current_branch --name-only)
 }
 
 # Checkout main
