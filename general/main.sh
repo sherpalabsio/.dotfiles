@@ -9,3 +9,12 @@ dev() {
     echo "Not a Phoenix or Rails project"
   fi
 }
+
+# Print the last exit code
+alias '?'='echo $?'
+
+# Print the value of a variable
+p() {
+  local -r var_name=$1
+  echo ${(P)var_name}
+}
