@@ -248,7 +248,7 @@ ln -s ~/.dotfiles/git/.gitconfig.global ~/.gitconfig
 
 ```shell
 brew install gpg
-ln -s /Volumes/DriveD/Dropbox/work/system/.gnupg ~/.gnupg
+ln -s $DROPBOX_PATH/backup/.dotfiles/.gnupg ~/.gnupg
 ```
 
 #### Sourcetree
