@@ -1,5 +1,7 @@
 #!/usr/bin/ruby
 
+IRB.conf[:HISTORY_FILE] = File.join(ENV["DROPBOX_PATH"], "backup/.dotfiles/.irb_history")
+
 # Load local extensions
 Dir['/Users/peter/.dotfiles/**/*irbrc.rb'].sort.each { |f| require f }
 
