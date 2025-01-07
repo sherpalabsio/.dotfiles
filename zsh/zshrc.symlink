@@ -4,13 +4,14 @@
 export PATH=/usr/local/bin:$PATH
 export PATH=/usr/local/sbin:$PATH
 export DOTFILES_PATH=$HOME/.dotfiles
+export DROPBOX_PATH=$(jq -r '.personal.path' ~/.dropbox/info.json)
 
 # Zsh settings
 plugins=(git zsh-syntax-highlighting)
 COMPLETION_WAITING_DOTS="true"
 
 # Zsh history
-export HISTFILE="/Volumes/DriveD/Dropbox/work/system/.zsh_history"
+export HISTFILE="$DROPBOX_PATH/work/system/.zsh_history"
 export HISTSIZE=50000
 export SAVEHIST=$HISTSIZE
 setopt INC_APPEND_HISTORY   # Don't wait until the shell exits to append to the history file
