@@ -1,8 +1,8 @@
-alias ec='code ~/.dotfiles'        # Edit config
-alias ecl='code ~/.dotfiles/local' # Edit config local
-alias eh='code $HISTFILE'          # Edit history
-alias erh='code ~/.irb_history'    # Edit Rails history
-alias ehr='code ~/.irb_history'    # Edit history Rails
+alias edc='code ~/.dotfiles'        # Edit config
+alias edcl='code ~/.dotfiles/local' # Edit config local
+alias edh='code $HISTFILE'          # Edit history
+alias edrh='code ~/.irb_history'    # Edit Rails history
+alias edhr='code ~/.irb_history'    # Edit history Rails
 
 alias c='code .'
 alias o='open .' # Open current directory in finder
