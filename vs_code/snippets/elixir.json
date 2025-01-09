@@ -24,4 +24,8 @@
 		"prefix": "pp",
 		"body": [ "dbg(${1:params})" ]
 	},
+	"Todo comment": {
+		"prefix": "todo",
+		"body": [ "# TODO: " ]
+	},
 }
