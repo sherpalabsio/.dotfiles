@@ -1,0 +1,6 @@
+echo "Homebrew setup"
+brew bundle --file ~/.dotfiles/setup/Brewfile
+
+echo "Linking dotfiles"
+ln -sf ~/.dotfiles/general/.skhdrc ~/.skhdrc
+skhd --restart-service
