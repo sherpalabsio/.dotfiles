@@ -6,3 +6,6 @@ alias pc='iex -S mix phx.server'
 
 # Elixir console like Rails console
 alias ec='iex -S mix'
+
+# Mix install
+alias mixi='mix deps.get'
