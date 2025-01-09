@@ -170,7 +170,7 @@ SourceTree custom action settings:
 ## Install
 
 ```shell
-git clone git@github.com:tothpeter/dotfiles.git
+git clone git@github.com:nomadsherpa/dotfiles.git
 mv ~/dotfiles ~/.dotfiles
 # Homebrew https://brew.sh
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
@@ -310,7 +310,7 @@ $(brew --prefix)/opt/fzf/install # To install key bindings to iTerm and fuzzy co
 brew install thefuck
 
 # Local Sherpa
-git clone git@github.com:tothpeter/local_sherpa.git ~/.dotfiles/lib/local_sherpa
+git clone git@github.com:nomadsherpa/local_sherpa.git ~/.dotfiles/lib/local_sherpa
 ```
 
 ### VLC

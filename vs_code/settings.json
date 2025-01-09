@@ -162,6 +162,7 @@
     "chpwd",
     "envrc",
     "mktemp",
+    "nomadsherpa",
     "ollama",
     "rubocop",
     "subproject",
