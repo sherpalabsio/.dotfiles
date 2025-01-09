@@ -167,7 +167,12 @@ unalias gco
 gco() {
   if [ -z "$1" ]; then
     # List all the branches and let the user select one if no arguments are provided
-    git branch | grep -v "^\*" | fzf --height=20% --reverse --info=inline | xargs git checkout
+    git branch |
+      grep -v "^\*" |
+      grep -v "^  Z" |
+      grep -v "$(git_main_branch)" |
+      fzf --height=20% --reverse --info=inline |
+      xargs git checkout
   else
     # Otherwise, fallback to the original behavior
     git checkout $@
