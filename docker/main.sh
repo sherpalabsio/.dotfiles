@@ -34,10 +34,8 @@ docker_start_daemon() {
 docker_compose_up() {
   docker_start_daemon
 
-  local -r container_name="${1:-$DOCKER_CONTAINER_NAME}"
-
   # Skip if the container(s) are already running
-  [ "$(docker ps -q -f name=$container_name)" ] && return
+  [ -n "$(docker compose ps -q)" ] && return
 
   echo "Starting the container(s)..."
   docker-compose up -d
