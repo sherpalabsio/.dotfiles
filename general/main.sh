@@ -1,4 +1,6 @@
 dev() {
+  docker_compose_up
+
   # Is this an Elixir project?
   if [ -f mix.exs ]; then
     # Is this a Phoenix project?
