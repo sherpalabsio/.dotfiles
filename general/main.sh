@@ -17,6 +17,21 @@ dev() {
   fi
 }
 
+# Start a console (Elixir, Phoenix, Rails)
+c() {
+  docker_compose_up
+
+  # Is this an Elixir project?
+  if [ -f mix.exs ]; then
+    iex -S mix
+  # Is this a Rails project?
+  elif [ -f Gemfile ]; then
+    rails console
+  else
+    echo "Not supported"
+  fi
+}
+
 # Print the last exit code
 alias '?'='echo $?'
 
