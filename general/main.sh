@@ -1,8 +1,13 @@
 dev() {
-  # If this is a Phoenix project, start the server
+  # Is this an Elixir project?
   if [ -f mix.exs ]; then
-    mix phx.server
-  # If this is a Rails project, start the server
+    # Is this a Phoenix project?
+    if grep -q "phoenix" mix.exs; then
+      mix phx.server
+    else
+      mix run --no-halt
+    fi
+  # Is this a Rails project?
   elif [ -f Gemfile ]; then
     rails server
   else
