@@ -6,6 +6,7 @@
   "workbench.editor.empty.hint": "hidden",
   "workbench.iconTheme": "file-icons",
   "workbench.layoutControl.enabled": false,
+  "workbench.navigationControl.enabled": false,
   "workbench.sideBar.location": "right",
   "workbench.startupEditor": "none",
 
