@@ -11,7 +11,7 @@ dev() {
     fi
   # Is this a Rails project?
   elif [ -f Gemfile ]; then
-    rails server
+    r server
   else
     echo "Not a Phoenix or Rails project"
   fi
@@ -26,7 +26,7 @@ c() {
     iex -S mix
   # Is this a Rails project?
   elif [ -f Gemfile ]; then
-    rails console
+    r console
   else
     echo "Not supported"
   fi
