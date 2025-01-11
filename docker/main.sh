@@ -30,15 +30,15 @@ docker_start_daemon() {
   echo ""
 }
 
-# Start the container(s) if they are not running
+# Start Docker and the container(s) if they are not running
 docker_compose_up() {
-  docker_start_daemon
-
   # Skip if there is no docker-compose.yml file
   [ ! -f docker-compose.yml ] && return
 
   # Skip if the container(s) are already running
   [ -n "$(docker compose ps -q)" ] && return
+
+  docker_start_daemon
 
   echo "Starting the container(s)..."
   docker-compose up -d
