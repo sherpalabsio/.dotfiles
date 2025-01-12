@@ -11,7 +11,7 @@
 			"#!/usr/bin/env bash"
 		]
 	},
-	"print spearator line": {
+	"print ------": {
 		"prefix": "p",
 		"body": [
 			"echo \"-------------------------------\""
@@ -23,13 +23,13 @@
 			"alias ${1:alias}='${2:command}'"
 		]
 	},
-	"echo \"\"": {
+	"echo $": {
 		"prefix": "e",
 		"body": [
 			"echo ${1:\"$0\"}"
 		]
 	},
-	"echo \"\"": {
+	"echo $()": {
 		"prefix": "e2",
 		"body": [
 			"echo $($0)"
