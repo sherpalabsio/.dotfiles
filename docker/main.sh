@@ -11,6 +11,8 @@ alias con='de /bin/bash'
 alias up="docker_start_daemon && docker-compose up -d"
 alias upb="docker_start_daemon && docker-compose up --build -d"
 alias down="docker-compose down"
+# Down all - Stop all running containers
+alias downa='docker stop $(docker ps -q)'
 
 alias d_tmp_ubuntu="docker run --rm -it ubuntu"
 
