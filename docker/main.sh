@@ -3,8 +3,31 @@ alias d_nukem='docker system prune --all --volumes -f'
 
 alias dps='docker ps'
 
-# Execute a command in the main container
-alias de='docker_compose_up && docker exec -it ${DOCKER_CONTAINER_NAME:-$(basename $(pwd))}'
+# Execute a command inside a running container
+# Offer the user to choose a container started from the current directory
+de() {
+  docker_compose_up
+
+  local container_name
+
+  if [ -n "$DOCKER_CONTAINER_NAME" ]; then
+    container_name="$DOCKER_CONTAINER_NAME"
+  else
+    container_name=$(
+      docker compose ps --format table |
+        tail -n +2 |
+        fzf --with-nth 4,1 \
+          --layout=reverse \
+          --bind 'enter:become(echo {1})'
+    )
+  fi
+
+  # Skip if we don't have a container name
+  [ -z "$container_name" ] && return
+
+  docker exec -it $container_name "$@"
+}
+
 # Connect to the main container
 alias con='de /bin/bash'
 
