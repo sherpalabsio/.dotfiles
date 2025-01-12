@@ -184,4 +184,6 @@
     "scminput": false
   },
   "github.copilot.editor.enableAutoCompletions": true,
+
+  "shellformat.flag": "-sr -kp",
 }
