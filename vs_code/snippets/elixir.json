@@ -1,31 +1,40 @@
 {
-	"IO.puts \"-----\"": {
+  "IO.puts \"-----\"": {
     "prefix": "p",
-    "body": ["IO.puts \"----------------------\""]
+    "body": [
+      "IO.puts \"----------------------\""
+    ]
   },
-  // "IO.inspect": {
-  //   "prefix": "i",
-  //   "body": ["IO.inspect "]
-  // },
   "=> ": {
     "prefix": "=",
-    "body": ["=> "]
+    "body": [
+      "=> "
+    ]
   },
   "->": {
     "prefix": "-",
-    "body": ["->"]
+    "body": [
+      "->"
+    ]
   },
   "%{}": {
     "prefix": "%",
-    "body": ["%{$0}"]
+    "body": [
+      "%{$0}"
+    ]
   },
-
-	"Inspect variable": {
-		"prefix": "pp",
-		"body": [ "dbg(${1:params})" ]
-	},
-	"Todo comment": {
-		"prefix": "todo",
-		"body": [ "# TODO: " ]
-	},
+  "Inspect variable": {
+    "prefix": "pp",
+    "body": [
+      "IO.puts \"----------------------\"",
+      "dbg(${1:params})",
+      "IO.puts \"----------------------\"",
+    ]
+  },
+  "Todo comment": {
+    "prefix": "todo",
+    "body": [
+      "# TODO: "
+    ]
+  }
 }

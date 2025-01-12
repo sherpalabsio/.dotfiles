@@ -1,40 +1,58 @@
 {
 	"#!/usr/bin/env zsh": {
 		"prefix": "!",
-    "body": ["#!/usr/bin/env zsh"]
-  },
+		"body": [
+			"#!/usr/bin/env zsh"
+		]
+	},
 	"#!/usr/bin/env bash": {
 		"prefix": "!b",
-    "body": ["#!/usr/bin/env bash"]
-  },
+		"body": [
+			"#!/usr/bin/env bash"
+		]
+	},
 	"print spearator line": {
 		"prefix": "p",
-    "body": ["echo \"-------------------------------\""]
-  },
+		"body": [
+			"echo \"-------------------------------\""
+		]
+	},
 	"alias": {
 		"prefix": "a",
-    "body": ["alias ${1:alias}='${2:command}'"]
-  },
+		"body": [
+			"alias ${1:alias}='${2:command}'"
+		]
+	},
 	"echo \"\"": {
 		"prefix": "e",
-    "body": ["echo ${1:\"$0\"}"]
-  },
+		"body": [
+			"echo ${1:\"$0\"}"
+		]
+	},
 	"echo \"\"": {
 		"prefix": "e2",
-    "body": ["echo $($0)"]
-  },
+		"body": [
+			"echo $($0)"
+		]
+	},
 	"echo ${array[@]}": {
 		"prefix": "ea",
-    "body": ["echo ${${0:array}[@]}"]
-  },
+		"body": [
+			"echo ${${0:array}[@]}"
+		]
+	},
 	"debug puts": {
 		"prefix": "pd",
-		"body": ["echo \"${1}: $${1}\""],
-  },
+		"body": [
+			"echo \"${1}: $${1}\""
+		],
+	},
 	"debug puts2": {
 		"prefix": "ppp",
-		"body": ["echo \"${1}: $${1}\""],
-  },
+		"body": [
+			"echo \"${1}: $${1}\""
+		],
+	},
 	"debug puts3": {
 		"prefix": "pp",
 		"body": [
@@ -42,13 +60,13 @@
 			"echo \"${1}: $${1}\"",
 			"echo '-------------------------------'"
 		],
-  },
-
+	},
 	"disable shellcheck": {
 		"prefix": "dis",
-		"body": ["# shellcheck disable=${1:SC2154}"],
-  },
-
+		"body": [
+			"# shellcheck disable=${1:SC2154}"
+		],
+	},
 	"if": {
 		"prefix": "if",
 		"body": [
@@ -56,7 +74,7 @@
 			"  ${0}",
 			"fi"
 		],
-  },
+	},
 	"if else": {
 		"prefix": "ife",
 		"body": [
@@ -66,5 +84,5 @@
 			"   ",
 			"fi"
 		],
-  },
+	},
 }

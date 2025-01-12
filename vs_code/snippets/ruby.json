@@ -1,5 +1,5 @@
 {
-	"Class from file name": {
+  "Class from file name": {
     "prefix": "cla",
     "body": [
       "class ${1:${TM_FILENAME_BASE/(?:^|_)(\\w)/${1:/capitalize}/g}}",

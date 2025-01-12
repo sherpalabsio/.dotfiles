@@ -3,49 +3,66 @@
   "print separator line": {
     "scope": "ruby",
     "prefix": "p",
-    "body": ["p '-------------------------------'"]
+    "body": [
+      "p '-------------------------------'"
+    ]
   },
   "print separator line 1": {
     "scope": "ruby",
     "prefix": "p1",
-    "body": ["p '-------------------------------1'"]
+    "body": [
+      "p '-------------------------------1'"
+    ]
   },
   "print separator line 0": {
     "scope": "ruby",
     "prefix": "p0",
-    "body": ["p '-------------------------------0'"]
+    "body": [
+      "p '-------------------------------0'"
+    ]
   },
   "print separator line 2": {
     "scope": "ruby",
     "prefix": "p2",
-    "body": ["p '-------------------------------2'"]
+    "body": [
+      "p '-------------------------------2'"
+    ]
   },
   "print separator line 3": {
     "scope": "ruby",
     "prefix": "p3",
-    "body": ["p '-------------------------------3'"]
+    "body": [
+      "p '-------------------------------3'"
+    ]
   },
   "print separator line 4": {
     "scope": "ruby",
     "prefix": "p4",
-    "body": ["p '-------------------------------4'"]
+    "body": [
+      "p '-------------------------------4'"
+    ]
   },
   "print separator line 5": {
     "scope": "ruby",
     "prefix": "p5",
-    "body": ["p '-------------------------------5'"]
+    "body": [
+      "p '-------------------------------5'"
+    ]
   },
   "print separator line 6": {
     "scope": "ruby",
     "prefix": "p6",
-    "body": ["p '-------------------------------6'"]
+    "body": [
+      "p '-------------------------------6'"
+    ]
   },
   "print variable with 1 separator": {
     "scope": "ruby",
     "prefix": "pp",
     "body": [
       "p '-------------------------------'",
-      "p $0"]
+      "p $0"
+    ]
   },
   "print variable with 2 separators": {
     "scope": "ruby",
@@ -53,37 +70,55 @@
     "body": [
       "p '-------------------------------'",
       "p $0",
-      "p '-------------------------------'"]
+      "p '-------------------------------'"
+    ]
   },
   "TODO": {
     "scope": "ruby",
     "prefix": "todo",
-    "body": ["# TODO: "]
+    "body": [
+      "# TODO: "
+    ]
   },
   "require debug": {
     "scope": "ruby",
     "prefix": "rd",
-    "body": ["require 'debug'"]
+    "body": [
+      "require 'debug'"
+    ]
   },
   "require debug then debug": {
     "scope": "ruby",
     "prefix": "d",
-    "body": ["require 'debug'", "debugger"]
+    "body": [
+      "require 'debug'",
+      "debugger"
+    ]
   },
   "debugger pry": {
     "scope": "ruby",
     "prefix": "dp",
-    "body": ["binding.pry"]
+    "body": [
+      "binding.pry"
+    ]
   },
   "defi": {
     "scope": "ruby",
     "prefix": "defi",
-    "body": ["def initialize", "  $0", "end"]
+    "body": [
+      "def initialize",
+      "  $0",
+      "end"
+    ]
   },
   "defs": {
     "scope": "ruby",
     "prefix": "defs",
-    "body": ["def self.${1:item}", "  $0", "end"]
+    "body": [
+      "def self.${1:item}",
+      "  $0",
+      "end"
+    ]
   },
   "RuboCop disable": {
     "scope": "ruby",
@@ -97,69 +132,91 @@
   "described_class": {
     "scope": "ruby",
     "prefix": "descc",
-    "body": ["described_class"]
+    "body": [
+      "described_class"
+    ]
   },
   // Overwrites
   ".each": {
     "scope": "ruby",
     "prefix": ".each",
-    "body": [".each do |${1:item}|", "\t$0", "end"]
+    "body": [
+      ".each do |${1:item}|",
+      "\t$0",
+      "end"
+    ]
   },
   "each": {
     "scope": "ruby",
     "prefix": "each",
-    "body": ["${1:item}s.each do |${1:item}|", "\t$0", "end"]
+    "body": [
+      "${1:item}s.each do |${1:item}|",
+      "\t$0",
+      "end"
+    ]
   },
   // ================ Rails ================
   "params[:id]": {
     "scope": "ruby",
     "prefix": "pa",
-    "body": ["params[${1::id}]"]
+    "body": [
+      "params[${1::id}]"
+    ]
   },
   "Rails.logger.info '--'": {
     "scope": "ruby",
     "prefix": "log",
-    "body": ["Rails.logger.info '-----------------------------------------'"]
+    "body": [
+      "Rails.logger.info '-----------------------------------------'"
+    ]
   },
   "Rails.logger.error '--'": {
     "scope": "ruby",
     "prefix": "loge",
-    "body": ["Rails.logger.error '-----------------------------------------'"]
+    "body": [
+      "Rails.logger.error '-----------------------------------------'"
+    ]
   },
-
   // ================ JavaScript ================
   "Props for a component": {
-		"scope": "javascript,typescript,vue",
+    "scope": "javascript,typescript,vue",
     "prefix": "props",
     "body": [
       "${1:const props = }defineProps({",
-			"  ${2}: {",
-			"${3:    required: true,}",
-			"    type: $0,",
-			"  }",
-			"})",
+      "  ${2}: {",
+      "${3:    required: true,}",
+      "    type: $0,",
+      "  }",
+      "})"
     ],
     "description": "Base for Vue File with SCSS"
   },
-
   "debugger JS": {
     "scope": "javascript,typescript,vue",
     "prefix": "d",
-    "body": ["debugger"]
+    "body": [
+      "debugger"
+    ]
   },
   "log": {
     "scope": "javascript,typescript,vue",
     "prefix": "p",
-    "body": ["console.log('----------------------')"]
+    "body": [
+      "console.log('----------------------')"
+    ]
   },
   "log2": {
     "scope": "javascript,typescript,vue",
     "prefix": "pp",
-    "body": ["console.log('----------------------', $0)"]
+    "body": [
+      "console.log('----------------------', $0)"
+    ]
   },
   "log3": {
     "scope": "javascript,typescript,vue",
     "prefix": "pb", // print body
-    "body": ["console.log('----------------------', document.body.innerHTML)"]
-  },
+    "body": [
+      "console.log('----------------------', document.body.innerHTML)"
+    ]
+  }
 }
