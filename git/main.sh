@@ -106,6 +106,7 @@ alias gplm='git fetch origin $(git_main_branch):$(git_main_branch) --prune'
 alias nah='git reset --hard && git clean -df'
 # Undo - Removes the last commit while keeping its changes
 alias gu="git reset --soft 'HEAD^'"
+alias guh="git reset --hard 'HEAD^'"
 
 # GitX: Open repository in SourceTree (don't ask why I associate GitX with SourceTree)
 alias gx='open -a SourceTree $(git rev-parse --show-toplevel || echo .)'
