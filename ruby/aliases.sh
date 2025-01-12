@@ -33,9 +33,6 @@ alias rrf='rr | fzf'                        # Rails routes find (fuzzy search)
 alias logd='tail -f log/development.log'
 alias logt='tail -f log/test.log'
 
-alias mig='r db:migrate'
-alias migt='RAILS_ENV=test r db:migrate'
-
 # alias rollb_normal='r db:rollback'
 
 alias rollbt='RAILS_ENV=test r db:rollback'

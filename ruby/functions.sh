@@ -1,4 +1,4 @@
-rollb() {
+rails_rollback() {
   # If there is an argument
   if [ -n "$1" ]; then
     rollb_version $1
@@ -7,6 +7,6 @@ rollb() {
   fi
 }
 
-rollb_version() {
+rails_rollback_version() {
   r db:migrate:down VERSION=$1
 }
