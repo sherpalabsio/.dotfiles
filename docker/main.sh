@@ -47,7 +47,13 @@ alias upb="docker_start_daemon && docker-compose up --build -d"
 # Down - Stop all running containers started with docker-compose from the current directory
 alias down="docker-compose down"
 # Down all - Stop all running containers
-alias downa='docker stop $(docker ps -q)'
+downa() {
+  local -r running_containers=$(docker ps -q)
+
+  # Skip if there are no running containers
+  [ -z "$running_containers" ] && return
+  echo "$running_containers" | xargs docker stop
+}
 
 # Stop containers started by other projects
 # Useful when two projects are using PostgreSQL with the same port
