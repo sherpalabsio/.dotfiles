@@ -149,6 +149,10 @@
     "editor.defaultFormatter": "ms-azuretools.vscode-docker"
   },
 
+  "[sql]": {
+    "editor.formatOnSave": true,
+    "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
+  },
 
   "emmet.includeLanguages": {
     "erb": "html",
