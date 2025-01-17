@@ -13,13 +13,23 @@ de() {
   if [ -n "$DOCKER_CONTAINER_NAME" ]; then
     container_name="$DOCKER_CONTAINER_NAME"
   else
-    container_name=$(
+    local -r running_containers=$(
       docker compose ps --format table |
-        tail -n +2 |
-        fzf --with-nth 4,1 \
-          --layout=reverse \
-          --bind 'enter:become(echo {1})'
+        tail -n +2
     )
+
+    if [ $(echo "$running_containers" | wc -l) -eq 1 ]; then
+      # If there is only one container, use it
+      container_name=$(echo "$running_containers" | awk '{print $1}')
+    else
+      # If there are multiple containers, let the user choose
+      container_name=$(
+        echo "$running_containers" |
+          fzf --with-nth 4,1 \
+              --layout=reverse \
+              --bind 'enter:become(echo {1})'
+      )
+    fi
   fi
 
   # Skip if we don't have a container name
