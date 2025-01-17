@@ -76,13 +76,13 @@ docker_start_daemon() {
   # Skip if Docker is already running
   pgrep -x "Docker" > /dev/null && return
 
-  echo -n "Starting the Docker daemon"
+  echo -en "==> \e[33mStarting the Docker daemon.\e[0m"
   open -a Docker
 
   # Wait for Docker to start
   while ! docker ps &> /dev/null; do
     sleep 0.3
-    echo -n "."
+    echo -en "\e[33m.\e[0m"
   done
   echo ""
 }
@@ -97,7 +97,7 @@ docker_compose_up() {
   # Skip if the container(s) are already running
   [ -n "$(docker compose ps -q)" ] && return
 
-  echo "Starting the container(s)..."
+  echo -e "==> \e[33mStarting the container(s)...\e[0m"
   docker-compose up -d
 
   # Warn if the container(s) failed to start

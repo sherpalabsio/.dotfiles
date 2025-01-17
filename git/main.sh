@@ -53,7 +53,7 @@ alias grb_fixup='git rebase -i --autosquash $(git_main_branch)'
 # Rebase continue all - Continue the rebase without editing the commit message
 alias grbca='git add --all && GIT_EDITOR=true git rebase --continue'
 
-alias git_clean_branches='git_clean_not_my_branches ; git_clean_merged_branches'
+alias git_clean_branches='echo -en "\e[33m" ; git_clean_not_my_branches ; git_clean_merged_branches ; echo -en "\e[0m"'
 alias git_clean_not_my_branches='git branch --format "%(refname:short)" | grep -v "peter-" | grep -v "$(git_main_branch)" | xargs -r git branch -D'
 alias git_clean_merged_branches="gfa && git branch --format '%(refname:short) %(upstream:track)' | awk '\$2 == \"[gone]\" { print \$1 }' | xargs -r git branch -D"
 alias git_clean='gfa && git_clean_branches'
