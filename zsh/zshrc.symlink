@@ -73,3 +73,5 @@ if [[ -f "$HOME/.config/local_sherpa/use_dev_version" ]]; then
 else
   include $DOTFILES_PATH/lib/local_sherpa/lib/init.sh
 fi
+
+eval $(thefuck --alias)
