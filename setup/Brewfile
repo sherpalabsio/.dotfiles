@@ -1,2 +1,2 @@
-tap "koekeishiya/formulae"
-brew "koekeishiya/formulae/skhd"
+tap 'koekeishiya/formulae'
+brew 'koekeishiya/formulae/skhd'
