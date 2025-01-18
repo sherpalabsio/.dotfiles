@@ -29,20 +29,20 @@ source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 asdf_sh_path="$(brew --prefix asdf)/libexec/asdf.sh" # (homebrew install)
 [[ -s $asdf_sh_path ]] && source $asdf_sh_path
 
-# Load my custom files
-_my_variables=($DOTFILES_PATH/**/variables.sh)
-_my_main_files=($DOTFILES_PATH/**/main.sh)
-_my_aliases=($DOTFILES_PATH/**/aliases.sh)
-_my_functions=($DOTFILES_PATH/**/functions.sh)
+# Load all .sh files recursively
+_my_files=($DOTFILES_PATH/**/*.sh)
+_my_files=(${_my_files[@]/*\/lib\/*/})
+_my_files=(${_my_files[@]/*\/tmp\/*/})
+_my_files=(${_my_files[@]/*\/local\/*/})
 _my_widgets=($DOTFILES_PATH/zsh/widgets/**/*.plugin.zsh)
 
-_my_files=($_my_variables $_my_main_files $_my_aliases $_my_functions $_my_widgets)
+_my_files=($_my_files $_my_widgets)
 
 for file in ${_my_files}; do
   source $file
 done
 
-unset _my_variables _my_main_files _my_aliases _my_functions _my_widgets _my_files
+unset _my_widgets _my_files
 
 source $DOTFILES_PATH/zsh/prompt.zsh
 
