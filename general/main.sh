@@ -1,71 +1,62 @@
-dev() {
-  docker_compose_up
+alias ec='code ~/.dotfiles'        # Edit config
+alias ecl='code ~/.dotfiles/local' # Edit config local
+alias eh='code $HISTFILE'          # Edit history
+alias ehr='code ~/.irb_history'    # Edit history Rails
 
-  # Is this an Elixir project?
-  if [ -f mix.exs ]; then
-    # Is this a Phoenix project?
-    if grep -q "phoenix" mix.exs; then
-      mix phx.server
-    else
-      mix run --no-halt
-    fi
-  # Is this a Rails project?
-  elif [ -f Gemfile ]; then
-    r server
-  else
-    echo "Not a Phoenix or Rails project"
-  fi
-}
+alias e='code .' # Edit current directory
+alias o='open .' # Open current directory in Finder
+alias http_server='python -m SimpleHTTPServer 8000'
 
-mig() {
-  docker_compose_up
+# Reload the shell (i.e. invoke as a login shell)
+alias rel="exec $SHELL -l"
 
-  # Is this an Elixir project?
-  if [ -f mix.exs ]; then
-    mix ecto.migrate
-  # Is this a Rails project?
-  elif [ -f Gemfile ]; then
-    r db:migrate
-  else
-    echo "Not an Elixir or Rails project"
-  fi
-}
+# Remove directory
+alias rmd="rm -rf"
 
-rollb() {
-  docker_compose_up
+alias cdw='cd ~/project-silverfin/web' # cd work
+alias cd_blog='cd ~/projects/blog'
+alias cd_blog_template='cd ~/projects/blog/template'
+alias cd_blog_content='cd ~/projects/blog/content'
 
-  # Is this an Elixir project?
-  if [ -f mix.exs ]; then
-    mix ecto.rollback
-  # Is this a Rails project?
-  elif [ -f Gemfile ]; then
-    rails_rollback
-  else
-    echo "Not an Elixir or Rails project"
-  fi
-}
+alias cdc='cd ~/.dotfiles'                                  # cd config
+alias cdcl='cd ~/.dotfiles/local'                           # cd config local
+alias cdp='cd ~/projects'                                   # Projects I'm currently working on
+alias cdps='cd ~/projects/local_sherpa'                     # Sherpa
+alias cdpm='cd ~/projects-mine'                             # Projects I'm not actively working on
+alias cdpn='cd ~/projects-not-mine'                         # Gems etc
+alias cdr='cd "$(git rev-parse --show-toplevel || echo .)"' # cd root
 
-alias migt='IX_ENV=test RAILS_ENV=test mig'
+alias cdtu='cd ~/tutorials'
+alias cdtj='cd ~/tutorials/js'
+alias cdtr='cd ~/tutorials/ruby'
 
-# Rerun the last migration
-alias migr='rollb && mig'
-# Rerun the last migration for the test DB
-alias migrt='MIX_ENV=test RAILS_ENV=test rollb && mig'
+alias cdt='cd ~/tmp'
+alias cdtmp='cd ~/tmp'
 
-# Start a console (Elixir, Phoenix, Rails)
-c() {
-  docker_compose_up
+alias tm='tmux'
+alias tma='tmux a'
 
-  # Is this an Elixir project?
-  if [ -f mix.exs ]; then
-    iex -S mix
-  # Is this a Rails project?
-  elif [ -f Gemfile ]; then
-    r console
-  else
-    echo "Not supported"
-  fi
-}
+alias backup_vlc_config='mv -v ~/Library/Preferences/org.videolan.vlc/vlcrc ~/.dotfiles/others/vlc/vlcrc && ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
+alias apply_vlc_config_from_dotfiles='rmd ~/Library/Preferences/org.videolan.vlc/vlcrc ; ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
+
+alias k='kubectl'
+alias k_logs='kubectl logs -f'
+alias k_get='kubectl get'
+alias k_pods='kubectl get pods'
+
+alias ng='ngrok http 3000' # opens an Ngrok tunnel to the local dev env
+
+alias s='sherpa'
+alias se='sherpa edit'
+alias st='sherpa trust'
+
+alias upgrade_sherpa='git -C $DOTFILES_PATH/lib/local_sherpa pull'
+alias upgrade_sherpa_f='git -C $DOTFILES_PATH/lib/local_sherpa reset origin/main --hard'
+
+alias screenshot_enable_shadow='defaults write com.apple.screencapture disable-shadow -bool false && killall SystemUIServer'
+alias screenshot_disable_shadow='defaults write com.apple.screencapture disable-shadow -bool true && killall SystemUIServer'
+
+alias llm='ollama run llama3.1'
 
 # Print the last exit code
 alias '?'='echo $?'
@@ -74,4 +65,38 @@ alias '?'='echo $?'
 p() {
   local -r var_name=$1
   echo ${(P)var_name}
+}
+
+# Find alias using fuzy search then execute the selected one
+find_alias() {
+  # Capture the selected alias using fzf and awk
+  local selected_alias
+  selected_alias=$(alias | fzf | awk -F'=' '{print $1}')
+
+  # Execute the selected alias if there is one
+  if [ -n "$selected_alias" ]; then
+    echo "Executing: $selected_alias"
+    eval "$selected_alias"
+  fi
+}
+
+# ==============================================================================
+# Screen Cast Environment
+
+readonly _ORIGINAL_BACKGROUND_PATH=~/.dotfiles/local/original_background.txt
+readonly _NEW_BACKGROUND_PATH=/Volumes/DriveD/Dropbox/YT\ Brand/sizing_bg.jpg
+
+readonly _ORIGINAL_DOCK_SIZE_PATH=~/.dotfiles/local/original_dock_size.txt
+readonly _DESIRED_DOCK_SIZE=71
+
+screen_cast_env__activate() {
+  # Change the background
+  osascript -e 'tell application "System Events" to picture of every desktop' > $_ORIGINAL_BACKGROUND_PATH
+  osascript -e 'tell application "System Events" to set picture of every desktop to "'"$_NEW_BACKGROUND_PATH"'"'
+}
+
+screen_cast_env__deactivate() {
+  # Restore the background
+  original_background=$(cat $_ORIGINAL_BACKGROUND_PATH)
+  osascript -e 'tell application "System Events" to set picture of every desktop to "'"$original_background"'"'
 }
