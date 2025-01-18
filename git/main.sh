@@ -63,15 +63,15 @@ alias gupd='gplm && git_delete_merged_branches && grbm'
 # Update remote - Sync changes from the remote master to the current branch and push the changes
 alias gupdr='gupd && gpf'
 
-# Commit
+# Commit all
 #
 # Stages all the changes then commits them with the provided message.
 # (no quotes are needed for the message)
 # If no message is provided, it opens the default editor to write one.
 # Usage:
-#   gc <message> - Commit the changes with the provided message
-unalias gc
-gc() {
+#   gca <message> - Commit the changes with the provided message
+unalias gca
+gca() {
   git add --all
 
   # Is commit message is provided?
