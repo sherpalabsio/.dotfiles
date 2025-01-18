@@ -25,7 +25,7 @@ de() {
       # If there are multiple containers, let the user choose
       container_name=$(
         echo "$running_containers" |
-          fzf --with-nth 4,1 \
+          fzf --with-nth 1 \
               --layout=reverse \
               --bind 'enter:become(echo {1})'
       )
