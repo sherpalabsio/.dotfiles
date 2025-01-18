@@ -1,4 +1,70 @@
-alias ec='code ~/.dotfiles'        # Edit config
+# Edit config (.dotfiles)
+# It offers a list of folders in the dotfiles directory sorted by most recently
+# opened. The user can select a folder to open in VS Code along with its content
+# sorted by modification time.
+ec() {
+  local -r history_file="${DOTFILES_PATH}/tmp/.ec_history"
+  local history_folders=""
+
+  # Read history file if it exists
+  if [[ -f "${history_file}" ]]; then
+    history_folders=$(cat "${history_file}")
+  fi
+
+  local eligible_folders=$(
+    find "${DOTFILES_PATH}" -maxdepth 1 -type d \
+         ! -name "lib" \
+         ! -name "tmp" \
+         ! -name "local" \
+         ! -name ".*" \
+         ! -name "_*" \
+         | awk -F/ '{print $NF}' \
+         | grep -v "^${DOTFILES_PATH##*/}$"
+  )
+
+  # Start with existing history folders that still exist
+  local sorted_folders=""
+  while IFS= read -r folder; do
+    if [[ -n "${folder}" ]] && echo "${eligible_folders}" | grep -q "^${folder}$"; then
+      sorted_folders="${sorted_folders}${folder}\n"
+    fi
+  done <<< "${history_folders}"
+
+  # Add any folders that aren't already in sorted_folders
+  while IFS= read -r folder; do
+    if [[ -n "${folder}" ]] && ! echo -e "${sorted_folders}" | grep -q "^${folder}$"; then
+      sorted_folders="${sorted_folders}${folder}\n"
+    fi
+  done <<< "${eligible_folders}"
+
+  # Select a folder using fzf
+  local -r selected_folder=$(
+    echo -e "${sorted_folders}" \
+    | grep -v '^$' \
+    | fzf --height 90% \
+          --layout=reverse \
+          --cycle
+  )
+
+  # Skip if no folder was selected
+  [ -z "${selected_folder}" ] && return 1
+
+  # Update history by moving selected folder to top
+  # First add the selected folder, then add all other folders except the selected one
+  echo "${selected_folder}" > "${history_file}"
+  echo -e "${sorted_folders}" | grep -v "^${selected_folder}$" | grep -v '^$' >> "${history_file}"
+
+  # Open the selected folder in VS Code along with its content
+  # split by regular and hidden files and sort by modification time
+  local -r folder_path="${DOTFILES_PATH}/${selected_folder}"
+  local -r regular_files=$(find "${folder_path}" -maxdepth 1 -type f ! -name ".*" -exec ls -t {} + )
+  local -r hidden_files=$(find "${folder_path}" -maxdepth 1 -type f -name ".*" -exec ls -t {} + )
+
+  echo "$regular_files\n$hidden_files" |
+    xargs code --new-window -n "${DOTFILES_PATH}"
+}
+
+alias eca='code ~/.dotfiles'       # Edit config all
 alias ecl='code ~/.dotfiles/local' # Edit config local
 alias eh='code $HISTFILE'          # Edit history
 alias ehr='code ~/.irb_history'    # Edit history Rails

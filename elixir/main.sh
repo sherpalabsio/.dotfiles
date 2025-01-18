@@ -4,8 +4,5 @@ export ERL_AFLAGS="-kernel shell_history enabled shell_history_path '\"$ERL_HIST
 # Phoenix console like Rails console
 alias pc='iex -S mix phx.server'
 
-# Elixir console like Rails console
-alias ec='iex -S mix'
-
 # Mix install
 alias mixi='mix deps.get'
