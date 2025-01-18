@@ -37,6 +37,19 @@ alias logt='tail -f log/test.log'
 
 alias rollbt='RAILS_ENV=test r db:rollback'
 
+rails_rollback() {
+  # If there is an argument
+  if [ -n "$1" ]; then
+    rollb_version $1
+  else
+    rollb_normal
+  fi
+}
+
+rails_rollback_version() {
+  r db:migrate:down VERSION=$1
+}
+
 alias seed='r db:seed'
 
 alias rg='r generate'
@@ -52,5 +65,3 @@ alias cop_fix='rubocop --autocorrect-all'
 # Other
 alias lint='rubocop'
 alias lint_fix='rubocop -a'
-
-# alias rest='pumactl restart'
