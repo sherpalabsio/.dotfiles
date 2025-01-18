@@ -1,4 +1,6 @@
 {
+  "window.newWindowDimensions": "maximized",
+
   "workbench.activityBar.location": "hidden",
   "workbench.colorTheme": "One Dark Pro Flat",
   "workbench.editor.decorations.colors": false,
