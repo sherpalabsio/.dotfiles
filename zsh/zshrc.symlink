@@ -22,6 +22,14 @@ setopt HIST_IGNORE_DUPS     # Don't save the command if it was just run
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries before unique ones when trimming history
 
+# Don't save non-existent commands to history
+zshaddhistory() {
+  local -r line=$1
+  local -r command_name=${${(z)line}[1]}
+
+  command -v "$command_name" > /dev/null
+}
+
 # Load Oh-My-Zsh
 source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 
