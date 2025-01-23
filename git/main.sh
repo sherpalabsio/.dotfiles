@@ -53,13 +53,29 @@ alias grb_fixup='git rebase -i --autosquash $(git_main_branch)'
 # Rebase continue all - Continue the rebase without editing the commit message
 alias grbca='git add --all && GIT_EDITOR=true git rebase --continue'
 
-alias git_clean_branches='echo -en "\e[33m" ; git_delete_not_my_branches ; git_delete_merged_branches ; echo -en "\e[0m"'
-alias git_delete_not_my_branches='git branch --format "%(refname:short)" | grep -v "peter-" | grep -v "$(git_main_branch)" | xargs -r git branch -D'
-alias git_delete_merged_branches="gfa && git branch --format '%(refname:short) %(upstream:track)' | awk '\$2 == \"[gone]\" { print \$1 }' | xargs -r git branch -D"
-alias git_clean='gfa && git_clean_branches'
+git_delete_not_my_branches() {
+  echo -en "\e[33m"
+
+  git branch --format "%(refname:short)" |
+    grep -v "peter-" |
+    grep -v "$(git_main_branch)" |
+    xargs -r git branch -D
+
+  echo -en "\e[0m"
+}
+
+git_delete_merged_branches() {
+  echo -en "\e[33m"
+
+  git branch --format '%(refname:short) %(upstream:track)' |
+    awk "\$2 == \"[gone]\" { print \$1 }" |
+    xargs -r git branch -D
+
+  echo -en "\e[0m"
+}
 
 # Update - Sync changes from the remote master to the current branch
-alias gupd='gplm && git_delete_merged_branches && grbm'
+alias gupd='gplm && gfa && git_delete_merged_branches && grbm'
 # Update remote - Sync changes from the remote master to the current branch and push the changes
 alias gupdr='gupd && gpf'
 
