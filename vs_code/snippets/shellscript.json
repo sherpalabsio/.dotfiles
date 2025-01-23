@@ -20,7 +20,7 @@
 	"alias": {
 		"prefix": "a",
 		"body": [
-			"alias ${1:alias}='${2:command}'"
+			"alias ${1:alias}=\"${2:command}\""
 		]
 	},
 	"echo $": {
