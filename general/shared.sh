@@ -63,7 +63,12 @@ c() {
     iex -S mix
   # Is this a Rails project?
   elif [ -f Gemfile ]; then
-    r console
+    # Does the gemfile have rails?
+    if grep -q "rails" Gemfile; then
+      r c
+    else
+      irb
+    fi
   else
     echo "Not supported"
   fi
