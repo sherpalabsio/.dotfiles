@@ -1,8 +1,41 @@
+alias ecg="ec git"      # Edit config Git
+alias ecge="ec general" # Edit config General
+alias ecm="ecge"        # Edit config Main
+alias ecr="ec ruby"     # Edit config Ruby
+alias ecd="ec docker"   # Edit config Rails
+alias ece="ec elixir"   # Edit config Elixir
+
 # Edit config (.dotfiles)
 # It offers a list of folders in the dotfiles directory sorted by most recently
 # opened. The user can select a folder to open in VS Code along with its content
 # sorted by modification time.
 ec() {
+  if [[ -n "$1" ]]; then
+    local -r selected_folder="$1"
+  else
+    local -r selected_folder="$(ec__select_folder)"
+  fi
+
+  # Skip if no folder was selected
+  [ -z "${selected_folder}" ] && return 1
+
+  # Update history by moving selected folder to top
+  # First add the selected folder, then add all other folders except the selected one
+  local -r history_file="${DOTFILES_PATH}/tmp/.ec_history"
+  echo "${selected_folder}" > "${history_file}"
+  echo -e "${sorted_folders}" | grep -v "^${selected_folder}$" | grep -v '^$' >> "${history_file}"
+
+  # Open the selected folder in VS Code along with its content
+  # split by regular and hidden files and sort by modification time
+  local -r folder_path="${DOTFILES_PATH}/${selected_folder}"
+  local -r regular_files=$(find "${folder_path}" -maxdepth 1 -type f ! -name ".*" -exec ls -t {} + )
+  local -r hidden_files=$(find "${folder_path}" -maxdepth 1 -type f -name ".*" -exec ls -t {} + )
+
+  echo "$regular_files\n$hidden_files" |
+    xargs code --new-window -n "${DOTFILES_PATH}"
+}
+
+ec__select_folder() {
   local -r history_file="${DOTFILES_PATH}/tmp/.ec_history"
   local history_folders=""
 
@@ -46,22 +79,7 @@ ec() {
           --cycle
   )
 
-  # Skip if no folder was selected
-  [ -z "${selected_folder}" ] && return 1
-
-  # Update history by moving selected folder to top
-  # First add the selected folder, then add all other folders except the selected one
-  echo "${selected_folder}" > "${history_file}"
-  echo -e "${sorted_folders}" | grep -v "^${selected_folder}$" | grep -v '^$' >> "${history_file}"
-
-  # Open the selected folder in VS Code along with its content
-  # split by regular and hidden files and sort by modification time
-  local -r folder_path="${DOTFILES_PATH}/${selected_folder}"
-  local -r regular_files=$(find "${folder_path}" -maxdepth 1 -type f ! -name ".*" -exec ls -t {} + )
-  local -r hidden_files=$(find "${folder_path}" -maxdepth 1 -type f -name ".*" -exec ls -t {} + )
-
-  echo "$regular_files\n$hidden_files" |
-    xargs code --new-window -n "${DOTFILES_PATH}"
+  echo "${selected_folder}"
 }
 
 alias eca='code ~/.dotfiles'       # Edit config all
