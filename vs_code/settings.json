@@ -201,6 +201,7 @@
     "scminput": false
   },
   "github.copilot.editor.enableAutoCompletions": true,
+  "chat.editing.confirmEditRequestRemoval": false,
 
   "shellformat.flag": "-sr -kp",
 
