@@ -164,6 +164,15 @@ find_alias() {
   fi
 }
 
+repeat_until_fails() {
+   while true; do
+    $@
+    [[ $? -ne 0 ]] && break # exit if any of the tests failed
+  done
+
+  echo "FAILED: $@"
+}
+
 # ==============================================================================
 # Screen Cast Environment
 
