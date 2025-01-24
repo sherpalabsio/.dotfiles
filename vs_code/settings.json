@@ -203,4 +203,29 @@
   "github.copilot.editor.enableAutoCompletions": true,
 
   "shellformat.flag": "-sr -kp",
+
+  "quickOpenRails.autoDetectAppDirectories": false,
+  "quickOpenRails.customCategories": [
+    {
+      "label": "Model",
+      "pattern": "models/**/*"
+    },
+    {
+      "label": "Migration",
+      "pattern": "db/migrate/**/*",
+      "reverse": true
+    },
+    {
+      "label": "System",
+      "pattern": "spec/system/**/*"
+    },
+    {
+      "label": "Fixture",
+      "pattern": "spec/fixtures/**/*"
+    },
+    {
+      "label": "Factory",
+      "pattern": "spec/factories/**/*"
+    }
+  ]
 }

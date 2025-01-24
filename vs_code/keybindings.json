@@ -112,4 +112,22 @@
     "command": "workbench.action.terminal.clear",
     "when": "terminalFocus"
   },
+  {
+    "key": "alt+r",
+    "command": "quickOpenRails.open"
+  },
+  {
+    "command": "rails.fastNavigation",
+    "key": "shift+alt+r",
+    "when": "editorTextFocus"
+  },
+  {
+    "key": "shift+cmd+,",
+    "command": "runCommands",
+    "args": {
+      "commands": [
+        "workbench.action.openSettingsJson"
+      ]
+    }
+  },
 ]
