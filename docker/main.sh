@@ -3,8 +3,10 @@ alias d_nukem='docker system prune --all --volumes -f'
 
 alias dps='docker ps'
 
-# Execute a command inside a running container
-# Offer the user to choose a container started from the current directory
+# Exec - Select a container then execute a command inside it
+# - Use the primary container if defined
+# - Use the only running container if there is only one
+# - Otherwise, offer a list of running containers to choose from
 de() {
   docker_compose_up
 
@@ -13,23 +15,7 @@ de() {
   if [ -n "$DOCKER_CONTAINER_NAME" ]; then
     container_name="$DOCKER_CONTAINER_NAME"
   else
-    local -r running_containers=$(
-      docker compose ps --format table |
-        tail -n +2
-    )
-
-    if [ $(echo "$running_containers" | wc -l) -eq 1 ]; then
-      # If there is only one container, use it
-      container_name=$(echo "$running_containers" | awk '{print $1}')
-    else
-      # If there are multiple containers, let the user choose
-      container_name=$(
-        echo "$running_containers" |
-          fzf --with-nth 1 \
-              --layout=reverse \
-              --bind 'enter:become(echo {1})'
-      )
-    fi
+    container_name=$(__docker_select_container)
   fi
 
   # Skip if we don't have a container name
@@ -38,8 +24,38 @@ de() {
   docker exec -it $container_name "$@"
 }
 
-# Connect to the main container
+# Exec all - Same as 'de' but ignores a defined primary container
+dea() {
+  docker_compose_up
+
+  local container_name
+  container_name=$(__docker_select_container)
+
+  # Skip if we don't have a container name
+  [ -z "$container_name" ] && return
+
+  docker exec -it $container_name "$@"
+}
+
+__docker_select_container() {
+  local -r running_container_names=$(
+    docker compose ps --format table |
+      tail -n +2 |
+      awk '{ print $1 }'
+  )
+
+  echo "$running_container_names" |
+    fzf --with-nth 1 \
+        --layout=reverse \
+        --select-1 \
+        --bind 'enter:become(echo {1})'
+}
+
+# Connect - Connect to the primary or the only running container
 alias con='de /bin/bash'
+# Connect all - Connect to the the only running container or offer a list of
+# running containers to choose from
+alias cona='dea /bin/bash'
 
 alias up="docker_start_daemon && docker-compose up -d"
 # Up build - Build the container(s) and start them
