@@ -165,7 +165,7 @@ find_alias() {
 }
 
 repeat_until_fails() {
-   while true; do
+  while true; do
     $@
     [[ $? -ne 0 ]] && break # exit if any of the tests failed
   done
