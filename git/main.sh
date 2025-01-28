@@ -43,10 +43,6 @@ grbia() {
   git rebase -i HEAD~$commit_count --autostash
 }
 
-
-# Rebase master
-alias grbm='git rebase $(git_main_branch) --autostash'
-
 # Squash fixup commits
 alias grb_fixup='git rebase -i --autosquash $(git_main_branch)'
 
@@ -73,11 +69,6 @@ git_delete_merged_branches() {
 
   echo -en "\e[0m"
 }
-
-# Update - Sync changes from the remote master to the current branch
-alias gupd='gplm && gfa && git_delete_merged_branches && grbm'
-# Update remote - Sync changes from the remote master to the current branch and push the changes
-alias gupdr='gupd && gpf'
 
 # Commit all
 #
@@ -118,6 +109,33 @@ alias gplr='git pull --rebase origin $(git_current_branch)'
 alias gplf='git reset origin/$(git_current_branch) --hard'
 # Pull master - Update the local main branch without switching branches
 alias gplm='git fetch origin $(git_main_branch):$(git_main_branch) --prune'
+# Rebase master
+alias grbm='git rebase $(git_main_branch) --autostash'
+
+# Update
+# - Fetch all branches and tags from all remotes
+# - Remove deleted remote branches
+# - Delete merged branches locally
+# - Pull changes from the remote master to the local master
+# - Pull the changes from the master to the current branch
+gupd() {
+  gfa
+  git_delete_merged_branches
+
+  # Are we on the main branch?
+  if [ "$(git_current_branch)" = "$(git_main_branch)" ]; then
+    git pull
+  else
+    gplm
+    grbm
+  fi
+
+  type after_git_update_hook &> /dev/null && after_git_update_hook
+}
+
+# Update remote
+alias gupdr='gupd && gpf'
+
 # Discard all changes
 alias nah='git reset --hard && git clean -df'
 # Undo - Removes the last commit while keeping its changes
