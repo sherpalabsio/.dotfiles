@@ -209,7 +209,7 @@
   "quickOpenRails.customCategories": [
     {
       "label": "Model",
-      "pattern": "models/**/*"
+      "pattern": "app/models/**/*"
     },
     {
       "label": "Migration",
