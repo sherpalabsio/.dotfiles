@@ -85,4 +85,10 @@
 			"fi"
 		],
 	},
+	"todo": {
+		"prefix": "todo",
+		"body": [
+			"# TODO: "
+		],
+	},
 }
