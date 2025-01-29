@@ -203,15 +203,34 @@ gco() {
   if [ -z "$1" ]; then
     # List all the branches and let the user select one if no arguments are provided
     git branch |
-      grep -v "^\*" |
-      grep -v "^  Z" |
-      grep -v "$(git_main_branch)" |
-      fzf --height=20% --reverse --info=inline |
+      grep -v "^\*" | # Exclude the current branch
+      grep -v "^  Z" | # Exclude the branches that start with 'Z'
+      grep -v "$(git_main_branch)" | # Exclude the main branch
+      sort -r |
+      fzf --height=20% \
+          --reverse \
+          --cycle \
+          --select-1 \
+          --info=inline |
       xargs git checkout
   else
     # Otherwise, fallback to the original behavior
     git checkout $@
   fi
+}
+
+# Checkout all - List the branches with less filtering
+gcoa() {
+  git branch |
+    grep -v "^\*" | # Exclude the current branch
+    grep -v "$(git_main_branch)" | # Exclude the main branch
+    sort -r |
+    fzf --height=20% \
+        --reverse \
+        --cycle \
+        --select-1 \
+        --info=inline |
+    xargs git checkout
 }
 
 # Checkout back
