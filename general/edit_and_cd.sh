@@ -1,12 +1,20 @@
 # ==================================== EDIT ====================================
-alias e='code .' # Edit current directory
+# Edit the current directory or a given path in VS Code
+e() {
+  if [[ -n "$1" ]]; then
+    code "$1"
+  else
+    code .
+  fi
+}
+
 alias eca='code ~/.dotfiles'       # Edit config all
 alias ecl='code ~/.dotfiles/local' # Edit config local
 alias eh='code $HISTFILE'          # Edit history
 alias ehr='code ~/.irb_history'    # Edit history Ruby
 
 alias ecg="ec git"      # Edit config Git
-alias ecm="ecge"        # Edit config Main
+alias ecm="ec general"  # Edit config Main/General
 alias ecr="ec ruby"     # Edit config Ruby
 alias ecd="ec docker"   # Edit config Rails
 alias ece="ec elixir"   # Edit config Elixir
