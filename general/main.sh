@@ -34,6 +34,7 @@ alias llm='ollama run llama3.1'
 
 # Print the last exit code
 alias '?'='echo $?'
+alias w='which'
 
 # Print the value of a variable
 p() {
