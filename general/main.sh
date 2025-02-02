@@ -10,8 +10,8 @@ alias rmd="rm -rf"
 alias tm='tmux'
 alias tma='tmux a'
 
-alias backup_vlc_config='mv -v ~/Library/Preferences/org.videolan.vlc/vlcrc ~/.dotfiles/others/vlc/vlcrc && ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
-alias apply_vlc_config_from_dotfiles='rmd ~/Library/Preferences/org.videolan.vlc/vlcrc ; ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
+alias vlc_backup_config='mv -v ~/Library/Preferences/org.videolan.vlc/vlcrc ~/.dotfiles/others/vlc/vlcrc && ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
+alias vlc_restore_config='rmd ~/Library/Preferences/org.videolan.vlc/vlcrc ; ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
 
 alias k='kubectl'
 alias k_logs='kubectl logs -f'
@@ -24,8 +24,8 @@ alias s='sherpa'
 alias se='sherpa edit'
 alias st='sherpa trust'
 
-alias upgrade_sherpa='git -C $DOTFILES_PATH/lib/local_sherpa pull'
-alias upgrade_sherpa_f='git -C $DOTFILES_PATH/lib/local_sherpa reset origin/main --hard'
+alias sherpa_upgrade_='git -C $DOTFILES_PATH/lib/local_sherpa pull'
+alias sherpa_upgrade_f='git -C $DOTFILES_PATH/lib/local_sherpa reset origin/main --hard'
 
 alias screenshot_enable_shadow='defaults write com.apple.screencapture disable-shadow -bool false && killall SystemUIServer'
 alias screenshot_disable_shadow='defaults write com.apple.screencapture disable-shadow -bool true && killall SystemUIServer'
@@ -41,7 +41,7 @@ p() {
   echo ${(P)var_name}
 }
 
-# Find alias using fuzy search then execute the selected one
+# Find alias using fuzzy search then execute the selected one
 find_alias() {
   # Capture the selected alias using fzf and awk
   local selected_alias
