@@ -1,19 +1,3 @@
-# Find alias using fuzzy search then execute the selected one
-find_alias() {
-  # Capture the selected alias using fzf and awk
-  local selected_alias
-  selected_alias=$(alias | fzf | awk -F'=' '{print $1}')
-
-  # Execute the selected alias if there is one
-  if [ -n "$selected_alias" ]; then
-    echo "Executing: $selected_alias"
-    eval "$selected_alias"
-  fi
-}
-
-zle -N find_alias
-bindkey '^f' 'find_alias'
-
 # Open a command plate with all the aliases and functions I defined by myself
 __select_my_command() {
   local commands
@@ -23,8 +7,14 @@ __select_my_command() {
     $(__select_my_command__load_functions)
   )
 
-  # Remove short items and sort the list
-  commands=($(printf "%s\n" "${commands[@]}" | awk 'length >= 4' | sort))
+  # Filter and sort the commands
+  commands=(
+    $(
+      printf "%s\n" "${commands[@]}" |
+        awk 'length >= 4 && !/^__/' | # Remove short commands and internal functions
+        sort
+    )
+  )
 
   selected_command=$(
     printf "%s\n" "${commands[@]}" |
