@@ -124,7 +124,7 @@ gupd() {
 
   # Are we on the main branch?
   if [ "$(git_current_branch)" = "$(git_main_branch)" ]; then
-    git pull
+    git pull --autostash
   else
     gplm
     grbm
