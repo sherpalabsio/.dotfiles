@@ -3,23 +3,12 @@ alias be='bundle exec'
 alias rs='rspec'
 alias t='rspec'
 
-alias edit_arb='code ~/projects/a.rb'
-alias c_arb='code ~/projects/a.rb'
-alias r_arb='ruby ~/projects/a.rb'
-alias run_arb='ruby ~/projects/a.rb'
-
 # Rails
 alias r4='rails _4.2.8_'
 alias r5='rails _5.0.2_'
 alias r6='rails _6.1.7.3_'
 
-function r() {
-  if [ -n "$USE_DOCKER_FOR_RAILS" ]; then
-    docker exec -it $DOCKER_CONTAINER_NAME rails $@
-  else
-    rails $@
-  fi
-}
+alias r="rails"
 
 alias rc='r console'
 alias rcs='r console --sandbox'
@@ -33,16 +22,17 @@ alias rrf='rr | fzf'                        # Rails routes find (fuzzy search)
 alias logd='tail -f log/development.log'
 alias logt='tail -f log/test.log'
 
-# alias rollb_normal='r db:rollback'
+alias rollb_default='r db:rollback'
 
 alias rollbt='RAILS_ENV=test r db:rollback'
 
 rails_rollback() {
-  # If there is an argument
-  if [ -n "$1" ]; then
-    rollb_version $1
+  local -r version=$1
+
+  if [ -n "$version" ]; then
+    rollb_version $version
   else
-    rollb_normal
+    rollb_default
   fi
 }
 
@@ -59,12 +49,8 @@ alias rgmig='r generate migration'
 alias rgmod='r generate model'
 alias rgs='r generate scaffold'
 
-alias cop='rubocop'
-alias cop_fix='rubocop --autocorrect-all'
-
-# Other
 alias lint='rubocop'
-alias lint_fix='rubocop -a'
+alias lint_fix='rubocop --autocorrect-all'
 
 # Rails translation add
 alias rta="$HOME/projects/tools/rails_i18n_sherpa/add_or_update"
