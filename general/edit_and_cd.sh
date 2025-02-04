@@ -8,22 +8,24 @@ e() {
   fi
 }
 
-alias eca='code ~/.dotfiles'       # Edit config all
+alias ec='code ~/.dotfiles'        # Edit config
 alias ecl='code ~/.dotfiles/local' # Edit config local
 alias eh='code $HISTFILE'          # Edit history
 alias ehr='code ~/.irb_history'    # Edit history Ruby
 
 alias ecg="ec git"      # Edit config Git
+alias ecgi="ec git"     # Edit config Git
+alias ecge="ec general" # Edit config Main/General
 alias ecm="ec general"  # Edit config Main/General
 alias ecr="ec ruby"     # Edit config Ruby
 alias ecd="ec docker"   # Edit config Rails
 alias ece="ec elixir"   # Edit config Elixir
 
-# Edit config (.dotfiles)
+# Edit config select (.dotfiles)
 # It offers a list of folders in the dotfiles directory sorted by most recently
 # opened. The user can select a folder to open in VS Code along with its content
 # sorted by modification time.
-ec() {
+ecs() {
   if [[ -n "$1" ]]; then
     local -r selected_folder="$1"
   else
