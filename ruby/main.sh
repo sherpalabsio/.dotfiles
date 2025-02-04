@@ -65,3 +65,6 @@ alias cop_fix='rubocop --autocorrect-all'
 # Other
 alias lint='rubocop'
 alias lint_fix='rubocop -a'
+
+# Rails translation add
+alias rta="$HOME/projects/tools/rails_i18n_sherpa/add_or_update"
