@@ -96,8 +96,7 @@ __ec__select_folder() {
   echo "${selected_folder}"
 }
 
-# Edit project
-ep() {
+__edit_project() {
   local selected
   selected=$(__select_project)
 
@@ -105,6 +104,9 @@ ep() {
     code "$selected"
   fi
 }
+
+zle -N __edit_project
+bindkey '^e' '__edit_project'
 
 # Edit project not mine
 epn() {
@@ -158,10 +160,13 @@ __select_project() {
   local selected
 
   selected=$(
-    __list_project_paths "$PROJECTS_DIR" |
+    __select_project__list_project_paths "$PROJECTS_DIR" |
       sed "s|^$PROJECTS_DIR/||" |
-      fzf --height 90% \
-          --layout=reverse \
+      fzf --layout=reverse \
+          --border \
+          --info=inline \
+          --margin=8,20 \
+          --padding=1 \
           --cycle
   )
 
@@ -172,7 +177,7 @@ __select_project() {
   echo "$PROJECTS_DIR/$selected"
 }
 
-__list_project_paths() {
+__select_project__list_project_paths() {
   local -r current_dir=$1
 
   # Don't print the starting directory
@@ -180,18 +185,18 @@ __list_project_paths() {
     echo $current_dir
   fi
 
-  __list_project_paths__should_we_stop "$current_dir" && return
+  __select_project__list_project_paths__should_we_stop "$current_dir" && return
 
   for subdir in "$current_dir"/*(/); do
     # Skip unwanted directories
     [[ ${subdir:t} = Z* ]] && continue
     [[ ${subdir:t} = *_assets ]] && continue
 
-    __list_project_paths "$subdir"
+    __select_project__list_project_paths "$subdir"
   done
 }
 
-__list_project_paths__should_we_stop() {
+__select_project__list_project_paths__should_we_stop() {
   local -r current_dir=$1
 
   # Directories and files indicating we are in a project root
