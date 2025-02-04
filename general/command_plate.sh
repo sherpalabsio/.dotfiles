@@ -100,4 +100,4 @@ __select_my_command__load_local_functions() {
 }
 
 zle -N __select_my_command
-bindkey "^[[80;5u" __select_my_command  # Shift+Cmd+p
+bindkey "^[[80;5u" __select_my_command # Shift+Cmd+p

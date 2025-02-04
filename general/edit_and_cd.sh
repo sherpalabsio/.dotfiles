@@ -108,7 +108,7 @@ __edit_project() {
 }
 
 zle -N __edit_project
-bindkey "^[[112;9u" __edit_project  # Cmd+p
+bindkey "^[[112;9u" __edit_project # Cmd+p
 
 # Edit project not mine
 epn() {
@@ -143,6 +143,21 @@ cdp() {
     cd "$selected"
   fi
 }
+
+# Open the selected project in the current terminal session and in VS Code
+__open_project() {
+  local selected
+  selected=$(__select_project)
+
+  if [[ -n "$selected" ]]; then
+    zle accept-line
+    cd "$selected"
+    code .
+  fi
+}
+
+zle -N __open_project
+bindkey "^[[111;9u" __open_project # Cmd+o
 
 cdpn() {
   local selected
