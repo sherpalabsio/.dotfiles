@@ -65,9 +65,6 @@ include() {
 
 include ~/.fzf.zsh
 
-zle -N find_alias
-bindkey '^f' 'find_alias'
-
 run_lazygit() { lazygit; }
 zle -N run_lazygit
 bindkey '^G' 'run_lazygit'
