@@ -3,8 +3,10 @@ __select_my_command() {
   local commands selected_command
 
   commands=(
-    $(__select_my_command__load_aliases)
-    $(__select_my_command__load_functions)
+    $(__select_my_command__load_global_aliases)
+    $(__select_my_command__load_local_aliases)
+    $(__select_my_command__load_global_functions)
+    $(__select_my_command__load_local_functions)
   )
 
   # Filter and sort the commands
@@ -34,7 +36,8 @@ __select_my_command() {
   zle reset-prompt
 }
 
-__select_my_command__load_aliases() {
+# Load the aliases defined in the main dotfiles directory
+__select_my_command__load_global_aliases() {
   unalias -a
 
   local my_files file
@@ -43,9 +46,6 @@ __select_my_command__load_aliases() {
   my_files=(${my_files[@]/*\/lib\/*/})
   my_files=(${my_files[@]/*\/tmp\/*/})
 
-  # Add the current Sherpa env file to the list if present
-  [ -f "$SHERPA_ENV_FILENAME" ] && my_files=($SHERPA_ENV_FILENAME $my_files)
-
   for file in ${my_files}; do
     source $file &> /dev/null
   done
@@ -53,15 +53,24 @@ __select_my_command__load_aliases() {
   compgen -a
 }
 
-__select_my_command__load_functions() {
+# Load the aliases defined in the local environment file
+__select_my_command__load_local_aliases() {
+  [ -f "$SHERPA_ENV_FILENAME" ] || return
+
+  unalias -a
+
+  source $SHERPA_ENV_FILENAME &> /dev/null
+
+  compgen -a | sed 's/^/@/' # Prefix the alias name with '@'
+}
+
+# Load the functions defined in the main dotfiles directory
+__select_my_command__load_global_functions() {
   local my_files file
 
   my_files=($DOTFILES_PATH/**/*.sh)
   my_files=(${my_files[@]/*\/lib\/*/})
   my_files=(${my_files[@]/*\/tmp\/*/})
-
-  # Add the current Sherpa env file to the list if present
-  [ -f "$SHERPA_ENV_FILENAME" ] && my_files=($SHERPA_ENV_FILENAME $my_files)
 
   local -r filter_pattern="^[[:space:]]*([[:alnum:]_]+[[:space:]]*\(\)|function[[:space:]]+[[:alnum:]_]+)"
 
@@ -73,6 +82,21 @@ __select_my_command__load_functions() {
       sed "s/function //" |
       sed "s/()//"
   done
+}
+
+# Load the functions defined in the local environment file
+__select_my_command__load_local_functions() {
+  [ -f "$SHERPA_ENV_FILENAME" ] || return
+
+  local -r filter_pattern="^[[:space:]]*([[:alnum:]_]+[[:space:]]*\(\)|function[[:space:]]+[[:alnum:]_]+)"
+
+  # Cleanup:
+  # "function_1()" -> "function_1"
+  # "function function_2()" -> "function_2()" -> "function_2"
+  grep -oE "$filter_pattern" "$SHERPA_ENV_FILENAME" |
+    sed "s/function //" |
+    sed "s/()//" |
+    sed 's/^/@/' # Prefix the function name with '@'
 }
 
 zle -N __select_my_command
