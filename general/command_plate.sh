@@ -76,4 +76,4 @@ __select_my_command__load_functions() {
 }
 
 zle -N __select_my_command
-bindkey '^p' '__select_my_command'
+bindkey "^[[80;5u" __select_my_command  # Shift+Cmd+p

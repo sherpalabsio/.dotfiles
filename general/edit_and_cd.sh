@@ -108,7 +108,7 @@ __edit_project() {
 }
 
 zle -N __edit_project
-bindkey '^e' '__edit_project'
+bindkey "^[[112;9u" __edit_project  # Cmd+p
 
 # Edit project not mine
 epn() {
