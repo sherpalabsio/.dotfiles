@@ -1,6 +1,6 @@
 # Open a command plate with all the aliases and functions I defined by myself
 __select_my_command() {
-  local commands
+  local commands selected_command
 
   commands=(
     $(__select_my_command__load_aliases)
