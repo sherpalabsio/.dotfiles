@@ -66,36 +66,6 @@
       "alignment": "left",
       "color": "#fff"
     },
-    // {
-    //   "command": "extension.switchToSpec",
-    //   "text": "$(beaker) Spec",
-    //   "tooltip": "Spec toggle",
-    //   "alignment": "left",
-    //   "color": "#fff",
-    //   "filterLanguageRegex": "ruby"
-    // },
-    {
-      "command": "workbench.panel.chat.view.copilot.focus",
-      "text": "$(github)",
-      "tooltip": "GH Copilot",
-      "alignment": "left",
-      "color": "#fff"
-    },
-    {
-      "command": "workbench.action.openChat.copilot",
-      "text": "$(github)",
-      "tooltip": "GH Copilot",
-      "alignment": "left",
-      "color": "#fff"
-    },
-    {
-      "command": "rails-go-to-spec-2.railsGoToSpec",
-      "text": "$(beaker) Spec",
-      "tooltip": "Spec toggle",
-      "alignment": "left",
-      "color": "#fff",
-      "filterLanguageRegex": "ruby"
-    },
     {
       "text": "$(markdown)",
       "command": "markdown.showPreviewToSide",
