@@ -70,6 +70,6 @@ c() {
       irb
     fi
   else
-    echo "Not supported"
+    irb
   fi
 }
