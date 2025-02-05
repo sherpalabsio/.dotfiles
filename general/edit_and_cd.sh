@@ -135,17 +135,21 @@ alias cdtr='cd ~/tutorials/ruby'
 
 alias cdt='cd ~/tmp'
 
-cdp() {
+__cd_project() {
   local selected
   selected=$(__select_project)
 
   if [[ -n "$selected" ]]; then
+    zle accept-line
     cd "$selected"
   fi
 }
 
+zle -N __cd_project
+bindkey "^[[111;9u" __cd_project # Cmd+o
+
 # Open the selected project in the current terminal session and in VS Code
-__open_project() {
+__cd_and_edit_project() {
   local selected
   selected=$(__select_project)
 
@@ -156,8 +160,8 @@ __open_project() {
   fi
 }
 
-zle -N __open_project
-bindkey "^[[111;9u" __open_project # Cmd+o
+zle -N __cd_and_edit_project
+bindkey "^[[111;10u" __cd_and_edit_project # Shift+Cmd+o
 
 cdpn() {
   local selected
