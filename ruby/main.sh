@@ -53,7 +53,7 @@ alias lint='rubocop'
 alias lint_fix='rubocop --autocorrect-all'
 
 rails_translation_add() {
-  $HOME/projects/tools/rails_i18n_sherpa/add_or_update
+  $HOME/projects/tools/rails_i18n_sherpa/add_or_update $1
 }
 
 alias rta="rails_translation_add"
