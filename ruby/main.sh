@@ -52,5 +52,15 @@ alias rgs='r generate scaffold'
 alias lint='rubocop'
 alias lint_fix='rubocop --autocorrect-all'
 
-# Rails translation add
-alias rta="$HOME/projects/tools/rails_i18n_sherpa/add_or_update"
+rails_translation_add() {
+  $HOME/projects/tools/rails_i18n_sherpa/add_or_update
+}
+
+alias rta="rails_translation_add"
+
+# Find the file(s) where the given text is located
+rails_translation_find() {
+  $HOME/projects/tools/rails_i18n_sherpa/find_file $1
+}
+
+alias rtf="rails_translation_find"
