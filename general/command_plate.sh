@@ -29,6 +29,9 @@ __select_my_command() {
   )
 
   if [ -n "$selected_command" ]; then
+    # Remove the '@' prefix
+    selected_command=$(echo "$selected_command" | sed 's/^@//')
+
     LBUFFER="${LBUFFER}${selected_command}"
   fi
 
