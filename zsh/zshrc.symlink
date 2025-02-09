@@ -73,8 +73,8 @@ alias use_sherpa_dev_version="mkdir -p ~/.config/local_sherpa && touch ~/.config
 alias use_sherpa_prod_version="rm -f ~/.config/local_sherpa/use_dev_version"
 
 if [[ -f "$HOME/.config/local_sherpa/use_dev_version" ]]; then
-  export USE_SHERPA_DEV_VERSION=true
   include ~/projects/local_sherpa/lib/init.sh
+  SHERPA_VERSION="$SHERPA_VERSION (dev)"
 else
   include $DOTFILES_PATH/lib/local_sherpa/lib/init.sh
 fi
