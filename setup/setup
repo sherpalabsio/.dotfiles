@@ -6,5 +6,10 @@ echo "Homebrew setup"
 brew bundle --file ~/.dotfiles/setup/Brewfile
 
 echo "Linking dotfiles"
+
 ln -sf ~/.dotfiles/general/.skhdrc ~/.skhdrc
+ln -sf ~/.dotfiles/elixir/.iex.exs ~/.iex.exs
+
 skhd --restart-service
+
+echo "Done!"
