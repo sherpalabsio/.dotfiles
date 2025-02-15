@@ -122,6 +122,11 @@
     "when": "editorTextFocus"
   },
   {
+    "command": "toggleVim",
+    "key": "ctrl+;",
+    "when": "editorTextFocus"
+  },
+  {
     "key": "shift+cmd+,",
     "command": "runCommands",
     "args": {
