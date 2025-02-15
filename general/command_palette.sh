@@ -1,4 +1,4 @@
-# Open a command plate with all the aliases and functions I defined by myself
+# Open a command palette with all the aliases and functions I defined by myself
 __select_my_command() {
   local commands selected_command
 
