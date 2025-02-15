@@ -91,6 +91,18 @@
     "when": "editorTextFocus && resourceLangId == ruby"
   },
   {
+    "key": "cmd+r cmd+t",
+    "command": "workbench.action.tasks.runTask",
+    "args": "run_test_line_in_iterm2",
+    "when": "editorTextFocus && resourceLangId == elixir"
+  },
+  {
+    "key": "cmd+r t",
+    "command": "workbench.action.tasks.runTask",
+    "args": "run_test_file_in_iterm2",
+    "when": "editorTextFocus && resourceLangId == elixir"
+  },
+  {
     "key": "cmd+r t",
     "command": "workbench.action.tasks.runTask",
     "args": "run_js_spec_file_in_iterm2",

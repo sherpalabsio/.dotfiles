@@ -19,7 +19,7 @@
       }
     },
     // Run the current file in RSpec (AppleScript)
-    // Applescript in iTerm2 is deprecated
+    // AppleScript in iTerm2 is deprecated
     {
       "label": "run_rspec_file_in_iterm2",
       "type": "shell",
@@ -49,7 +49,23 @@
         "focus": false
       }
     },
-    // Run the current file as a JS test (AppleScript)
+    // Run the current line as a test (AppleScript)
+    // AppleScript in iTerm2 is deprecated
+    {
+      "label": "run_test_line_in_iterm2",
+      "type": "shell",
+      "command": "osascript",
+      "args": [
+        "~/.dotfiles/iTerm/run_command.scpt",
+        "t", // alias for rspec
+        "${relativeFile}:${lineNumber}"
+      ],
+      "presentation": {
+        "reveal": "never",
+        "focus": false
+      }
+    },
+    // Run the current file as a test (AppleScript)
     {
       "label": "run_test_file_in_iterm2",
       "type": "shell",
