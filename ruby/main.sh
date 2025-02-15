@@ -1,7 +1,6 @@
 alias be='bundle exec'
 
 alias rs='rspec'
-alias t='rspec'
 
 # Rails
 alias r4='rails _4.2.8_'

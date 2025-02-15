@@ -1,5 +1,46 @@
 # Shared between Rails and Elixir projects
 
+t() {
+  docker_compose_up || return
+
+  # Is this an Elixir project?
+  if [ -f mix.exs ]; then
+    __run_tests_phoenix $1
+    # Is this a Phoenix project?
+    # if grep -q "phoenix" mix.exs; then
+    #   __run_tests_phoenix
+    # else
+    #   mix run --no-halt
+    # fi
+  # Is this a Rails project?
+  elif [ -f Gemfile ]; then
+    rs
+  else
+    echo "Not a Phoenix or Rails project"
+  fi
+}
+
+__run_tests_phoenix() {
+  local test_file=$1
+
+  if [ -n "$test_file" ]; then
+    # Remove optional :line_number
+    test_file_path=$(echo "$test_file" | sed 's/:.*//')
+
+    # Check if the file contains "IEx.pry()"
+    local -r debug_line=$(grep "IEx.pry()" "$test_file_path")
+    # Check if it is not commented out
+    local -r commented_out=$(echo "$debug_line" | grep "# IEx.pry()")
+
+    if [ -n "$debug_line" ] && [ -z "$commented_out" ]; then
+      iex -S mix test --trace $test_file
+      return
+    fi
+  fi
+
+  mix test $test_file
+}
+
 dev() {
   docker_compose_up
 
