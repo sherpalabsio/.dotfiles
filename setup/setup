@@ -1,3 +1,7 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
 echo "Homebrew setup"
 brew bundle --file ~/.dotfiles/setup/Brewfile
 
