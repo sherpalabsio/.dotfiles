@@ -46,6 +46,7 @@ __docker_select_container() {
 
   echo "$running_container_names" |
     fzf --with-nth 1 \
+        --height 20% \
         --layout=reverse \
         --select-1 \
         --bind 'enter:become(echo {1})'
