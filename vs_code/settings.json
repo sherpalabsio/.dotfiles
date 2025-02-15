@@ -104,6 +104,8 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "JakeBecker.elixir-ls"
   },
+  "elixirLS.suggestSpecs": false,
+  "elixirLS.enableTestLenses": false,
 
   "rubocop.mode": "enableUnconditionally",
   "[ruby]": {
