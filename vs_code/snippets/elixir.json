@@ -17,6 +17,12 @@
       "->"
     ]
   },
+  "|>": {
+    "prefix": "|",
+    "body": [
+      "|> "
+    ]
+  },
   "%{}": {
     "prefix": "%",
     "body": [
@@ -35,6 +41,13 @@
     "prefix": "todo",
     "body": [
       "# TODO: "
+    ]
+  },
+  "debug": {
+    "prefix": "d",
+    "body": [
+      "require IEx",
+      "IEx.pry()"
     ]
   }
 }
