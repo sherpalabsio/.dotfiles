@@ -13,19 +13,18 @@ alias ecl='code ~/.dotfiles/local' # Edit config local
 alias eh='code $HISTFILE'          # Edit history
 alias ehr='code ~/.irb_history'    # Edit history Ruby
 
-alias ecg="ec git"      # Edit config Git
-alias ecgi="ec git"     # Edit config Git
-alias ecge="ec general" # Edit config Main/General
-alias ecm="ec general"  # Edit config Main/General
-alias ecr="ec ruby"     # Edit config Ruby
-alias ecd="ec docker"   # Edit config Rails
-alias ece="ec elixir"   # Edit config Elixir
+alias ecge="__edit_config general" # Edit config Main/General
+alias ecgi="__edit_config git"     # Edit config Git
+alias ecd="__edit_config docker"   # Edit config Rails
+alias ecr="__edit_config ruby"     # Edit config Ruby
+alias ece="__edit_config elixir"   # Edit config Elixir
+alias ecv="__edit_config vs_code"  # Edit config VS Code
 
-# Edit config select (.dotfiles)
+# Edit config (.dotfiles)
 # It offers a list of folders in the dotfiles directory sorted by most recently
 # opened. The user can select a folder to open in VS Code along with its content
 # sorted by modification time.
-ecs() {
+__edit_config() {
   if [[ -n "$1" ]]; then
     local -r selected_folder="$1"
   else
@@ -33,7 +32,7 @@ ecs() {
   fi
 
   # Skip if no folder was selected
-  [ -z "${selected_folder}" ] && return 1
+  [ -z "${selected_folder}" ] && return
 
   # Update history by moving selected folder to top
   # First add the selected folder, then add all other folders except the selected one
@@ -45,11 +44,14 @@ ecs() {
   # split by regular and hidden files and sort by modification time
   local -r folder_path="${DOTFILES_PATH}/${selected_folder}"
   local -r regular_files=$(find "${folder_path}" -maxdepth 1 -type f ! -name ".*" -exec ls -t {} +)
-  local -r hidden_files=$(find "${folder_path}" -maxdepth 1 -type f -name ".*" -exec ls -t {} +)
+  local -r hidden_files=$(find "${folder_path}" -maxdepth 1 -type f -name ".*" ! -name ".DS_Store" -exec ls -t {} +)
 
   echo "$regular_files\n$hidden_files" |
-    xargs code --new-window -n "${DOTFILES_PATH}"
+    xargs code --new-window -n "$DOTFILES_PATH/$selected_folder"
 }
+
+zle -N __edit_config
+bindkey '[113;9u' '__edit_config'
 
 __ec__select_folder() {
   local -r history_file="${DOTFILES_PATH}/tmp/.ec_history"
@@ -90,8 +92,11 @@ __ec__select_folder() {
   local -r selected_folder=$(
     echo -e "${sorted_folders}" |
       grep -v '^$' |
-      fzf --height 90% \
-          --layout=reverse \
+      fzf --layout=reverse \
+          --border \
+          --info=inline \
+          --margin=8,20 \
+          --padding=1 \
           --cycle
   )
 
