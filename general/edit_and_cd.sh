@@ -123,7 +123,7 @@ epn() {
 # ===================================== CD =====================================
 alias cdc='cd ~/.dotfiles'                                  # cd config
 alias cdcl='cd ~/.dotfiles/local'                           # cd config local
-alias cdpa='cd ~/projects'                                  # cd projects all
+alias cdp='cd ~/projects'                                   # cd projects all
 alias cdps='cd ~/projects/local_sherpa'                     # cd project sherpa
 alias cdpm='cd ~/projects-mine'                             # cd projects mine
 alias cdpna='cd ~/projects-not-mine'                        # cd projects not mine
