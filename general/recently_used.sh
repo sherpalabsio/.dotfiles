@@ -43,6 +43,8 @@ __recently_used::get() {
 # Push a value to the top of the list
 # Usage: __recently_used::used "my_key" "my_value"
 __recently_used::used() {
+  local -r MAX_RECENT_VALUES=10
+
   local -r key=$1
   local -r value=$2
 
@@ -54,6 +56,9 @@ __recently_used::used() {
   local -a recent_values=($(__recently_used::get "$key"))
   recent_values=("${(@)recent_values:#$value}")
   recent_values=("$value" "${recent_values[@]}")
+
+  # Limit the recent_values to 10 items
+  recent_values=("${recent_values[1,$MAX_RECENT_VALUES]}")
 
   echo "${recent_values[@]}" > "$recent_values_file"
 }
