@@ -29,6 +29,12 @@
 			"echo ${1:\"$0\"}"
 		]
 	},
+	"print variable": {
+		"prefix": "pv",
+		"body": [
+			"echo $$0"
+		]
+	},
 	"echo $()": {
 		"prefix": "e2",
 		"body": [
