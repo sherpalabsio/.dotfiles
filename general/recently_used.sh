@@ -13,11 +13,11 @@ __recently_used::merge() {
     # Does the current value exist in the recent values?
     if [[ " ${current_values[@]} " =~ " ${recent_value} " ]]; then
       # Recent value is in the current values -> remove it from the current values
-      current_values=("${current_values[@]/$recent_value/}")
+      current_values=("${(@)current_values:#$recent_value}")
       merged_values+=("$recent_value")
     else
       # Recent value is NOT in the current values -> remove it from the recent values
-      recent_values=("${recent_values[@]/$recent_value/}")
+      recent_values=("${(@)recent_values:#$recent_value}")
       recent_values_changed=true
     fi
   done
@@ -52,7 +52,7 @@ __recently_used::used() {
   touch "$recent_values_file"
 
   local -a recent_values=($(__recently_used::get "$key"))
-  recent_values=("${recent_values[@]/$value/}")
+  recent_values=("${(@)recent_values:#$value}")
   recent_values=("$value" "${recent_values[@]}")
 
   echo "${recent_values[@]}" > "$recent_values_file"

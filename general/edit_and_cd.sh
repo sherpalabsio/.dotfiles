@@ -160,11 +160,17 @@ setopt null_glob
 
 __select_project() {
   local -r PROJECTS_DIR=${1:-~/projects}
-  local selected
+  local eligible_projects=(
+    $(
+      __select_project__list_project_paths "$PROJECTS_DIR" |
+        sed "s|^$PROJECTS_DIR/||"
+    )
+  )
 
-  selected=$(
-    __select_project__list_project_paths "$PROJECTS_DIR" |
-      sed "s|^$PROJECTS_DIR/||" |
+  eligible_projects=($(__recently_used::merge "select_project" "${eligible_projects[@]}"))
+
+  local -r selected=$(
+    printf "%s\n" "${eligible_projects[@]}" |
       fzf --layout=reverse \
           --border \
           --info=inline \
@@ -173,10 +179,9 @@ __select_project() {
           --cycle
   )
 
-  if [[ -z "$selected" ]]; then
-    return 1
-  fi
+  [ -z "$selected" ] && return
 
+  __recently_used::used "select_project" "$selected"
   echo "$PROJECTS_DIR/$selected"
 }
 
