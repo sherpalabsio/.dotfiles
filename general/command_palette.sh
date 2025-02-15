@@ -18,6 +18,8 @@ __select_my_command() {
     )
   )
 
+  commands=($(__recently_used::merge "select_my_command" "${commands[@]}"))
+
   selected_command=$(
     printf "%s\n" "${commands[@]}" |
       fzf --layout=reverse \
@@ -29,6 +31,7 @@ __select_my_command() {
   )
 
   if [ -n "$selected_command" ]; then
+    __recently_used::used "select_my_command" "$selected_command"
     # Remove the '@' prefix
     selected_command=$(echo "$selected_command" | sed 's/^@//')
 

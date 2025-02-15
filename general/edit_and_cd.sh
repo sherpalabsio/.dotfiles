@@ -34,12 +34,6 @@ __edit_config() {
   # Skip if no folder was selected
   [ -z "${selected_folder}" ] && return
 
-  # Update history by moving selected folder to top
-  # First add the selected folder, then add all other folders except the selected one
-  local -r history_file="${DOTFILES_PATH}/tmp/.ec_history"
-  echo "${selected_folder}" > "${history_file}"
-  echo -e "${sorted_folders}" | grep -v "^${selected_folder}$" | grep -v '^$' >> "${history_file}"
-
   # Open the selected folder in VS Code along with its content
   # split by regular and hidden files and sort by modification time
   local -r folder_path="${DOTFILES_PATH}/${selected_folder}"
@@ -54,15 +48,7 @@ zle -N __edit_config
 bindkey '[113;9u' '__edit_config'
 
 __ec__select_folder() {
-  local -r history_file="${DOTFILES_PATH}/tmp/.ec_history"
-  local history_folders=""
-
-  # Read history file if it exists
-  if [[ -f "${history_file}" ]]; then
-    history_folders=$(cat "${history_file}")
-  fi
-
-  local eligible_folders=$(
+  local eligible_folders=($(
     find "${DOTFILES_PATH}" -maxdepth 1 -type d \
          ! -name "lib" \
          ! -name "tmp" \
@@ -71,26 +57,13 @@ __ec__select_folder() {
          ! -name "_*" |
            awk -F/ '{print $NF}' |
            grep -v "^${DOTFILES_PATH##*/}$"
-  )
+  ))
 
-  # Start with existing history folders that still exist
-  local sorted_folders=""
-  while IFS= read -r folder; do
-    if [[ -n "${folder}" ]] && echo "${eligible_folders}" | grep -q "^${folder}$"; then
-      sorted_folders="${sorted_folders}${folder}\n"
-    fi
-  done <<< "${history_folders}"
-
-  # Add any folders that aren't already in sorted_folders
-  while IFS= read -r folder; do
-    if [[ -n "${folder}" ]] && ! echo -e "${sorted_folders}" | grep -q "^${folder}$"; then
-      sorted_folders="${sorted_folders}${folder}\n"
-    fi
-  done <<< "${eligible_folders}"
+  eligible_folders=($(__recently_used::merge "edit_config" "${eligible_folders[@]}"))
 
   # Select a folder using fzf
   local -r selected_folder=$(
-    echo -e "${sorted_folders}" |
+    printf "%s\n" "${eligible_folders[@]}" |
       grep -v '^$' |
       fzf --layout=reverse \
           --border \
@@ -99,6 +72,10 @@ __ec__select_folder() {
           --padding=1 \
           --cycle
   )
+
+  if [ -n "$selected_folder" ]; then
+    __recently_used::used "edit_config" "$selected_folder"
+  fi
 
   echo "${selected_folder}"
 }
