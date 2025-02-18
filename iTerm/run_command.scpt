@@ -5,6 +5,7 @@
 -- It will:
 -- - Switch to iTerm2
 -- - Open a new tab if the current tab is busy running a command
+-- - Clear the screen
 -- - Run `command argument1 argument2 ...` in the current session
 
 -- AppleScript in iTerm2 is deprecated
@@ -32,6 +33,13 @@ on run argv
     end repeat
 
     tell current session of current window
+      -- printf '\33c\e[3J' - This doesn't work need extra permissions
+      -- but it is less smooth
+      -- clear the screen - this one needs extra permissions
+      tell application "System Events" to tell process "iTerm2"
+        click menu item "Clear Buffer" of menu 1 of menu bar item "Edit" of menu bar 1
+      end tell
+
       write text command
     end tell
   end tell
