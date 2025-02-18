@@ -5,6 +5,28 @@
       "IO.puts \"----------------------\""
     ]
   },
+  "Debug variable": {
+    "prefix": "pp",
+    "body": [
+      "IO.puts \"----------------------\"",
+      "dbg(${1:params})",
+      "IO.puts \"----------------------\"",
+    ]
+  },
+  "Inspect variable": {
+    "prefix": "ii",
+    "body": [
+      "IO.puts \"----------------------\"",
+      "IO.inspect ${1:params}",
+      "IO.puts \"----------------------\"",
+    ]
+  },
+  "Inspect...": {
+    "prefix": "i",
+    "body": [
+      "IO.inspect ",
+    ]
+  },
   "=> ": {
     "prefix": "=",
     "body": [
@@ -27,14 +49,6 @@
     "prefix": "%",
     "body": [
       "%{$0}"
-    ]
-  },
-  "Inspect variable": {
-    "prefix": "pp",
-    "body": [
-      "IO.puts \"----------------------\"",
-      "dbg(${1:params})",
-      "IO.puts \"----------------------\"",
     ]
   },
   "Todo comment": {
