@@ -1,13 +1,12 @@
-# AppleScript to run any command with any argument in the current tab of iTerm2
-# I run this script from VS Code to run RSpec and JS tests by a keyboard shortcut
+-- AppleScript to run a command with arguments in the current tab of iTerm2
+-- I run this script from VS Code to run RSpec and JS tests by a keyboard shortcut
 
-# Usage: osascript ~/.dotfiles/iTerm/run_command.scpt rspec spec/models/user_spec.rb
-# It will:
-# - Switch to iTerm2, then using the current tab
-# - Clear the screen
-# - Run `rspec spec/models/user_spec.rb`
+-- Usage: osascript ~/.dotfiles/iTerm/run_command.scpt command argument1 argument2 ...
+-- It will:
+-- - Switch to iTerm2
+-- - Run `command argument1 argument2 ...` in the current session
 
-# Applescript in iTerm2 is deprecated
+-- AppleScript in iTerm2 is deprecated
 
 on run argv
   tell application "iTerm"
@@ -18,12 +17,8 @@ on run argv
       set command to command & item i of argv & " "
     end repeat
 
-    tell current window
-      tell current tab
-        tell current session
-          write text command
-        end tell
-      end tell
+    tell current session of current window
+      write text command
     end tell
   end tell
 end run
