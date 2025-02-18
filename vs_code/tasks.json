@@ -7,9 +7,9 @@
     {
       "label": "run_rspec_line_in_iterm2",
       "type": "shell",
-      "command": "~/.asdf/shims/python3", // Python binary
+      "command": "osascript", // Python binary
       "args": [
-        "~/.dotfiles/iTerm/run_command.py",
+        "~/.dotfiles/iTerm/run_command.scpt",
         "rs", // alias for rspec
         "${relativeFile}:${lineNumber}"
       ],
