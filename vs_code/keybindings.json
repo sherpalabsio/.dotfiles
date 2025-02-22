@@ -144,7 +144,8 @@
     "command": "runCommands",
     "args": {
       "commands": [
-        "workbench.action.openSettingsJson"
+        "workbench.action.openSettingsJson",
+        "workbench.action.openGlobalKeybindingsFile"
       ]
     }
   },
