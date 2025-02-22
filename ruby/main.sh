@@ -1,6 +1,6 @@
 alias be='bundle exec'
 
-alias rs='rspec --force-color | tee tmp/jump_to_failed_rspec_line.log'
+alias rs='rspec --format progress --format json --out tmp/jump_to_failed_rspec_line.json'
 
 # Rails
 alias r4='rails _4.2.8_'
@@ -66,11 +66,19 @@ alias rtf="rails_translation_find"
 
 jump_to_failed_rspec_line() {
   local -r failed_path_with_line_number=$(
-    grep "# ./spec" tmp/jump_to_failed_rspec_line.log |
-      head -n 1 |
-      awk -F'# ' '{print $2}' |
-      awk -F':in' '{print $1}'
-  # )
+    jq -r --arg pwd "$(pwd)" '
+      [.examples[] | select(.status == "failed") |
+        (.exception.backtrace | map(select(startswith($pwd))) | last)]
+      | map(sub(":in .*$"; ""))[]' tmp/jump_to_failed_rspec_line.json |
+      fzf --height 20% \
+          --layout=reverse \
+          --select-1 \
+          --cycle
+  )
+
+  zle accept-line
+
+  [ -z "$failed_path_with_line_number" ] && return
 
   code -g $failed_path_with_line_number
 }
