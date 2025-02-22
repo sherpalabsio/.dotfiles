@@ -1,6 +1,6 @@
 alias be='bundle exec'
 
-alias rs='rspec'
+alias rs='rspec --force-color | tee tmp/jump_to_failed_rspec_line.log'
 
 # Rails
 alias r4='rails _4.2.8_'
@@ -63,3 +63,17 @@ rails_translation_find() {
 }
 
 alias rtf="rails_translation_find"
+
+jump_to_failed_rspec_line() {
+  local -r failed_path_with_line_number=$(
+    grep "# ./spec" tmp/jump_to_failed_rspec_line.log |
+      head -n 1 |
+      awk -F'# ' '{print $2}' |
+      awk -F':in' '{print $1}'
+  # )
+
+  code -g $failed_path_with_line_number
+}
+
+zle -N jump_to_failed_rspec_line
+bindkey "^[[122;9u" jump_to_failed_rspec_line # Cmd+j
