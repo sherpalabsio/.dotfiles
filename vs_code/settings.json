@@ -43,6 +43,20 @@
   "extensions.ignoreRecommendations": true,
   "security.workspace.trust.untrustedFiles": "open",
 
+  "runTestsInIterm2": {
+    "defaultCommand": "t",
+
+    "customCommands": [
+      {
+        "suffix": "_spec.rb",
+        "command": "rs"
+      },
+      {
+        "language": "javascript",
+        "command": "tjs"
+      }
+    ]
+  },
 
   "commands.commands": [
     {
