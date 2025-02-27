@@ -71,3 +71,26 @@ screen_cast_env__deactivate() {
   original_background=$(cat $_ORIGINAL_BACKGROUND_PATH)
   osascript -e 'tell application "System Events" to set picture of every desktop to "'"$original_background"'"'
 }
+
+is_url_open_in_browser() {
+  local -r url=$1
+
+  local -r apple_script="
+    tell application \"Google Chrome\"
+      repeat with current_tab in tabs of front window
+        if URL of current_tab contains \"$url\" then
+          return true
+        end if
+      end repeat
+
+      return false
+    end tell"
+
+  local -r result=$(osascript -e "$apple_script")
+
+  if [ "$result" = "true" ]; then
+    return 0
+  else
+    return 1
+  fi
+}
