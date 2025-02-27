@@ -1,6 +1,9 @@
 alias be='bundle exec'
 
 alias rs='rspec --format progress --format json --out tmp/jump_to_failed_rspec_line.json'
+alias shorten_capybara_timeout='export CAPYBARA_TIMEOUT=5'
+alias reset_capybara_timeout='unset CAPYBARA_TIMEOUT'
+alias hard_restart_rails_server="osascript $DOTFILES_PATH/ruby/hard_restart_rails_server.scpt"
 
 # Rails
 alias r4='rails _4.2.8_'
