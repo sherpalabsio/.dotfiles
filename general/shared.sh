@@ -68,7 +68,7 @@ mig() {
     mix ecto.migrate
   # Is this a Rails project?
   elif [ -f Gemfile ]; then
-    r db:migrate
+    eval r db:migrate
   else
     echo "Not an Elixir or Rails project"
   fi
