@@ -18,3 +18,23 @@ screen_cast_env__deactivate() {
   original_background=$(cat $_ORIGINAL_BACKGROUND_PATH)
   osascript -e 'tell application "System Events" to set picture of every desktop to "'"$original_background"'"'
 }
+
+screen_cast__resize() {
+  osascript -e 'tell application "System Events"
+    tell process "Code"
+      set frontmost to true
+      tell window 1
+        set size to {610, 410}
+      end tell
+    end tell
+  end tell
+
+  tell application "System Events"
+    tell process "iTerm2"
+      set frontmost to true
+      tell window 1
+        set size to {610, 410}
+      end tell
+    end tell
+  end tell'
+}
