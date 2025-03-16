@@ -25,7 +25,7 @@ __select_my_command() {
       fzf --layout=reverse \
           --border \
           --info=inline \
-          --margin=8,20 \
+          --margin=19%,11% \
           --padding=1 \
           --cycle
   )

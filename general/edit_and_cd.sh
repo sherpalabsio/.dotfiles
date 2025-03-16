@@ -68,7 +68,7 @@ __ec__select_folder() {
       fzf --layout=reverse \
           --border \
           --info=inline \
-          --margin=8,20 \
+          --margin=19%,11% \
           --padding=1 \
           --cycle
   )
@@ -174,7 +174,7 @@ __select_project() {
       fzf --layout=reverse \
           --border \
           --info=inline \
-          --margin=8,20 \
+          --margin=19%,11% \
           --padding=1 \
           --cycle
   )
