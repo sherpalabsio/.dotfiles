@@ -1,5 +1,5 @@
 alias o='open .' # Open current directory in Finder
-alias http_server='python -m SimpleHTTPServer 8000'
+alias http_server='python -m http.server 8000'
 
 # Reload the shell (i.e. invoke as a login shell)
 alias rel="exec $SHELL -l"
