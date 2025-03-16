@@ -1,8 +1,10 @@
 #!/bin/zsh
 
 # Paths and variables
-export PATH=/usr/local/bin:$PATH
-export PATH=/usr/local/sbin:$PATH
+PATH=/usr/local/bin:$PATH
+PATH=/usr/local/sbin:$PATH
+PATH=$HOME/.local/bin:$PATH
+
 export DOTFILES_PATH=$HOME/.dotfiles
 export DROPBOX_PATH=$(jq -r '.personal.path' ~/.dropbox/info.json)
 
