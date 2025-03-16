@@ -106,7 +106,7 @@ c() {
   elif [ -f Gemfile ]; then
     # Does the gemfile have rails?
     if grep -q "rails" Gemfile; then
-      rc
+      eval r c
     else
       irb
     fi
