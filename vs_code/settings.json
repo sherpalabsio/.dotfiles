@@ -43,10 +43,13 @@
   "extensions.ignoreRecommendations": true,
   "security.workspace.trust.untrustedFiles": "open",
 
-  "runTestsInIterm2": {
-    "defaultCommand": "t",
-
-    "customCommands": [
+  // "runTestsInIterm2.bringIterm2ForwardOnExecution": true,
+  // "runTestsInIterm2.openNewTab": false,
+  // "runTestsInIterm2.clearTheScreen": true,
+  // "runTestsInIterm2.iUseTmux": true,
+  "runTestsInIterm2.defaultTestRunner": "t",
+  "runTestsInIterm2.testRunners": [
+    [
       {
         "suffix": "_spec.rb",
         "command": "rs"
@@ -56,7 +59,7 @@
         "command": "tjs"
       }
     ]
-  },
+  ],
 
   "commands.commands": [
     {
