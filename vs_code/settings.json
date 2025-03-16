@@ -214,7 +214,7 @@
       "pattern": "spec/fixtures/**/*"
     },
     {
-      "label": "Factory",
+      "label": "ZFactory",
       "pattern": "spec/factories/**/*"
     }
   ]
