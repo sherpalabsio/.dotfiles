@@ -74,11 +74,10 @@ bindkey '^G' 'run_lazygit'
 alias use_sherpa_dev_version="mkdir -p ~/.config/local_sherpa && touch ~/.config/local_sherpa/use_dev_version"
 alias use_sherpa_prod_version="rm -f ~/.config/local_sherpa/use_dev_version"
 
-if [[ -f "$HOME/.config/local_sherpa/use_dev_version" ]]; then
-  include ~/projects/local_sherpa/lib/init.sh
-  SHERPA_VERSION="$SHERPA_VERSION (dev)"
-else
-  include $DOTFILES_PATH/lib/local_sherpa/lib/init.sh
-fi
-
 eval $(thefuck --alias)
+
+if [[ -f "$HOME/.config/local_sherpa/use_dev_version" ]]; then
+  eval "$(~/projects/local_sherpa/init)"
+else
+  eval "$(local_sherpa_init)"
+fi
