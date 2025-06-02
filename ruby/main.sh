@@ -15,12 +15,12 @@ alias r="rails"
 
 alias rc='r console'
 alias rcs='r console --sandbox'
-alias rrun='r runner'
+alias rr='r runner'
 
-alias routes='r routes'
+alias rout='cat tmp/routes.txt | fzf'
+alias routf='routes | fzf'                      # Rails routes find (fuzzy search)
+alias routes='routes_update && cat tmp/routes.txt'
 alias routes_update='r routes > tmp/routes.txt' # Rails routes update
-alias rr='cat tmp/routes.txt'                   # Rails routes
-alias routes_fuzzy_find='rr | fzf'              # Rails routes find (fuzzy search)
 
 alias logd='tail -f log/development.log'
 alias logt='tail -f log/test.log'
