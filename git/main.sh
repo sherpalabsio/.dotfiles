@@ -200,6 +200,9 @@ alias gcm='git checkout $(git_main_branch) > /dev/null'
 #   gco <branch> - Checkout the provided branch
 unalias gco
 gco() {
+  # Skip if not a git repository
+  [ ! -d .git ] && return
+
   if [ -z "$1" ]; then
     # List all the branches and let the user select one if no arguments are provided
     git branch |
@@ -221,6 +224,9 @@ gco() {
 
 # Checkout all - List the branches with less filtering
 gcoa() {
+  # Skip if not a git repository
+  [ ! -d .git ] && return
+
   git branch |
     grep -v "^\*" | # Exclude the current branch
     grep -v "$(git_main_branch)" | # Exclude the main branch
