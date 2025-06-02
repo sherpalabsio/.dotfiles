@@ -73,3 +73,5 @@ is_url_open_in_browser() {
     return 1
   fi
 }
+
+alias generate_invoice='~/.dotfiles/local/silverfin/invoice/generate'
