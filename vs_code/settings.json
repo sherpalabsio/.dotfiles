@@ -217,5 +217,7 @@
       "label": "ZFactory",
       "pattern": "spec/factories/**/*"
     }
-  ]
+  ],
+  "window.commandCenter": false,
+  "chat.commandCenter.enabled": false
 }
