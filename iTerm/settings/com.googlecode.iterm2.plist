@@ -3,7 +3,7 @@
 <plist version="1.0">
 <dict>
 	<key>AdjustWindowForFontSizeChange</key>
-	<true/>
+	<false/>
 	<key>ClickToSelectCommand</key>
 	<false/>
 	<key>Custom Color Presets</key>
@@ -1690,10 +1690,16 @@
 	</dict>
 	<key>Default Bookmark Guid</key>
 	<string>56698054-F23B-46A5-A36B-A6A0C6B17442</string>
-	<key>DimInactiveSplitPanes</key>
+	<key>DimBackgroundWindows</key>
 	<false/>
+	<key>DimInactiveSplitPanes</key>
+	<true/>
 	<key>EnableAPIServer</key>
 	<true/>
+	<key>EnableDivisionView</key>
+	<false/>
+	<key>FlashTabBarInFullscreen</key>
+	<false/>
 	<key>GlobalKeyMap</key>
 	<dict>
 		<key>0x19-0x60000</key>
@@ -1908,6 +1914,8 @@ Preferences...</string>
 			<string></string>
 		</dict>
 	</dict>
+	<key>HTMLTabTitles</key>
+	<false/>
 	<key>HapticFeedbackForEsc</key>
 	<false/>
 	<key>HideActivityIndicator</key>
@@ -1928,6 +1936,8 @@ Preferences...</string>
 	<integer>524288</integer>
 	<key>MaxVertically</key>
 	<false/>
+	<key>NeverBlockSystemShutdown</key>
+	<true/>
 	<key>New Bookmarks</key>
 	<array>
 		<dict>
@@ -3615,7 +3625,7 @@ Preferences...</string>
 	<key>SoundForEsc</key>
 	<false/>
 	<key>SplitPaneDimmingAmount</key>
-	<real>0.057100652305825242</real>
+	<real>0.029999999999999999</real>
 	<key>StretchTabsToFillBar</key>
 	<true/>
 	<key>TabStyleWithAutomaticOption</key>
