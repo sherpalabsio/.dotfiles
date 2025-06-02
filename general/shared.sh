@@ -14,7 +14,7 @@ t() {
     # fi
   # Is this a Rails project?
   elif [ -f Gemfile ]; then
-    rs
+    eval "rs $@"
   else
     echo "Not a Phoenix or Rails project"
   fi
