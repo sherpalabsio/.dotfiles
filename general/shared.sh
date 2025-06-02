@@ -42,7 +42,7 @@ __run_tests_phoenix() {
 }
 
 dev() {
-  docker_compose_up
+  docker_compose_up || return
 
   # Is this an Elixir project?
   if [ -f mix.exs ]; then
