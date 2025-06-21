@@ -1,5 +1,5 @@
-# Docker Nukem to remove all containers, images, volumes, and networks
-alias d_nukem='docker system prune --all --volumes -f'
+# To remove all containers, images, volumes, and networks
+alias docker_nukem='docker system prune --all --volumes -f'
 
 alias dps='docker ps'
 

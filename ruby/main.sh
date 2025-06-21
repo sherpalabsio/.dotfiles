@@ -77,11 +77,7 @@ rails_translation_add() {
   $HOME/projects/tools/rails_i18n_sherpa/add_or_update $1
 }
 
-alias rta="rails_translation_add"
-
 # Find the file(s) where the given translated english string is referenced
 rails_translation_find() {
   $HOME/projects/tools/rails_i18n_sherpa/find_file $@
 }
-
-alias rtf="rails_translation_find"
