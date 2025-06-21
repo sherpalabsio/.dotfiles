@@ -1,7 +1,24 @@
 alias be='bundle exec'
 
-alias rspec_with_extra_logging='rspec --format progress --format json --out tmp/jump_to_failed_rspec_line.json'
-alias rs='rspec_with_extra_logging'
+rspec() {
+  rm -f tmp/jumper_rspec.json tmp/jumper
+
+  if [ -x "bin/rspec" ]; then
+    bin/rspec "$@" --format progress --format json --out tmp/jumper_rspec.json
+  else
+    command rspec "$@" --format progress --format json --out tmp/jumper_rspec.json
+  fi
+
+  jq -r '
+    .examples[]
+    | select(.status == "failed")
+    | .exception.backtrace[0]
+    | split(":in") | .[0]
+  ' tmp/jumper_rspec.json > tmp/jumper
+}
+
+alias rs='rspec'
+
 alias shorten_capybara_timeout='export CAPYBARA_TIMEOUT=5'
 alias reset_capybara_timeout='unset CAPYBARA_TIMEOUT'
 alias hard_restart_rails_server="osascript $DOTFILES_PATH/ruby/hard_restart_rails_server.scpt"
@@ -68,31 +85,3 @@ rails_translation_find() {
 }
 
 alias rtf="rails_translation_find"
-
-jump_to_failed_rspec_line() {
-  if [ ! -f tmp/jump_to_failed_rspec_line.json ]; then
-    echo -n "\nThere is no output file"
-    zle accept-line
-    return
-  fi
-
-  local -r failed_path_with_line_number=$(
-    jq -r --arg pwd "$(pwd)" '
-      [.examples[] | select(.status == "failed") |
-        (.exception.backtrace | map(select(startswith($pwd))) | first)]
-      | map(sub(":in .*$"; ""))[]' tmp/jump_to_failed_rspec_line.json |
-      fzf --height 20% \
-          --layout=reverse \
-          --select-1 \
-          --cycle
-  )
-
-  zle accept-line
-
-  [ -z "$failed_path_with_line_number" ] && return
-
-  code -g $failed_path_with_line_number
-}
-
-zle -N jump_to_failed_rspec_line
-bindkey "^[[122;9u" jump_to_failed_rspec_line # Cmd+j
