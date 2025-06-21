@@ -97,22 +97,22 @@ alias migr='rollb && mig'
 # Rerun the last migration for the test DB
 alias migrt='MIX_ENV=test RAILS_ENV=test rollb && mig'
 
-# Start a console (Elixir, Phoenix, Rails)
+# Start a console (Elixir, Phoenix, Rails, or Ruby)
 c() {
   docker_compose_up
 
-  # Is this an Elixir project?
+  # Elixir project?
   if [ -f mix.exs ]; then
-    iex -S mix
-  # Is this a Rails project?
+    iex -S mix "$@"
+  # Ruby project?
   elif [ -f Gemfile ]; then
-    # Does the gemfile have rails?
+    # Rails project?
     if grep -q "rails" Gemfile; then
-      eval r c
+      eval r c "$@"
     else
-      irb
+      irb "$@"
     fi
   else
-    irb
+    irb "$@"
   fi
 }

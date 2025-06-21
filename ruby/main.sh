@@ -31,8 +31,7 @@ alias r6='rails _6.1.7.3_'
 
 alias r="rails"
 
-alias rc='r console'
-alias rcs='r console --sandbox'
+alias rcs='c --sandbox'
 alias rr='r runner'
 
 alias rout='cat tmp/routes.txt | fzf'
