@@ -29,17 +29,16 @@ alias r4='rails _4.2.8_'
 alias r5='rails _5.0.2_'
 alias r6='rails _6.1.7.3_'
 
-alias r="rails"
+alias r='rails'
 
 alias rcs='c --sandbox'
 alias rr='r runner'
 
-alias rout='cat tmp/routes.txt | fzf'
-alias routf='routes | fzf'                      # Rails routes find (fuzzy search)
-alias routes='routes_update && cat tmp/routes.txt'
-alias routes_update='r routes > tmp/routes.txt' # Rails routes update
+alias rout='cat tmp/routes.txt'
+alias routf='routes | fzf'
+alias routes_update='r routes > tmp/routes.txt && rout'
 
-alias logd='tail -f log/development.log'
+alias log='tail -f log/development.log'
 alias logt='tail -f log/test.log'
 
 alias rollb_default='r db:rollback'
