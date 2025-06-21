@@ -5,6 +5,7 @@ alias rs='rspec_with_extra_logging'
 alias shorten_capybara_timeout='export CAPYBARA_TIMEOUT=5'
 alias reset_capybara_timeout='unset CAPYBARA_TIMEOUT'
 alias hard_restart_rails_server="osascript $DOTFILES_PATH/ruby/hard_restart_rails_server.scpt"
+alias hard_restart_bg="osascript $DOTFILES_PATH/ruby/hard_restart_bg.scpt"
 
 # Rails
 alias r4='rails _4.2.8_'

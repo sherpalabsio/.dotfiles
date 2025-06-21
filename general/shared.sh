@@ -44,6 +44,8 @@ __run_tests_phoenix() {
 dev() {
   docker_compose_up || return
 
+  type mid_dev_hook &> /dev/null && mid_dev_hook
+
   # Is this an Elixir project?
   if [ -f mix.exs ]; then
     # Is this a Phoenix project?
