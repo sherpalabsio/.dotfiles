@@ -79,9 +79,9 @@ rails_translation_add() {
 
 alias rta="rails_translation_add"
 
-# Find the file(s) where the given text is located
+# Find the file(s) where the given translated english string is referenced
 rails_translation_find() {
-  $HOME/projects/tools/rails_i18n_sherpa/find_file $1
+  $HOME/projects/tools/rails_i18n_sherpa/find_file $@
 }
 
 alias rtf="rails_translation_find"
