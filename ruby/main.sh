@@ -35,7 +35,19 @@ alias rcs='c --sandbox'
 alias rr='r runner'
 
 alias rout='cat tmp/routes.txt'
-alias routf='routes | fzf'
+
+# Rails rout finder
+routf() {
+  local -r url="$1"
+
+  if [ -n "$url" ]; then
+    local url_path="/${url#*://*/}" # Remove protocol and domain
+    url_path=$(echo "$url_path" | sed -E 's/[0-9]+/:id/g') # Replace numbers with :id
+  fi
+
+  cat tmp/routes.txt | fzf --query="$url_path"
+}
+
 alias routes_update='r routes > tmp/routes.txt && rout'
 
 alias log='tail -f log/development.log'
