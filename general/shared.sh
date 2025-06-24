@@ -63,7 +63,7 @@ dev() {
 }
 
 mig() {
-  docker_compose_up
+  docker_compose_up || return
 
   # Is this an Elixir project?
   if [ -f mix.exs ]; then
@@ -77,7 +77,7 @@ mig() {
 }
 
 rollb() {
-  docker_compose_up
+  docker_compose_up || return
 
   # Is this an Elixir project?
   if [ -f mix.exs ]; then
@@ -99,7 +99,7 @@ alias migrt='MIX_ENV=test RAILS_ENV=test rollb && mig'
 
 # Start a console (Elixir, Phoenix, Rails, or Ruby)
 c() {
-  docker_compose_up
+  docker_compose_up || return
 
   # Elixir project?
   if [ -f mix.exs ]; then
