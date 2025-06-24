@@ -9,7 +9,7 @@ tell application "iTerm"
   tell current window
     repeat with aTab in tabs
       repeat with aSession in sessions of aTab
-        if name of aSession contains "dev (rails" then
+        if name of aSession contains "dev" then
           set targetSession to aSession
           exit repeat
         end if

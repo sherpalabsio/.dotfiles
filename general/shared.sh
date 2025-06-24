@@ -74,6 +74,8 @@ mig() {
   else
     echo "Not an Elixir or Rails project"
   fi
+
+  type after_migration_hook &> /dev/null && after_migration_hook
 }
 
 rollb() {
@@ -84,7 +86,7 @@ rollb() {
     mix ecto.rollback
   # Is this a Rails project?
   elif [ -f Gemfile ]; then
-    rails_rollback
+    rails_rollback "$@"
   else
     echo "Not an Elixir or Rails project"
   fi
