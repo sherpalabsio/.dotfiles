@@ -8,7 +8,7 @@ alias dps='docker ps'
 # - Use the only running container if there is only one
 # - Otherwise, offer a list of running containers to choose from
 de() {
-  docker_compose_up
+  docker_compose_up || return
 
   local container_name
 
@@ -26,7 +26,7 @@ de() {
 
 # Exec all - Same as 'de' but ignores a defined primary container
 dea() {
-  docker_compose_up
+  docker_compose_up || return
 
   local container_name
   container_name=$(__docker_select_container)
