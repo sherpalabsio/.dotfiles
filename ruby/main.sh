@@ -12,9 +12,27 @@ rspec() {
   jq -r '
     .examples[]
     | select(.status == "failed")
-    | .exception.backtrace[0]
+    | select(.exception.backtrace | length > 0)
+    | .exception.backtrace
+    | map(select(startswith("./spec/")))
+    | .[0]
     | split(":in") | .[0]
   ' tmp/jumper_rspec.json > tmp/jumper
+
+  # When 2 or more expectations fail in the same example,
+  # the backtrace will be empty
+  jq -r '
+      .examples[]
+      | select(.status == "failed")
+      | select(.exception.backtrace | length == 0)
+      | .exception.message
+    ' tmp/jumper_rspec.json |
+      # Filter for lines that contain './spec/'
+      grep './spec/' |
+      # Remove leading spaces
+      sed 's/^[[:space:]]*//' |
+      # Split by ':in' and take the first part
+      awk -F':in' '{print $1}' >> tmp/jumper
 }
 
 alias rs='rspec'
