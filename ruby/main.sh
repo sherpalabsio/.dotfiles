@@ -58,7 +58,7 @@ alias rollb_default='r db:rollback'
 alias rollbt='RAILS_ENV=test r db:rollback'
 
 rails_rollback() {
-  local -r version=$1
+  local -r version="$1"
 
   if [ -n "$version" ]; then
     rollb_version $version
