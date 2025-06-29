@@ -70,7 +70,8 @@ __ec__select_folder() {
           --info=inline \
           --margin=19%,11% \
           --padding=1 \
-          --cycle
+          --cycle \
+          --border-label=" Edit Config "
   )
 
   if [ -n "$selected_folder" ]; then
@@ -176,7 +177,8 @@ __select_project() {
           --info=inline \
           --margin=19%,11% \
           --padding=1 \
-          --cycle
+          --cycle \
+          --border-label=" Projects "
   )
 
   [ -z "$selected" ] && return
