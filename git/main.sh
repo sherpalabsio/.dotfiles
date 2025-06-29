@@ -120,15 +120,15 @@ alias grbm='git rebase $(git_main_branch) --autostash'
 # - Pull changes from the remote master to the local master
 # - Pull the changes from the master to the current branch
 gupd() {
-  gfa
+  gfa || return 1
   git_delete_merged_branches
 
   # Are we on the main branch?
   if [ "$(git_current_branch)" = "$(git_main_branch)" ]; then
     git pull --autostash
   else
-    gplm
-    grbm
+    gplm || return 1
+    grbm || return 1
   fi
 
   type after_git_update_hook &> /dev/null && after_git_update_hook
