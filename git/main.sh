@@ -64,6 +64,7 @@ git_delete_merged_branches() {
   echo -en "\e[33m"
 
   git branch --format '%(refname:short) %(upstream:track)' |
+    grep -v -E "^(main|master) " |
     awk "\$2 == \"[gone]\" { print \$1 }" |
     xargs -r git branch -D
 
