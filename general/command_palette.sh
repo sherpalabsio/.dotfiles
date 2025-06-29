@@ -27,7 +27,8 @@ __select_my_command() {
           --info=inline \
           --margin=19%,11% \
           --padding=1 \
-          --cycle
+          --cycle \
+          --border-label=" Command Palette "
   )
 
   if [ -n "$selected_command" ]; then
