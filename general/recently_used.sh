@@ -7,7 +7,6 @@ __recently_used::merge() {
   local -a current_values=("$@")
   local -a recent_values=($(__recently_used::get "$key"))
   local -a merged_values=()
-  local recent_values_changed=false
 
   for recent_value in "${recent_values[@]}"; do
     # Does the current value exist in the recent values?
@@ -18,13 +17,8 @@ __recently_used::merge() {
     else
       # Recent value is NOT in the current values -> remove it from the recent values
       recent_values=("${(@)recent_values:#$recent_value}")
-      recent_values_changed=true
     fi
   done
-
-  if $recent_values_changed; then
-    echo "${recent_values[@]}" > "$DOTFILES_PATH/tmp/recently_used/$key"
-  fi
 
   merged_values+=("${current_values[@]}")
   echo "${merged_values[@]}"
