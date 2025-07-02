@@ -28,6 +28,9 @@ setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries before unique ones when
 zshaddhistory() {
   local -r line=$1
 
+  # Skip if the line is 1 character long
+  [[ ${#line} -eq 1 ]] && return 0
+
   # Extract the first word that is not an environment variable assignment
   local -a words=(${(z)line})
   local command_name
@@ -39,6 +42,7 @@ zshaddhistory() {
     fi
   done
 
+  # Skip if the command does not exist
   command -v "$command_name" > /dev/null
 }
 
