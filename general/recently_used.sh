@@ -56,3 +56,19 @@ __recently_used::used() {
 
   echo "${recent_values[@]}" > "$recent_values_file"
 }
+
+recently_used_edit() {
+  local -r selected_file=$(
+    ls "$DOTFILES_PATH/tmp/recently_used/"* |
+      fzf --layout=reverse \
+          --border \
+          --info=inline \
+          --margin=19%,11% \
+          --padding=1 \
+          --cycle
+  )
+
+  [ -z "$selected_file" ] && return
+
+  code "$selected_file"
+}

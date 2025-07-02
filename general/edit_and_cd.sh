@@ -146,33 +146,46 @@ __cd_and_edit_project() {
 zle -N __cd_and_edit_project
 bindkey "^[[111;10u" __cd_and_edit_project # Shift+Cmd+o
 
-cdpn() {
-  local selected
-  selected=$(__select_project ~/projects-not-mine)
+# =================================== Utils ====================================
 
-  if [[ -n "$selected" ]]; then
-    cd "$selected"
-  fi
-}
-
-# =================================== UTILS ====================================
+__DOTFILES_BOOKMARK_FILE="$DOTFILES_PATH/tmp/project_bookmarks"
 
 setopt null_glob
 
-__select_project() {
-  local -r PROJECTS_DIR=${1:-~/projects}
-  local eligible_projects=(
-    $(
-      __select_project__list_project_paths "$PROJECTS_DIR" |
-        sed "s|^$PROJECTS_DIR/||"
+add_project_bookmark() {
+  local -r current_path="$(pwd)"
+
+  # Skip if already bookmarked
+  if grep -Fq "$current_path|" "$__DOTFILES_BOOKMARK_FILE"; then
+    return 0
+  fi
+
+  local name="$1"
+  if [ -z "$name" ]; then
+    name=$(
+      echo "$current_path" |
+        sed -e "s|^$HOME/projects/||" -e "s|^$HOME/projects-not-mine/||"
     )
-  )
+  fi
 
-  eligible_projects=($(__recently_used::merge "select_project" "${eligible_projects[@]}"))
+  echo "$current_path|$name" >> "$__DOTFILES_BOOKMARK_FILE"
+}
 
-  local -r selected=$(
-    printf "%s\n" "${eligible_projects[@]}" |
-      fzf --layout=reverse \
+edit_project_bookmarks() {
+  code "$__DOTFILES_BOOKMARK_FILE"
+}
+
+remove_project_bookmark() {
+  local -r current_dir=$(pwd)
+  sed -i '' "/^${current_dir//\//\\/}/d" "$__DOTFILES_BOOKMARK_FILE"
+}
+
+__select_project() {
+  local -r selected_bookmark=$(
+    cat "$__DOTFILES_BOOKMARK_FILE" |
+      fzf --delimiter='\|' \
+          --with-nth=2 \
+          --layout=reverse \
           --border \
           --info=inline \
           --margin=19%,11% \
@@ -181,55 +194,14 @@ __select_project() {
           --border-label=" Projects "
   )
 
-  [ -z "$selected" ] && return
+  [ -z "$selected_bookmark" ] && return
 
-  __recently_used::used "select_project" "$selected"
-  echo "$PROJECTS_DIR/$selected"
-}
+  # Move the selected project to the top of the bookmarks file
+  local -r temp_file=$(mktemp)
+  grep -Fxv "$selected_bookmark" "$__DOTFILES_BOOKMARK_FILE" > "$temp_file"
+  echo "$selected_bookmark" > "$__DOTFILES_BOOKMARK_FILE"
+  cat "$temp_file" >> "$__DOTFILES_BOOKMARK_FILE"
+  rm "$temp_file"
 
-__select_project__list_project_paths() {
-  local -r current_dir=$1
-
-  # Don't print the starting directory
-  if [[ $current_dir:h != $HOME ]]; then
-    echo $current_dir
-  fi
-
-  __select_project__list_project_paths__should_we_stop "$current_dir" && return
-
-  for subdir in "$current_dir"/*(/); do
-    # Skip unwanted directories
-    [[ ${subdir:t} = Z* ]] && continue
-    [[ ${subdir:t} = *_assets ]] && continue
-
-    __select_project__list_project_paths "$subdir"
-  done
-}
-
-__select_project__list_project_paths__should_we_stop() {
-  local -r current_dir=$1
-
-  # Directories and files indicating we are in a project root
-  local -r PROJECT_ROOT_INDICATORS=(
-    "node_modules"
-    "vendor"
-    "_build"
-    "bin"
-    "spec"
-
-    "README.md"
-    "Gemfile"
-    ".project"
-    "mix.lock"
-    "manifest.json"
-    "package.json"
-  )
-
-  local project_root_indicator
-
-  for project_root_indicator in $PROJECT_ROOT_INDICATORS; do
-    [[ -e "$current_dir/$project_root_indicator" ]] && return 0
-  done
-
-  return 1
+  echo "$selected_bookmark" | cut -d'|' -f1
 }
