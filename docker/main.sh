@@ -49,6 +49,7 @@ __docker_select_container() {
         --height 20% \
         --layout=reverse \
         --select-1 \
+        --cycle \
         --bind 'enter:become(echo {1})'
 }
 
