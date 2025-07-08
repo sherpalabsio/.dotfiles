@@ -43,7 +43,7 @@ __command_palette() {
   zle reset-prompt
 }
 
-# Load the aliases defined in the main dotfiles directory
+# Load the aliases defined in my dotfiles
 __command_palette__load_global_aliases() {
   unalias -a
 
@@ -62,16 +62,14 @@ __command_palette__load_global_aliases() {
 
 # Load the aliases defined in the local environment file
 __command_palette__load_local_aliases() {
-  [ -f "$SHERPA_ENV_FILENAME" ] || return
+  local alias_name
 
-  unalias -a
-
-  source $SHERPA_ENV_FILENAME &> /dev/null
-
-  compgen -a | sed 's/^/@/' # Prefix the alias name with '@'
+  for alias_name in $(echo "${SHERPA_STATUS_INFO__ALIASES[@]}"); do
+    echo "@$alias_name"
+  done
 }
 
-# Load the functions defined in the main dotfiles directory
+# Load the functions defined in my dotfiles
 __command_palette__load_global_functions() {
   local my_files file
 
@@ -93,17 +91,11 @@ __command_palette__load_global_functions() {
 
 # Load the functions defined in the local environment file
 __command_palette__load_local_functions() {
-  [ -f "$SHERPA_ENV_FILENAME" ] || return
+  local function_name
 
-  local -r filter_pattern="^[[:space:]]*([[:alnum:]_]+[[:space:]]*\(\)|function[[:space:]]+[[:alnum:]_]+)"
-
-  # Cleanup:
-  # "function_1()" -> "function_1"
-  # "function function_2()" -> "function_2()" -> "function_2"
-  grep -oE "$filter_pattern" "$SHERPA_ENV_FILENAME" |
-    sed "s/function //" |
-    sed "s/()//" |
-    sed 's/^/@/' # Prefix the function name with '@'
+  for function_name in $(echo "${SHERPA_STATUS_INFO__FUNCTIONS[@]}"); do
+    echo "@$function_name"
+  done
 }
 
 zle -N __command_palette
