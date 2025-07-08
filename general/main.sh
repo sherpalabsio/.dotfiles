@@ -75,3 +75,6 @@ is_url_open_in_browser() {
 }
 
 alias generate_invoice='~/.dotfiles/local/silverfin/invoice/generate'
+
+alias use_sherpa_dev_version="mkdir -p ~/.config/local_sherpa && touch ~/.config/local_sherpa/use_dev_version && rel"
+alias use_sherpa_prod_version="rm -f ~/.config/local_sherpa/use_dev_version && rel"

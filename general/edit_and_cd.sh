@@ -107,7 +107,7 @@ epn() {
 alias cdc='cd ~/.dotfiles'                                  # cd config
 alias cdcl='cd ~/.dotfiles/local'                           # cd config local
 alias cdp='cd ~/projects'                                   # cd projects all
-alias cdps='cd ~/projects/local_sherpa'                     # cd project sherpa
+alias cdps='cd ~/projects/local_sherpa/local_sherpa'        # cd project sherpa
 alias cdpm='cd ~/projects-mine'                             # cd projects mine
 alias cdpna='cd ~/projects-not-mine'                        # cd projects not mine
 alias cdr='cd "$(git rev-parse --show-toplevel || echo .)"' # cd root

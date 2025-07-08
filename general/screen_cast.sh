@@ -24,7 +24,7 @@ screen_cast__resize() {
     tell process "Code"
       set frontmost to true
       tell window 1
-        set size to {610, 410}
+        set size to {640, 360}
       end tell
     end tell
   end tell
@@ -33,7 +33,7 @@ screen_cast__resize() {
     tell process "iTerm2"
       set frontmost to true
       tell window 1
-        set size to {610, 410}
+        set size to {640, 360}
       end tell
     end tell
   end tell'
