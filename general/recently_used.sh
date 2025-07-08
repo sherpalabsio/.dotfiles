@@ -35,8 +35,8 @@ __recently_used::get() {
 }
 
 # Push a value to the top of the list
-# Usage: __recently_used::used "my_key" "my_value"
-__recently_used::used() {
+# Usage: __recently_used::add "my_key" "my_value"
+__recently_used::add() {
   local -r MAX_RECENT_VALUES=10
 
   local -r key=$1
