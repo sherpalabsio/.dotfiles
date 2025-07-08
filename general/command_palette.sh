@@ -1,12 +1,12 @@
 # Open a command palette with all the aliases and functions I defined by myself
-__select_my_command() {
+__command_palette() {
   local commands selected_command
 
   commands=(
-    $(__select_my_command__load_global_aliases)
-    $(__select_my_command__load_local_aliases)
-    $(__select_my_command__load_global_functions)
-    $(__select_my_command__load_local_functions)
+    $(__command_palette__load_global_aliases)
+    $(__command_palette__load_local_aliases)
+    $(__command_palette__load_global_functions)
+    $(__command_palette__load_local_functions)
   )
 
   # Filter and sort the commands
@@ -32,7 +32,7 @@ __select_my_command() {
   )
 
   if [ -n "$selected_command" ]; then
-    __recently_used::used "select_my_command" "$selected_command"
+    __recently_used::add "select_my_command" "$selected_command"
     # Remove the '@' prefix
     selected_command=$(echo "$selected_command" | sed 's/^@//')
 
@@ -44,7 +44,7 @@ __select_my_command() {
 }
 
 # Load the aliases defined in the main dotfiles directory
-__select_my_command__load_global_aliases() {
+__command_palette__load_global_aliases() {
   unalias -a
 
   local my_files file
@@ -61,7 +61,7 @@ __select_my_command__load_global_aliases() {
 }
 
 # Load the aliases defined in the local environment file
-__select_my_command__load_local_aliases() {
+__command_palette__load_local_aliases() {
   [ -f "$SHERPA_ENV_FILENAME" ] || return
 
   unalias -a
@@ -72,7 +72,7 @@ __select_my_command__load_local_aliases() {
 }
 
 # Load the functions defined in the main dotfiles directory
-__select_my_command__load_global_functions() {
+__command_palette__load_global_functions() {
   local my_files file
 
   my_files=($DOTFILES_PATH/**/*.sh)
@@ -92,7 +92,7 @@ __select_my_command__load_global_functions() {
 }
 
 # Load the functions defined in the local environment file
-__select_my_command__load_local_functions() {
+__command_palette__load_local_functions() {
   [ -f "$SHERPA_ENV_FILENAME" ] || return
 
   local -r filter_pattern="^[[:space:]]*([[:alnum:]_]+[[:space:]]*\(\)|function[[:space:]]+[[:alnum:]_]+)"
@@ -106,5 +106,5 @@ __select_my_command__load_local_functions() {
     sed 's/^/@/' # Prefix the function name with '@'
 }
 
-zle -N __select_my_command
-bindkey "^[[80;5u" __select_my_command # Shift+Cmd+p
+zle -N __command_palette
+bindkey "^[[80;5u" __command_palette # Shift+Cmd+p

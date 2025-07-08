@@ -45,7 +45,7 @@ __edit_config() {
 }
 
 zle -N __edit_config
-bindkey '[113;9u' '__edit_config'
+bindkey '^[[113;9u' '__edit_config' # Cmd+,
 
 __ec__select_folder() {
   local eligible_folders=($(
@@ -75,7 +75,7 @@ __ec__select_folder() {
   )
 
   if [ -n "$selected_folder" ]; then
-    __recently_used::used "edit_config" "$selected_folder"
+    __recently_used::add "edit_config" "$selected_folder"
   fi
 
   echo "${selected_folder}"
