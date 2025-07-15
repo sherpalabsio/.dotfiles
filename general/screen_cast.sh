@@ -20,11 +20,17 @@ screen_cast_env__deactivate() {
 }
 
 screen_cast__resize() {
-  osascript -e 'tell application "System Events"
+  local -r width=${1:-640}
+  local -r height=$((width * 9 / 16))
+
+  echo "$width X $height"
+
+  osascript -e '
+  tell application "System Events"
     tell process "Code"
       set frontmost to true
       tell window 1
-        set size to {640, 360}
+        set size to {'$width', '$height'}
       end tell
     end tell
   end tell
@@ -33,7 +39,7 @@ screen_cast__resize() {
     tell process "iTerm2"
       set frontmost to true
       tell window 1
-        set size to {640, 360}
+        set size to {'$width', '$height'}
       end tell
     end tell
   end tell'
