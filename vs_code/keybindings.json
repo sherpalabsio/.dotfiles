@@ -86,12 +86,12 @@
   },
   {
     "key": "cmd+; cmd+l",
-    "command": "run-tests-in-iterm2.runAtCursor",
+    "command": "run-tests-in-iterm.runAtCursor",
     "when": "editorTextFocus"
   },
   {
     "key": "cmd+; cmd+f",
-    "command": "run-tests-in-iterm2.runCurrentFile",
+    "command": "run-tests-in-iterm.runCurrentFile",
     "when": "editorTextFocus"
   },
   {

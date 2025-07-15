@@ -43,22 +43,16 @@
   "extensions.ignoreRecommendations": true,
   "security.workspace.trust.untrustedFiles": "open",
 
-  // "runTestsInIterm2.bringIterm2ForwardOnExecution": true,
-  // "runTestsInIterm2.openNewTab": false,
-  // "runTestsInIterm2.clearTheScreen": true,
-  // "runTestsInIterm2.iUseTmux": true,
-  "runTestsInIterm2.defaultTestRunner": "t",
-  "runTestsInIterm2.testRunners": [
-    [
-      {
-        "suffix": "_spec.rb",
-        "command": "rs"
-      },
-      {
-        "language": "javascript",
-        "command": "tjs"
-      }
-    ]
+  "runTestsInIterm.defaultTestRunner": "t",
+  "runTestsInIterm.testRunners": [
+    {
+      "suffix": "_spec.rb",
+      "command": "rs"
+    },
+    {
+      "language": "javascript",
+      "command": "tjs"
+    }
   ],
 
   "commands.commands": [
@@ -173,6 +167,7 @@
   "cSpell.userWords": [
     "chpwd",
     "envrc",
+    "Iterm",
     "mktemp",
     "nomadsherpa",
     "ollama",
