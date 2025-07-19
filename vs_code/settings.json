@@ -90,7 +90,6 @@
     }
   ],
 
-
   "vim.disableExtension": true,
 
   "[javascript]": {
@@ -214,5 +213,6 @@
     }
   ],
   "window.commandCenter": false,
-  "chat.commandCenter.enabled": false
+  "chat.commandCenter.enabled": false,
+  "github.copilot.nextEditSuggestions.enabled": true,
 }
