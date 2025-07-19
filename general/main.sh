@@ -74,6 +74,27 @@ is_url_open_in_browser() {
   fi
 }
 
+free_up_port() {
+  local -r port="$1"
+  local -r pids=$(lsof -ti :$port)
+
+  # Skip if the port is not in use
+  [ -z "$pids" ] && return
+
+  print_in_yellow "Freeing up port $1..." -n
+
+  while IFS= read -r pid; do
+    kill "$pid"
+  done <<< "$pids"
+
+  while lsof -ti :$1; do
+    sleep 0.3
+    echo -n "."
+  done
+
+  echo ""
+}
+
 alias generate_invoice='~/.dotfiles/local/silverfin/invoice/generate'
 
 alias use_sherpa_dev_version="mkdir -p ~/.config/local_sherpa && touch ~/.config/local_sherpa/use_dev_version && rel"
