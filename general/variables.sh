@@ -1,5 +1,4 @@
 export EDITOR='code --wait'
 export SHERPA_ENABLE_DYNAMIC_ENV_FILE_PARSING=true
-export SHERPA_DUMP_ENV_ON_EDIT=true
 export HOMEBREW_AUTO_UPDATE_SECS=$((60 * 60 * 24 * 7)) # 1 week
 export HOMEBREW_NO_ENV_HINTS=1
