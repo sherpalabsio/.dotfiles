@@ -84,9 +84,9 @@ gca() {
 
   # Is commit message is provided?
   if [ -n "$1" ]; then
-    git commit -m "$*"
+    git commit -m "$*" --verbose
   else
-    git commit
+    git commit --verbose
   fi
 }
 
