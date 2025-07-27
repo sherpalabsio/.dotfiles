@@ -55,7 +55,7 @@ alias rr='r runner'
 alias rout='cat tmp/routes.txt'
 
 # Rails rout finder
-routf() {
+rails_routes_find() {
   local -r url="$1"
 
   if [ -n "$url" ]; then
