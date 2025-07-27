@@ -99,4 +99,4 @@ __command_palette__load_local_functions() {
 }
 
 zle -N __command_palette
-bindkey "^[[80;5u" __command_palette # Shift+Cmd+p
+bindkey "^[[80;9u" __command_palette # shift + cmd + p

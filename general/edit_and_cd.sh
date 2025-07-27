@@ -45,7 +45,7 @@ __edit_config() {
 }
 
 zle -N __edit_config
-bindkey '^[[113;9u' '__edit_config' # Cmd+,
+bindkey '^[[44;8u' '__edit_config' # cmd + ,
 
 __ec__select_folder() {
   local eligible_folders=($(
@@ -91,7 +91,7 @@ __edit_project() {
 }
 
 zle -N __edit_project
-bindkey "^[[112;9u" __edit_project # Cmd+p
+bindkey "^[[80;8u" __edit_project # cmd + p
 
 # Edit project not mine
 epn() {
@@ -129,7 +129,7 @@ __cd_project() {
 }
 
 zle -N __cd_project
-bindkey "^[[111;9u" __cd_project # Cmd+o
+bindkey "^[[79;8u" __cd_project # cmd + o
 
 # Open the selected project in the current terminal session and in VS Code
 __cd_and_edit_project() {
@@ -144,7 +144,7 @@ __cd_and_edit_project() {
 }
 
 zle -N __cd_and_edit_project
-bindkey "^[[111;10u" __cd_and_edit_project # Shift+Cmd+o
+bindkey "^[[79;9u" __cd_and_edit_project # shift + cmd + o
 
 # =================================== Utils ====================================
 

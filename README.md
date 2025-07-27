@@ -240,7 +240,7 @@ To check what we have:
 defaults read -g NSUserKeyEquivalents
 ```
 
-### Merge All Windows shortcut for all apps (cmd+shift+m)
+### Merge All Windows shortcut for all apps (cmd + shift + m)
 
 ```shell
 defaults write -g NSUserKeyEquivalents -dict-add "Merge All Windows" -string '@$m'

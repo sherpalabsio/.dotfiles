@@ -1,6 +1,6 @@
 # I use this tool to jump to a line in a file using VS Code.
 # For example, when an RSpec test fails, it writes the file path and line number
-# of the failed expectation to the `tmp/jumper`, then I just press `cmd+j` and
+# of the failed expectation to the `tmp/jumper`, then I just press `cmd + j` and
 # I'll be in the spec file at the line of the failed expectation.
 # The same happens when I'm looking for a translated string in a Rails app.
 
@@ -38,4 +38,4 @@ __jump() {
 }
 
 zle -N __jump
-bindkey "^[[122;9u" __jump # cmd+j
+bindkey "^[[74;8u" __jump # cmd + j

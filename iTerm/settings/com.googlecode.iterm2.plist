@@ -1718,7 +1718,7 @@
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
-			<string>[113;9u</string>
+			<string>[44;8u</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
@@ -1745,7 +1745,7 @@ Preferences...</string>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
-			<string>[111;10u</string>
+			<string>[79;9u</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
@@ -1758,7 +1758,7 @@ Preferences...</string>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
-			<string>[80;5u</string>
+			<string>[80;9u</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
@@ -1771,7 +1771,7 @@ Preferences...</string>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
-			<string>[122;9u</string>
+			<string>[74;8u</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
@@ -1784,7 +1784,7 @@ Preferences...</string>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
-			<string>[111;9u</string>
+			<string>[79;8u</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
@@ -1797,7 +1797,7 @@ Preferences...</string>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
-			<string>[112;9u</string>
+			<string>[80;8u</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
@@ -1810,7 +1810,7 @@ Preferences...</string>
 			<key>Escaping</key>
 			<integer>2</integer>
 			<key>Text</key>
-			<string>[114;9u</string>
+			<string>[82;8u</string>
 			<key>Version</key>
 			<integer>2</integer>
 		</dict>
