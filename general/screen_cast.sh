@@ -20,7 +20,7 @@ screen_cast_env__deactivate() {
 }
 
 screen_cast__resize() {
-  local -r width=${1:-640}
+  local -r width=${1:-960}
   local -r height=$((width * 9 / 16))
 
   echo "$width X $height"
