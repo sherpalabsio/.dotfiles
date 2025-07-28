@@ -1,8 +1,6 @@
 # Open a command palette with all the aliases and functions I defined by myself
 __command_palette() {
-  local commands selected_command
-
-  commands=(
+  local commands=(
     $(__command_palette__load_global_aliases)
     $(__command_palette__load_local_aliases)
     $(__command_palette__load_global_functions)
@@ -20,16 +18,20 @@ __command_palette() {
 
   commands=($(__recently_used::merge "select_my_command" "${commands[@]}"))
 
-  selected_command=$(
+  local -r result=$(
     printf "%s\n" "${commands[@]}" |
-      fzf --layout=reverse \
+      fzf --expect ctrl-_ \
+          --layout=reverse \
           --border \
           --info=inline \
           --margin=19%,11% \
           --padding=1 \
           --cycle \
-          --border-label=" Command Palette "
+          --border-label=" Command Palette " \
   )
+
+  local -r key=$(head -1 <<< "$result")
+  local selected_command=$(tail -n +2 <<< "$result")
 
   if [ -n "$selected_command" ]; then
     __recently_used::add "select_my_command" "$selected_command"
@@ -37,6 +39,9 @@ __command_palette() {
     selected_command=$(echo "$selected_command" | sed 's/^@//')
 
     LBUFFER="${LBUFFER}${selected_command}"
+
+    # Execute the command immediately if cmd + enter is pressed
+    [[ $key == "ctrl-_" ]] && zle accept-line
   fi
 
   # Refresh the prompt
