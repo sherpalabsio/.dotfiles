@@ -23,6 +23,8 @@ screen_cast__resize() {
   local -r width=${1:-960}
   local -r height=$((width * 9 / 16))
 
+  echo -e "\033]50;SetProfile=ScreenCast\a"
+
   echo "$width X $height"
 
   osascript -e '
