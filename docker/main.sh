@@ -93,7 +93,7 @@ down_others() {
   docker stop "${other_containers[@]}"
 }
 
-alias d_tmp_ubuntu="docker run --rm -it ubuntu"
+alias docker_tmp_ubuntu="docker run --rm -it ubuntu"
 
 # Start the Docker daemon if it is not running
 docker_start_daemon() {

@@ -90,8 +90,6 @@ gca() {
   fi
 }
 
-# Fixup commit
-alias gc_fixup="git log -n 50 --pretty=format:'%h %s' --no-merges | fzf | awk '{ print \$1 }' | xargs -o git commit --fixup"
 # Amend - Amend all changes to the last commit
 alias gam='git add . && git commit --amend --no-edit'
 
@@ -264,8 +262,8 @@ gcp() {
 
 # Rename the current branch locally and remotely
 # Usage:
-#   gb_rename <new_branch>
-gb_rename() {
+#   git_branch_rename <new_branch>
+git_branch_rename() {
   local -r current_branch=$(git_current_branch)
   local -r new_branch=$1
 

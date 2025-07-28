@@ -15,7 +15,6 @@ alias vlc_restore_config='rmd ~/Library/Preferences/org.videolan.vlc/vlcrc ; ln 
 
 alias k='kubectl'
 alias k_logs='kubectl logs -f'
-alias k_get='kubectl get'
 alias k_pods='kubectl get pods'
 
 alias ng='ngrok http 3000' # opens an Ngrok tunnel to the local dev env

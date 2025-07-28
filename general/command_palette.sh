@@ -11,7 +11,7 @@ __command_palette() {
   commands=(
     $(
       printf "%s\n" "${commands[@]}" |
-        awk 'length >= 4 && !/^__/' | # Remove short commands and internal functions
+        awk 'length >= 4 && !/^__/ && /_/' | # Remove short commands, internal functions, and commands without underscores
         sort
     )
   )
