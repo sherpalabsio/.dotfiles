@@ -44,7 +44,7 @@ repeat_until_fails() {
     [[ $? -ne 0 ]] && break # exit if any of the tests failed
   done
 
-  echo "FAILED: $@"
+  echo "FAILED"
 }
 
 is_url_open_in_browser() {

@@ -33,6 +33,8 @@ rspec() {
       sed 's/^[[:space:]]*//' |
       # Split by ':in' and take the first part
       awk -F':in' '{print $1}' >> tmp/jumper
+
+  return 0
 }
 
 alias rs='rspec'
@@ -54,7 +56,7 @@ alias rr='r runner'
 
 alias rout='cat tmp/routes.txt'
 
-# Rails rout finder
+# Pass in a URL to find the corresponding Rails route
 rails_routes_find() {
   local -r url="$1"
 
