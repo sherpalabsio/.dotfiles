@@ -3427,7 +3427,7 @@ Preferences...</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 14</string>
+			<string>0xProtoNF-Regular 15</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -3523,6 +3523,8 @@ Preferences...</string>
 			<key>Shortcut</key>
 			<string></string>
 			<key>Show Mark Indicators</key>
+			<false/>
+			<key>Show Offscreen Command line</key>
 			<false/>
 			<key>Show Status Bar</key>
 			<false/>
@@ -5284,9 +5286,9 @@ Preferences...</string>
 	<key>TabsHaveCloseButton</key>
 	<true/>
 	<key>TerminalMargin</key>
-	<integer>10</integer>
-	<key>TerminalVMargin</key>
 	<integer>5</integer>
+	<key>TerminalVMargin</key>
+	<integer>4</integer>
 	<key>UseLionStyleFullscreen</key>
 	<true/>
 	<key>VisualIndicatorForEsc</key>
