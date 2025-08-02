@@ -1,8 +1,62 @@
 # Peter's Dotfiles
 
-Tools and shortcuts I use to minimize manual work and maximize productivity.
+Tools and shortcuts I built for myself to automate manual work so I can focus on what matters.\
+These also help me to reduce the mental load of remembering and typing out commands.\
+No-one gets paid because they know by heart how to do connect to staging in a particular project.
 
-## Terminal prompt (Zsh)
+## Highlights
+
+All the .sh files are loaded recursively.\
+The local folder keeps everything I want to keep private, like API keys, secrets, etc.
+
+### Terminal command palette
+
+- cmd + shift + p: Open the command palette
+- It is a fuzzy search for commands I defined globally and for the current folder
+- Select a command then hit cmd + enter to paste it to the prompt and execute it
+
+### Shortcuts
+
+```shell
+# Open a Ruby, Rails, Elixir, or Phoenix console depending on the current folder
+$ c
+
+# Start docker, start the containers, offer an fzf list to select a container
+# to connect to
+$ con
+
+# Git update - for feature branch workflow
+# Update the current Git branch with changes from the upstream main branch
+# It's best to work with the most recent version of the app
+
+# Steps it follows:
+# - Pulls the latest changes to my local main and feature branch
+# - Deletes the merged branches
+# - Runs an after hook if a folder specifies one
+# (run bundle install, yarn install, migrate the DB, etc.)
+$ gupd
+
+# Git: Discard all changes
+$ nah
+
+# GitX: Open the current Git repository in SourceTree
+# It works even if the Git folder is several levels up
+$ gx
+
+# Git amend: Add all changes to the last commit. Useful for TDD
+$ gam
+
+# Git rebase interactive all: Starts an interactive rebase for all the commits
+# on the current branch
+$ grbia
+
+# Git undo: Removes the last commit without losing its changes
+$ gu
+```
+
+### Terminal prompt (Zsh)
+
+<img width="1324" height="676" src="https://github.com/user-attachments/assets/17b97ebd-834c-4864-999e-d90c2749bd30" />
 
 - When in a Git repository:
   - Normal mode: `"{top-level-directory} {git-branch}"`
@@ -13,48 +67,6 @@ Tools and shortcuts I use to minimize manual work and maximize productivity.
     - This lets me know which commit is problematic in case of a rebase conflict or which commit we stopped at during an interactive rebase
 - When not in a Git repository:
   - `"{top-level-directory}"`
-
-## Example usage
-
-### Command line tools
-
-```shell
-# Git update - for feature branch workflow
-# Update the current Git branch with changes from the upstream main branch.
-# It's best to work with the most recent version of the app.
-
-# Steps it follows:
-# - Pulls the latest changes to the local main branch from its remote counterpart
-# - Stashes all the changes if there are any
-# - Rebases the current branch to main
-# - Pulls the changes back from the stash if we stashed before
-# - Prunes the deleted remote branches
-$ gupd
-
-# Git: Discard all changes
-$ nah
-
-# GitX: Open the current Git repository in SourceTree. (don't ask why I associate GitX with SourceTree)
-# It works even if the Git folder is several levels up.
-$ gx
-
-# Git amend: Add all changes to the last commit. Very useful for TDD.
-$ gam
-
-# Git rebase interactive all: Starts an interactive rebase for all the commits
-# on the current branch.
-$ grbia
-
-# Git undo: Removes the last commit without losing its changes.
-$ gu
-
-# Git rebase fixups: squash all fixup commits into the right commits.
-$ grb_fixups
-```
-
-### Super secret stuff
-
-Put any \*.sh file into the folder named `local` and they will be loaded recursively.
 
 ### SourceTree custom actions
 
