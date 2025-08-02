@@ -32,15 +32,15 @@ grbia() {
   if [ "$(git_current_branch)" = "$(git_main_branch)" ]; then
     # Are there less than 50 commits?
     if [ $(git rev-list --count HEAD) -lt 50 ]; then
-      git rebase -i --root --autostash
+      git rebase -i --root --autostash --no-autosquash
     else
-      git rebase -i HEAD~50 --autostash
+      git rebase -i HEAD~50 --autostash --no-autosquash
     fi
     return 0
   fi
 
   local -r commit_count=$(git rev-list --count HEAD ^$(git_main_branch))
-  git rebase -i HEAD~$commit_count --autostash
+  git rebase -i HEAD~$commit_count --autostash --no-autosquash
 }
 
 # Squash fixup commits
