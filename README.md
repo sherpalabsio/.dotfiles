@@ -5,15 +5,14 @@ Tools and shortcuts I use to minimize manual work and maximize productivity.
 ## Terminal prompt (Zsh)
 
 - When in a Git repository:
-  - Normal mode: `"{top-level-directory} [{git-branch}] ❯ "`
-    - For example: "project_awesome [main] ❯ "
-    - It also adds a star after the branch name if there is any change
-  - Stopping at a commit: `"{top-level-directory} rebase-i > {target-sha} | {commit-subject} ❯ "`
-    - For example: "project_awesome rebase-i > 123456 | Fix Stripe webhook verification ❯ "
+  - Normal mode: `"{top-level-directory} {git-branch}"`
+    - For example: "project_awesome main"
+    - It also adds a ! after the branch name if there is any change
+  - Stopping at a commit: `"{top-level-directory} rebase-i > {target-sha} | {commit-subject}"`
+    - For example: "project_awesome rebase-i > 123456 | Fix Stripe webhook verification"
     - This lets me know which commit is problematic in case of a rebase conflict or which commit we stopped at during an interactive rebase
 - When not in a Git repository:
-  - `"{top-level-directory} ❯ "`
-    - For example: "project_awesome ❯ "
+  - `"{top-level-directory}"`
 
 ## Example usage
 

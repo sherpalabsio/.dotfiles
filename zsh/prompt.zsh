@@ -1,13 +1,52 @@
 # For more info see the readme
 
 autoload -Uz vcs_info
-precmd() { vcs_info }
+precmd() {
+  vcs_info
+  if git rev-parse --is-inside-work-tree &>/dev/null; then
+    directory_close="%K{$_prompt_bg2}%F{$_prompt_bg1}"
+  else
+    directory_close="%k%F{$_prompt_bg1}"
+  fi
+}
+
+_prompt_color_rosewater="#f4dbd6"
+_prompt_color_flamingo="#f0c6c6"
+_prompt_color_pink="#f5bde6"
+_prompt_color_mauve="#c6a0f6"
+_prompt_color_red="#ed8796"
+_prompt_color_maroon="#ee99a0"
+_prompt_color_peach="#f5a97f"
+_prompt_color_yellow="#eed49f"
+_prompt_color_green="#a6da95"
+_prompt_color_teal="#8bd5ca"
+_prompt_color_sky="#91d7e3"
+_prompt_color_sapphire="#7dc4e4"
+_prompt_color_blue="#8aadf4"
+_prompt_color_lavender="#b7bdf8"
+_prompt_color_text="#cad3f5"
+_prompt_color_subtext1="#b8c0e0"
+_prompt_color_subtext0="#a5adcb"
+_prompt_color_overlay2="#939ab7"
+_prompt_color_overlay1="#8087a2"
+_prompt_color_overlay0="#6e738d"
+_prompt_color_surface2="#5b6078"
+_prompt_color_surface1="#494d64"
+_prompt_color_surface0="#363a4f"
+_prompt_color_base="#24273a"
+_prompt_color_mantle="#1e2030"
+_prompt_color_crust="#181926"
+
+_prompt_bg1="$_prompt_color_peach"
+_prompt_fg1="$_prompt_color_crust"
+
+_prompt_bg2="$_prompt_color_yellow"
 
 # Define format for Git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' get-revision true
-zstyle ':vcs_info:git:*' formats '%b%f%m '
-zstyle ':vcs_info:git:*' actionformats '%a%m '
+zstyle ':vcs_info:git:*' formats " %b%m %k%F{$_prompt_bg2}"
+zstyle ':vcs_info:git:*' actionformats " %a%m %k%F{$_prompt_bg2}"
 zstyle ':vcs_info:git*+set-message:*' hooks git-changes
 
 +vi-git-changes() {
@@ -32,8 +71,8 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-changes
 
   # Do we have any changes?
   if git status --porcelain | grep -E -q '^ ?(M|A|D|R|C|\?)' &>/dev/null; then
-    hook_com[misc]='%F{white}!' # Add ! after the branch name if there are changes
+    hook_com[misc]='!' # Add ! after the branch name if there are changes
   fi
 }
 
-PROMPT='%F{blue}%1~%f %F{241}${vcs_info_msg_0_}%f❯ '
+PROMPT='%F{$_prompt_bg1}%K{$_prompt_bg1} %F{$_prompt_fg1}%1~%f $directory_close%F{$_prompt_fg1}${vcs_info_msg_0_}%k%f '
