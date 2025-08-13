@@ -9,6 +9,8 @@ rspec() {
     command rspec "$@" --format progress --format json --out tmp/jumper_rspec.json
   fi
 
+  local exit_code=$?
+
   jq -r '
     .examples[]
     | select(.status == "failed")
@@ -34,7 +36,7 @@ rspec() {
       # Split by ':in' and take the first part
       awk -F':in' '{print $1}' >> tmp/jumper
 
-  return 0
+  return $exit_code
 }
 
 alias rs='rspec'
