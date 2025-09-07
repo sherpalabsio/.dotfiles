@@ -100,3 +100,8 @@ __sherpa_palette() {
 
 zle -N __sherpa_palette
 bindkey "^[[82;8u" __sherpa_palette # cmd + r
+
+# Load Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
