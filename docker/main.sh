@@ -1,5 +1,6 @@
 # To remove all containers, images, volumes, and networks
 alias docker_nukem='docker system prune --all --volumes -f'
+alias docker_prune='docker image prune -a -f'
 
 alias dps='docker ps'
 
@@ -118,11 +119,14 @@ docker_compose_up() {
 
   docker_start_daemon
 
-  # Skip if the container(s) are already running
+  # Skip if all the containers are already running
   [ -n "$(docker compose ps -q)" ] && return
+  # [ $(docker compose ps -aq | wc -l) -eq $(docker compose ps -q | wc -l) ] && return
+
+  __stop_containers_of_other_projects
 
   echo -e "==> \e[33mStarting the container(s)...\e[0m"
-  docker-compose up -d
+  docker-compose up -d || return 1
 
   # Warn if the container(s) failed to start
   if [ -z "$(docker compose ps -q)" ]; then
@@ -136,4 +140,24 @@ docker_compose_up() {
     echo -e "\033[0;31mThe container(s) exited immediately\033[0m"
     return 1
   fi
+}
+
+__stop_containers_of_other_projects() {
+  local other_containers=()
+
+  local -r current_containers=$(docker compose ps -q)
+  local -r all_containers=($(docker ps -q))
+
+  for container in "${all_containers[@]}"; do
+    if ! [[ "$current_containers" =~ "$container" ]]; then
+      other_containers+=("$container")
+    fi
+  done
+
+  # Skip if there are no other containers
+  [ ${#other_containers[@]} -eq 0 ] && return
+
+  print_in_yellow "Stopping containers of other projects"
+
+  docker stop "${other_containers[@]}"
 }
