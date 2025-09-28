@@ -271,3 +271,17 @@ git_branch_rename() {
   git push origin :$current_branch $new_branch
   git push origin -u $new_branch
 }
+
+alias gfa="git fetch --prune"
+alias gfaa="git fetch --all --tags --prune --jobs=10"
+
+unalias gbl
+gbl() {
+  if [[ $1 =~ ^.*:[0-9]+$ ]]; then
+    local file=$(echo "$1" | sed -E 's/:([0-9]+)$//')
+    local line=$(echo "$1" | sed -E 's/^.*:([0-9]+)$/\1/')
+    git blame -w -L "$line,+1" "$file"
+  else
+    git blame -w "$@"
+  fi
+}
