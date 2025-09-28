@@ -1,3 +1,5 @@
-alt - 1 : open -a "Google Chrome"
+alt - 1 : open -a "iTerm"
 alt - 2 : open -a "Visual Studio Code"
-alt - 3 : open -a "iTerm"
+alt - 0 : open -a "Final Cut Pro"
+alt - 9 : open -a "Finder"
+alt - 8 : open -a "Google Chrome"
