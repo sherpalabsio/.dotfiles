@@ -38,15 +38,6 @@ p() {
   echo ${(P)var_name}
 }
 
-repeat_until_fails() {
-  while true; do
-    $@
-    [[ $? -ne 0 ]] && break # exit if any of the tests failed
-  done
-
-  echo "FAILED"
-}
-
 is_url_open_in_browser() {
   local -r url=$1
 

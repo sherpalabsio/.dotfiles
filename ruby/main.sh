@@ -40,6 +40,7 @@ rspec() {
 }
 
 alias rs='rspec'
+alias rsn='rspec_n -c "bin/rspec"'
 
 alias shorten_capybara_timeout='export CAPYBARA_TIMEOUT=5'
 alias reset_capybara_timeout='unset CAPYBARA_TIMEOUT'
