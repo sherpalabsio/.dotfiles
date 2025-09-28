@@ -4482,6 +4482,10 @@ Preferences...</string>
 			<string>No</string>
 			<key>Custom Directory</key>
 			<string>Recycle</string>
+			<key>Custom Tab Title</key>
+			<string> </string>
+			<key>Custom Window Title</key>
+			<string> </string>
 			<key>Default Bookmark</key>
 			<string>No</string>
 			<key>Description</key>
@@ -5057,13 +5061,13 @@ Preferences...</string>
 			<key>Mouse Reporting</key>
 			<true/>
 			<key>Name</key>
-			<string>ScreenCast</string>
+			<string></string>
 			<key>Non Ascii Font</key>
 			<string>Monaco 12</string>
 			<key>Non-ASCII Anti Aliased</key>
 			<true/>
 			<key>Normal Font</key>
-			<string>Monaco 24</string>
+			<string>0xProtoNF-Regular 24</string>
 			<key>Option Key Sends</key>
 			<integer>0</integer>
 			<key>Prompt Before Closing 2</key>
@@ -5189,7 +5193,7 @@ Preferences...</string>
 			<key>Terminal Type</key>
 			<string>xterm-256color</string>
 			<key>Title Components</key>
-			<integer>1</integer>
+			<integer>32</integer>
 			<key>Transparency</key>
 			<real>0.0</real>
 			<key>Unlimited Scrollback</key>
@@ -5200,6 +5204,10 @@ Preferences...</string>
 			<true/>
 			<key>Use Cursor Guide</key>
 			<false/>
+			<key>Use Custom Tab Title</key>
+			<true/>
+			<key>Use Custom Window Title</key>
+			<true/>
 			<key>Use Italic Font</key>
 			<true/>
 			<key>Use Non-ASCII Font</key>
