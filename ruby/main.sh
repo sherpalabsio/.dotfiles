@@ -17,6 +17,7 @@ rspec() {
     | select(.exception.backtrace | length > 0)
     | .exception.backtrace
     | map(select(startswith("./spec/")))
+    | map(select(startswith("./spec/support") | not))
     | .[0]
     | split(":in") | .[0]
   ' tmp/jumper_rspec.json > tmp/jumper
