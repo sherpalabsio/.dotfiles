@@ -87,6 +87,11 @@ bindkey '^G' 'run_lazygit'
 
 eval $(thefuck --alias)
 
+# Load Nix
+if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
+  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
+fi
+
 if [[ -f "$HOME/.config/local_sherpa/use_dev_version" ]]; then
   eval "$(~/projects/local_sherpa/local_sherpa/init)"
   SHERPA_VERSION="$SHERPA_VERSION (dev)"
@@ -100,8 +105,3 @@ __sherpa_palette() {
 
 zle -N __sherpa_palette
 bindkey "^[[82;8u" __sherpa_palette # cmd + r
-
-# Load Nix
-if [ -e '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh' ]; then
-  . '/nix/var/nix/profiles/default/etc/profile.d/nix-daemon.sh'
-fi
