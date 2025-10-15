@@ -55,7 +55,7 @@ __docker_select_container() {
 }
 
 # Connect - Connect to the primary or the only running container
-alias con='de /bin/bash'
+alias con='de /bin/bash --login'
 # Connect all - Connect to the the only running container or offer a list of
 # running containers to choose from
 alias cona='dea /bin/bash'
@@ -123,7 +123,7 @@ docker_compose_up() {
   [ -n "$(docker compose ps -q)" ] && return
   # [ $(docker compose ps -aq | wc -l) -eq $(docker compose ps -q | wc -l) ] && return
 
-  __stop_containers_of_other_projects
+  # __stop_containers_of_other_projects
 
   echo -e "==> \e[33mStarting the container(s)...\e[0m"
   docker-compose up -d || return 1

@@ -13,10 +13,6 @@ alias tma='tmux a'
 alias vlc_backup_config='mv -v ~/Library/Preferences/org.videolan.vlc/vlcrc ~/.dotfiles/others/vlc/vlcrc && ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
 alias vlc_restore_config='rmd ~/Library/Preferences/org.videolan.vlc/vlcrc ; ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
 
-alias k='kubectl'
-alias k_logs='kubectl logs -f'
-alias k_pods='kubectl get pods'
-
 alias ng='ngrok http 3000' # opens an Ngrok tunnel to the local dev env
 
 alias s='sherpa'
