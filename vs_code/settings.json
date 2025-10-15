@@ -225,4 +225,5 @@
   "window.commandCenter": false,
   "chat.commandCenter.enabled": false,
   "github.copilot.nextEditSuggestions.enabled": true,
+  "security.promptForLocalFileProtocolHandling": false
 }

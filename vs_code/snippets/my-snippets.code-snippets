@@ -77,14 +77,14 @@
     "scope": "ruby",
     "prefix": "rd",
     "body": [
-      "require 'debug'"
+      "require \"debug\""
     ]
   },
   "require debug then debug": {
     "scope": "ruby",
     "prefix": "d",
     "body": [
-      "require 'debug'",
+      "require \"debug\"",
       "debugger"
     ]
   },
