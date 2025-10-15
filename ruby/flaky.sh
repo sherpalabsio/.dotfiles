@@ -1,5 +1,5 @@
 flaky() {
-  __repeat_until_fails "bin/rspec -f d --order defined $@"
+  __repeat_until_fails "bin/rspec --error_exit_code=2 -f d --order defined $@"
 }
 
 flaky_all() {
@@ -8,12 +8,13 @@ flaky_all() {
 
 __repeat_until_fails() {
   rm -rf tmp/reports/*(N)
-  echo "" > log/test.log
 
   local counter=1
-  local -r limit=15
+  local -r limit=35
 
   while true; do
+    echo "" > log/test.log
+
     local round_message=" Round #$counter "
     local centered_message=$(__center_content "$round_message")
     echo "$centered_message"
@@ -21,9 +22,14 @@ __repeat_until_fails() {
 
     eval "$@"
 
-    [[ $? -ne 0 ]] && break # exit if any of the tests failed
+    if [[ $? -ne 0 ]]; then
+      cp log/test.log log/failed.log
+      break # exit if any of the tests failed
+    fi
 
     ((counter++))
+
+    cp log/test.log log/success.log
 
     if ((limit < counter)); then
       echo "Limit reached ($limit)..."
@@ -43,12 +49,16 @@ __center_content() {
   local content_length=${#content}
 
   # Calculate padding needed on each side
-  local total_padding=$((terminal_width - content_length))
-  local left_padding=$((total_padding / 2))
+  local total_space=$((terminal_width - content_length))
+  local left_space=$((total_space / 2))
 
   # Create the centered line with equal signs
-  local left_equals=$(printf "%*s" $left_padding "" | tr ' ' '=')
-  local right_equals=$(printf "%*s" $((total_padding - left_padding)) "" | tr ' ' '=')
+  local left_padding=$(printf "%*s" $left_space "")
+  local right_padding=$(printf "%*s" $((total_space - left_space)) "")
 
-  echo "${left_equals}${content}${right_equals}"
+
+  # printf "%*s" $terminal_width "" | tr ' ' '-'
+  printf '─%.0s' $(seq 1 $terminal_width)
+  echo "${left_padding}${content}${right_padding}"
+  printf '─%.0s' $(seq 1 $terminal_width)
 }

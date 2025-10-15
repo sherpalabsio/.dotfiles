@@ -3,10 +3,16 @@ alias be='bundle exec'
 rspec() {
   rm -f tmp/jumper_rspec.json tmp/jumper
 
+  # Check if --format or -f is already specified in the arguments
+  local format_args=()
+  if [[ ! "$*" =~ (--format|-f) ]]; then
+    format_args=(--format progress)
+  fi
+
   if [ -x "bin/rspec" ]; then
-    bin/rspec "$@" --format progress --format json --out tmp/jumper_rspec.json
+    bin/rspec "$@" "${format_args[@]}" --format json --out tmp/jumper_rspec.json
   else
-    command rspec "$@" --format progress --format json --out tmp/jumper_rspec.json
+    command rspec "$@" "${format_args[@]}" --format json --out tmp/jumper_rspec.json
   fi
 
   local exit_code=$?
