@@ -163,6 +163,15 @@
   "code-runner.showRunCommandInExplorerContextMenu": false,
   "code-runner.clearPreviousOutput": true,
 
+  "cSpell.dictionaries": [
+    "ruby",
+    "typescript",
+    "elixir",
+    "bash",
+    "shellscript",
+    "docker",
+    "sql"
+  ],
   "cSpell.enabled": true,
   "cSpell.userWords": [
     "chpwd",
