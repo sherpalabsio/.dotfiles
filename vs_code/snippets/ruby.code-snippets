@@ -1,0 +1,124 @@
+{
+  "Class from file name": {
+    "prefix": "cla",
+    "body": [
+      "class ${1:${TM_FILENAME_BASE/(?:^|_)(\\w)/${1:/capitalize}/g}}",
+      "  $0",
+      "end"
+    ],
+    "description": "Create a class with the name derived from the file name."
+  },
+  "Module from file name": {
+    "prefix": "mod",
+    "body": [
+      "module ${1:${TM_FILENAME_BASE/(?:^|_)(\\w)/${1:/capitalize}/g}}",
+      "  $0",
+      "end"
+    ],
+    "description": "Create a module with the name derived from the file name."
+  },
+
+
+  // ================================== RSpec ==================================
+
+  "let": {
+    "prefix": "let",
+    "body": [
+      "let(${1:name}) { ${2:expression} }"
+    ]
+  },
+
+  "bef": {
+    "prefix": "bef",
+    "body": [
+      "before do",
+      "  $0",
+      "end"
+    ]
+  },
+
+  "sce": {
+    "prefix": "sce",
+    "body": [
+      "scenario \"$0\" do",
+      "  ",
+      "end"
+    ]
+  },
+
+  "des": {
+    "prefix": "des",
+    "body": [
+      "describe \"$0\" do",
+      "  ",
+      "end"
+    ]
+  },
+
+  "con": {
+    "prefix": "con",
+    "body": [
+      "context \"${0:when}\" do",
+      "  ",
+      "end"
+    ]
+  },
+
+  "it": {
+    "prefix": "it",
+    "body": [
+      "it \"$0\" do",
+      "  ",
+      "end"
+    ]
+  },
+
+  "desc": {
+    "prefix": "desc",
+    "body": [
+      "described_class."
+    ]
+  },
+
+  "ex": {
+    "prefix": "ex",
+    "body": [
+      "expect(${1:subject}).to ${0:eq()}"
+    ],
+ },
+
+  "ext": {
+    "prefix": "ext",
+    "body": [
+      "expect(${1:subject}).to be_${0:empty}"
+    ],
+ },
+
+  "exb": {
+    "prefix": "exb",
+    "body": [
+      "expect {$0}.to change { }.by(1)"
+    ],
+ },
+
+  "exr": {
+    "prefix": "exr",
+    "body": [
+      "expect($1).to have_received($0)"
+    ],
+ },
+
+  "rspec_skeleton": {
+    "prefix": "rspec",
+    "body": [
+      "# frozen_string_literal: true",
+      "",
+      "require \"rails_helper\"",
+      "",
+      "RSpec.describe ${1:${TM_FILENAME_BASE/(?:^|_)([A-Za-z0-9]+)(?:_spec)?/${1:/capitalize}/g}} do",
+      "  $0",
+      "end\n"
+    ],
+    "description": "RSpec test skeleton"
+  },
+}

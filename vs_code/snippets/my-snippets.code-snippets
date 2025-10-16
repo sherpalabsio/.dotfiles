@@ -121,14 +121,6 @@
       "# rubocop:enable ${1:Layout/LineLength}"
     ]
   },
-  // RSpec
-  "described_class": {
-    "scope": "ruby",
-    "prefix": "descc",
-    "body": [
-      "described_class"
-    ]
-  },
   // Overwrites
   ".each": {
     "scope": "ruby",
