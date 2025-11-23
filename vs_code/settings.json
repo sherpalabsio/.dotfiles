@@ -150,6 +150,10 @@
     "editor.defaultFormatter": "inferrinizzard.prettier-sql-vscode"
   },
 
+  "[yaml]": {
+    "editor.formatOnSave": false,
+  },
+
   "emmet.includeLanguages": {
     "erb": "html",
     "phoenix-heex": "html"
@@ -220,6 +224,10 @@
     {
       "label": "ZFactory",
       "pattern": "spec/factories/**/*"
+    },
+    {
+      "label": "ZControllers",
+      "pattern": "app/controllers/**/*"
     }
   ],
   "window.commandCenter": false,

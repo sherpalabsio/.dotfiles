@@ -100,13 +100,8 @@
     "when": "editorHasDefinitionProvider && editorTextFocus"
   },
   {
-    "key": "alt+r",
+    "key": "cmd+r",
     "command": "quickOpenRails.open"
-  },
-  {
-    "command": "rails.fastNavigation",
-    "key": "shift+alt+r",
-    "when": "editorTextFocus"
   },
   {
     "command": "toggleVim",
@@ -122,5 +117,5 @@
         "workbench.action.openGlobalKeybindingsFile"
       ]
     }
-  },
+  }
 ]
