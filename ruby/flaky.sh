@@ -1,16 +1,18 @@
 flaky() {
-  __repeat_until_fails "bin/rspec --error_exit_code=2 -f d --order defined $@"
-}
+  local order_param=""
 
-flaky_all() {
-  __repeat_until_fails "bin/rspec -f d $@"
+  # Set default order if not provided
+  if [[ "$*" != *"--order"* ]]; then
+    order_param="--order defined"
+  fi
+  __repeat_until_fails "bin/rspec -f d $order_param $@"
 }
 
 __repeat_until_fails() {
   rm -rf tmp/reports/*(N)
 
   local counter=1
-  local -r limit=35
+  local -r limit=30
 
   while true; do
     echo "" > log/test.log
@@ -61,4 +63,20 @@ __center_content() {
   printf '─%.0s' $(seq 1 $terminal_width)
   echo "${left_padding}${content}${right_padding}"
   printf '─%.0s' $(seq 1 $terminal_width)
+}
+
+flaky__print_order_before() {
+  local target_spec="${@: -1}"  # Get the last argument as target spec
+  local other_args=("${@:1:$(($#-1))}")  # Get all arguments except the last one
+
+  bin/rspec --dry-run --format json "${other_args[@]}" | \
+    jq -r '.examples[].file_path' | \
+    awk -v target="$target_spec" '
+      {
+        print $0
+        if ($0 ~ target) exit
+      }' | \
+    sort -u | \
+    sed 's|^\./||' | \
+    tr '\n' ' '
 }

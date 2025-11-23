@@ -1,8 +1,9 @@
 # To remove all containers, images, volumes, and networks
 alias docker_nukem='docker system prune --all --volumes -f'
-alias docker_prune='docker image prune -a -f'
+alias docker_prune_images='docker image prune -af'
+alias docker_prune='docker system prune -af'
 
-alias dps='docker ps'
+alias dps='docker ps --format "table {{.Names}}\t{{.Status}}\t{{.Ports}}"'
 
 # Exec - Select a container then execute a command inside it
 # - Use the primary container if defined
@@ -24,6 +25,21 @@ de() {
 
   docker exec -it $container_name "$@"
 }
+
+# Set default container - Select a container and set it as the default for the current session
+docker_set_default_container() {
+  docker_compose_up || return
+
+  local container_name
+  container_name=$(__docker_select_container)
+
+  # Skip if we don't have a container name
+  [ -z "$container_name" ] && return
+
+  export DOCKER_CONTAINER_NAME="$container_name"
+  echo "Default container set to: $DOCKER_CONTAINER_NAME"
+}
+
 
 # Exec all - Same as 'de' but ignores a defined primary container
 dea() {
@@ -58,7 +74,7 @@ __docker_select_container() {
 alias con='de /bin/bash --login'
 # Connect all - Connect to the the only running container or offer a list of
 # running containers to choose from
-alias cona='dea /bin/bash'
+alias cona='dea /bin/bash --login'
 
 alias up="docker_start_daemon && docker-compose up -d"
 # Up build - Build the container(s) and start them

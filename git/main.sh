@@ -304,7 +304,15 @@ gbl() {
   if [[ $1 =~ ^.*:[0-9]+$ ]]; then
     local file=$(echo "$1" | sed -E 's/:([0-9]+)$//')
     local line=$(echo "$1" | sed -E 's/^.*:([0-9]+)$/\1/')
-    git blame -w -L "$line,+1" "$file"
+    local blame_output=$(git blame -w -L "$line,+1" "$file")
+    echo "$blame_output"
+
+    # Extract commit hash from blame output and show commit message
+    local commit_hash=$(echo "$blame_output" | awk '{print $1}' | grep -v '^0*$')
+    if [[ -n "$commit_hash" && "$commit_hash" != "00000000" ]]; then
+      echo $(git log -1 --pretty=format:"%C(yellow)%h%C(reset) %s" "$commit_hash")
+      echo
+    fi
   else
     git blame -w "$@"
   fi
