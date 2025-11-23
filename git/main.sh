@@ -94,7 +94,31 @@ gca() {
 alias gam='git add . && git commit --amend --no-edit'
 
 # Log
-alias gl='git log --oneline --graph'
+#
+# Usage:
+#   gl             - Shows the standard git log
+#   gl <file_path> - Shows interactive commit list for the file with diff preview
+unalias gl
+gl() {
+  if [ -z "$1" ]; then
+    git log --oneline --graph
+    return
+  fi
+
+  local file_path="$1"
+
+  if [ ! -f "$file_path" ]; then
+    echo "File not found: $file_path"
+    return 1
+  fi
+
+  git log -n 15 --pretty=format:"%cd %an - %s [%h]" --date=format:"%Y-%m-%d" --follow -- "$file_path" | \
+    fzf --reverse \
+        --cycle \
+        --header="Last 15 commits for: $file_path" \
+        --preview="echo {} | sed -n 's/.*\[\([^]]*\)\]/\1/p' | xargs -I {} git show --color=always --date=format:'%Y-%m-%d %H:%M:%S %z' {} -- '$file_path'" \
+        --preview-window=right:60% \
+}
 # Log all
 alias gla='git log --oneline --graph --all --decorate'
 # Remotes - List all remotes
