@@ -1,4 +1,11 @@
-alias o='open .' # Open current directory in Finder
+o() {
+  if [ -n "$1" ]; then
+    open "$1"
+  else
+    open .
+  fi
+}
+
 alias http_server='python -m http.server 8000'
 
 # Reload the shell (i.e. invoke as a login shell)

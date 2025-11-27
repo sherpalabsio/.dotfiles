@@ -76,7 +76,17 @@ flaky__print_order_before() {
         print $0
         if ($0 ~ target) exit
       }' | \
-    sort -u | \
+    awk '!seen[$0]++' | \
+    sed 's|^\./||' | \
+    tr '\n' ' '
+}
+
+flaky__print_order() {
+  local target_spec="${@: -1}"  # Get the last argument as target spec
+  local other_args=("${@:1:$(($#-1))}")  # Get all arguments except the last one
+
+  bin/rspec --dry-run --format json "${other_args[@]}" | \
+    jq -r '.examples[].file_path' | \
     sed 's|^\./||' | \
     tr '\n' ' '
 }

@@ -1,5 +1,12 @@
 {
   // ================ Ruby ================
+  "sleep 3": {
+    "scope": "ruby",
+    "prefix": "s",
+    "body": [
+      "sleep 3"
+    ]
+  },
   "print separator line": {
     "scope": "ruby",
     "prefix": "p",

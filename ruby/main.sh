@@ -1,3 +1,10 @@
+# To be able to install Zlib 3.2.1
+export CPPFLAGS="-I$(brew --prefix zlib)/include"
+export LDFLAGS="-L$(brew --prefix zlib)/lib"
+export RUBY_CONFIGURE_OPTS="--with-zlib-dir=$(brew --prefix zlib)"
+
+# The rest
+
 alias be='bundle exec'
 
 rspec() {

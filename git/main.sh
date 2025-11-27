@@ -90,6 +90,9 @@ gca() {
   fi
 }
 
+# Commit update - Update the last commit message
+alias gcu="git commit --amend"
+
 # Amend - Amend all changes to the last commit
 alias gam='git add . && git commit --amend --no-edit'
 
