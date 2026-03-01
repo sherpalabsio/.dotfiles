@@ -2,7 +2,7 @@
   // ================ Ruby ================
   "sleep 3": {
     "scope": "ruby",
-    "prefix": "s",
+    "prefix": "s3",
     "body": [
       "sleep 3"
     ]
@@ -87,9 +87,16 @@
       "require \"debug\""
     ]
   },
-  "require debug then debug": {
+  "debugger": {
     "scope": "ruby",
     "prefix": "d",
+    "body": [
+      "debugger"
+    ]
+  },
+  "require debug; debugger": {
+    "scope": "ruby",
+    "prefix": "dd",
     "body": [
       "require \"debug\"",
       "debugger"

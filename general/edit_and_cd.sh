@@ -11,6 +11,7 @@ e() {
 alias ec='code ~/.dotfiles'        # Edit config
 alias ecl='code ~/.dotfiles/local' # Edit config local
 alias eh='code $HISTFILE'          # Edit history
+alias eirbh='code $DROPBOX_PATH/backup/.dotfiles/.irb_history'
 alias ehr='code ~/.irb_history'    # Edit history Ruby
 
 alias ecge="__edit_config general" # Edit config Main/General
@@ -109,7 +110,7 @@ alias cdcl='cd ~/.dotfiles/local'                           # cd config local
 alias cdp='cd ~/projects'                                   # cd projects all
 alias cdps='cd ~/projects/local_sherpa/local_sherpa'        # cd project sherpa
 alias cdpm='cd ~/projects-mine'                             # cd projects mine
-alias cdpna='cd ~/projects-not-mine'                        # cd projects not mine
+alias cdpn='cd ~/projects-not-mine'                         # cd projects not mine
 alias cdr='cd "$(git rev-parse --show-toplevel || echo .)"' # cd root
 
 alias cdtu='cd ~/tutorials'

@@ -71,7 +71,14 @@ alias r='rails'
 alias rcs='c --sandbox'
 alias rr='r runner'
 
-alias rout='cat tmp/routes.txt'
+rout() {
+  if [ -f tmp/routes.txt ]; then
+    cat tmp/routes.txt
+  else
+    r routes > tmp/routes.txt
+    cat tmp/routes.txt
+  fi
+}
 
 # Pass in a URL to find the corresponding Rails route
 rails_routes_find() {
@@ -117,6 +124,7 @@ alias rgmig='r generate migration'
 alias rgmod='r generate model'
 alias rgs='r generate scaffold'
 
+alias cop='rubocop'
 alias lint='rubocop'
 alias lint_fix='rubocop --autocorrect-all'
 
@@ -125,6 +133,13 @@ rails_translation_add() {
 }
 
 # Find the file(s) where the given translated english string is referenced
-rails_translation_find() {
+rails_find() {
   $HOME/projects/tools/rails_i18n_sherpa/find_file $@
 }
+
+# To install Ruby with Apple’s toolchain not Nix clang
+# export PATH="/usr/bin:/bin:/usr/sbin:/sbin:/opt/homebrew/bin"
+# export CC=/usr/bin/clang
+# export CXX=/usr/bin/clang++
+
+# hash -r

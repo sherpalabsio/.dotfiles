@@ -2,7 +2,7 @@
 # Screen Cast Environment
 
 readonly _ORIGINAL_BACKGROUND_PATH=~/.dotfiles/local/original_background.txt
-readonly _NEW_BACKGROUND_PATH=/Volumes/DriveD/Dropbox/Empire\ -\ collect/tech/desktop_bg/610_410.png
+readonly _NEW_BACKGROUND_PATH=/Volumes/DriveD/Dropbox/Empire\ -\ collect/tech/desktop_bg/black.jpg
 
 readonly _ORIGINAL_DOCK_SIZE_PATH=~/.dotfiles/local/original_dock_size.txt
 readonly _DESIRED_DOCK_SIZE=71

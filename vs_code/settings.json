@@ -22,7 +22,7 @@
   "editor.tabCompletion": "onlySnippets",
   "editor.tabSize": 2,
 
-  "explorer.autoReveal": false,
+  "explorer.autoReveal": "focusNoScroll",
   "explorer.confirmDragAndDrop": false,
 
   "breadcrumbs.symbolPath": "off",
@@ -96,10 +96,13 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "typescript.updateImportsOnFileMove.enabled": "always",
+  "javascript.updateImportsOnFileMove.enabled": "always",
   "[vue]": {
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "esbenp.prettier-vscode"
   },
+  "vue.editor.templateInterpolationDecorators": false,
   "[json]": {
     "editor.defaultFormatter": "vscode.json-language-features"
   },
@@ -127,6 +130,28 @@
     "editor.formatOnSave": true,
     "editor.defaultFormatter": "rubocop.vscode-rubocop"
   },
+  "rubyLsp.formatter": "none",
+  "rubyLsp.linters": [],
+  "rubyLsp.enabledFeatures": {
+    "codeActions": true,
+    "diagnostics": false,
+    "documentHighlights": true,
+    "documentLink": true,
+    "documentSymbols": true,
+    "foldingRanges": true,
+    "formatting": true,
+    "hover": true,
+    "inlayHint": true,
+    "onTypeFormatting": true,
+    "selectionRanges": true,
+    "semanticHighlighting": true,
+    "completion": true,
+    "codeLens": false,
+    "definition": true,
+    "workspaceSymbol": true,
+    "signatureHelp": true,
+    "typeHierarchy": true
+  },
 
   "[phoenix-heex]": {
     "editor.formatOnSave": true,
@@ -151,7 +176,7 @@
   },
 
   "[yaml]": {
-    "editor.formatOnSave": false,
+    "editor.formatOnSave": false
   },
 
   "emmet.includeLanguages": {
@@ -199,6 +224,8 @@
   },
   "github.copilot.editor.enableAutoCompletions": true,
   "chat.editing.confirmEditRequestRemoval": false,
+  "chat.commandCenter.enabled": false,
+  "chat.viewSessions.orientation": "stacked",
 
   "shellformat.flag": "-sr -kp",
 
@@ -231,7 +258,6 @@
     }
   ],
   "window.commandCenter": false,
-  "chat.commandCenter.enabled": false,
   "github.copilot.nextEditSuggestions.enabled": true,
   "security.promptForLocalFileProtocolHandling": false
 }

@@ -111,18 +111,28 @@ gl() {
 
   local file_path="$1"
 
-  if [ ! -f "$file_path" ]; then
-    echo "File not found: $file_path"
+  # Check if git has any history for this path (works even for renamed/deleted files)
+  if ! git log -1 --follow -- "$file_path" &>/dev/null || [ -z "$(git log -1 --follow -- "$file_path" 2>/dev/null)" ]; then
+    echo "No git history found for: $file_path"
     return 1
   fi
 
-  git log -n 15 --pretty=format:"%cd %an - %s [%h]" --date=format:"%Y-%m-%d" --follow -- "$file_path" | \
+  # Get commits with their associated filenames (handles renames via --follow)
+  git log -n 15 --pretty=format:"%h" --follow --name-only -- "$file_path" | \
+    awk '/^[a-f0-9]{7,}$/ {hash=$0; next} NF {print hash, $0}' | \
+    while read -r hash fpath; do
+      info=$(git log -1 --pretty=format:"%cd %an - %s" --date=format:"%Y-%m-%d" "$hash")
+      echo "$info [$hash] |$fpath|"
+    done | \
     fzf --reverse \
         --cycle \
         --header="Last 15 commits for: $file_path" \
-        --preview="echo {} | sed -n 's/.*\[\([^]]*\)\]/\1/p' | xargs -I {} git show --color=always --date=format:'%Y-%m-%d %H:%M:%S %z' {} -- '$file_path'" \
+        --preview="hash=\$(echo {} | sed 's/.*\[\([^]]*\)\].*/\1/'); \
+                   fpath=\$(echo {} | sed 's/.*|\([^|]*\)|.*/\1/'); \
+                   git show --color=always --date=format:'%Y-%m-%d %H:%M:%S %z' \"\$hash\" -- \"\$fpath\"" \
         --preview-window=right:60% \
 }
+
 # Log all
 alias gla='git log --oneline --graph --all --decorate'
 # Remotes - List all remotes
@@ -244,8 +254,9 @@ gco() {
           --info=inline |
       xargs git checkout
   else
-    # Otherwise, fallback to the original behavior
-    git checkout $@
+    # Otherwise, fallback to the original behavior with silent error handling
+    # (fetch all branches and tags before checking out to handle the case where the branch exists remotely but not locally)
+    git checkout $@ 2>/dev/null || (git fetch origin --prune && git checkout $@)
   fi
 }
 
