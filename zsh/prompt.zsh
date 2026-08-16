@@ -2,6 +2,7 @@
 
 autoload -Uz vcs_info
 precmd() {
+  _prompt_apply_colors
   vcs_info
   if git rev-parse --is-inside-work-tree &>/dev/null; then
     directory_close="%K{$_prompt_bg2}%F{$_prompt_bg1}"
@@ -37,16 +38,47 @@ _prompt_color_base="#24273a"
 _prompt_color_mantle="#1e2030"
 _prompt_color_crust="#181926"
 
-_prompt_bg1="$_prompt_color_peach"
 _prompt_fg1="$_prompt_color_crust"
 
-_prompt_bg2="$_prompt_color_yellow"
+_prompt_default_bg1="$_prompt_color_peach"
+_prompt_default_bg2="$_prompt_color_yellow"
+
+# Per-directory colors: "<directory>" "<bg1> <bg2>"
+# Applies to the directory itself and everything below it, longest match wins
+typeset -gA _prompt_dir_colors=(
+  # Twins of the default peach/yellow: same saturation and lightness,
+  # hue spun round into the blues / greens
+  "$HOME/projects/nyomda/data_service" "#7fb0f5 #9fcdee"
+  # Green needs less saturation than the others to read as washed
+  "$HOME/projects/nyomda/print_works" "#87bd75 #abc58e"
+)
+
+_prompt_apply_colors() {
+  local dir longest=''
+
+  for dir in ${(k)_prompt_dir_colors}; do
+    [[ $PWD == $dir || $PWD == $dir/* ]] || continue
+    (( $#dir > $#longest )) && longest=$dir
+  done
+
+  if [[ -n $longest ]]; then
+    _prompt_bg1=${_prompt_dir_colors[$longest]%% *}
+    _prompt_bg2=${_prompt_dir_colors[$longest]##* }
+  else
+    _prompt_bg1=$_prompt_default_bg1
+    _prompt_bg2=$_prompt_default_bg2
+  fi
+
+  # The Git format bakes the color in, so it has to be refreshed alongside it
+  zstyle ':vcs_info:git:*' formats " %b%m %k%F{$_prompt_bg2}"
+  zstyle ':vcs_info:git:*' actionformats " %a%m %k%F{$_prompt_bg2}"
+}
+
+_prompt_apply_colors
 
 # Define format for Git
 zstyle ':vcs_info:*' check-for-changes true
 zstyle ':vcs_info:*' get-revision true
-zstyle ':vcs_info:git:*' formats " %b%m %k%F{$_prompt_bg2}"
-zstyle ':vcs_info:git:*' actionformats " %a%m %k%F{$_prompt_bg2}"
 zstyle ':vcs_info:git*+set-message:*' hooks git-changes
 
 +vi-git-changes() {
@@ -75,4 +107,5 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-changes
   fi
 }
 
-PROMPT='%F{$_prompt_bg1}%K{$_prompt_bg1} %F{$_prompt_fg1}%1~%f $directory_close%F{$_prompt_fg1}${vcs_info_msg_0_}%k%f '
+PROMPT='%F{$_prompt_bg1}%K{$_prompt_bg1}%F{$_prompt_fg1}%1~%f $directory_close%F{$_prompt_fg1}${vcs_info_msg_0_}%k%f '
+# PROMPT='%F{$_prompt_bg1}%K{$_prompt_bg1}%F{$_prompt_fg1}%1~%f$directory_close%F{$_prompt_fg1}${vcs_info_msg_0_}%k%f '
