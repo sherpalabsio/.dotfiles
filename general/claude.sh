@@ -120,9 +120,11 @@ ccdl() {
   local -a files relative_files
   files=("$docs_dir"/**/*(.N))
 
-  # A bare `return 1` from a widget only rings the bell, which looks like a crash
+  # Print the error above a fresh prompt; `zle -M` leaves it pinned under the line
   if (( ! ${#files[@]} )); then
-    zle -M "ccdl: no doc files under $docs_dir"
+    zle -I
+    print -u2 "ccdl: no doc files under $docs_dir"
+    # Non-zero rings the bell
     return 0
   fi
 
