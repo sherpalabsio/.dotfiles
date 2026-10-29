@@ -4,8 +4,12 @@ autoload -Uz vcs_info
 precmd() {
   _prompt_apply_colors
   vcs_info
-  if git rev-parse --is-inside-work-tree &>/dev/null; then
+  _prompt_dir='%1~'
+  local git_dirs=(${(f)"$(git rev-parse --path-format=absolute --show-toplevel --git-common-dir 2>/dev/null)"})
+  if (( $#git_dirs )); then
     directory_close="%K{$_prompt_bg2}%F{$_prompt_bg1}"
+    # Worktree root: main checkout name, not the branch twice
+    [[ $PWD == $git_dirs[1] && $git_dirs[2] != $PWD/.git ]] && _prompt_dir="${git_dirs[2]:h:t}+wt"
   else
     directory_close="%k%F{$_prompt_bg1}"
   fi
@@ -107,5 +111,5 @@ zstyle ':vcs_info:git*+set-message:*' hooks git-changes
   fi
 }
 
-PROMPT='%F{$_prompt_bg1}%K{$_prompt_bg1}%F{$_prompt_fg1}%1~%f $directory_close%F{$_prompt_fg1}${vcs_info_msg_0_}%k%f '
+PROMPT='%F{$_prompt_bg1}%K{$_prompt_bg1}%F{$_prompt_fg1}${_prompt_dir}%f $directory_close%F{$_prompt_fg1}${vcs_info_msg_0_}%k%f '
 # PROMPT='%F{$_prompt_bg1}%K{$_prompt_bg1}%F{$_prompt_fg1}%1~%f$directory_close%F{$_prompt_fg1}${vcs_info_msg_0_}%k%f '
