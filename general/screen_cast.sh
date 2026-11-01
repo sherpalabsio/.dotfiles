@@ -1,11 +1,8 @@
 # ==============================================================================
 # Screen Cast Environment
 
-readonly _ORIGINAL_BACKGROUND_PATH=~/.dotfiles/local/original_background.txt
+readonly _ORIGINAL_BACKGROUND_PATH=/tmp/original_background.txt
 readonly _NEW_BACKGROUND_PATH=/Volumes/DriveD/Dropbox/Empire\ -\ collect/tech/desktop_bg/black.jpg
-
-readonly _ORIGINAL_DOCK_SIZE_PATH=~/.dotfiles/local/original_dock_size.txt
-readonly _DESIRED_DOCK_SIZE=71
 
 screen_cast_env__activate() {
   # Change the background
