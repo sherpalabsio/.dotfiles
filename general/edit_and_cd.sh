@@ -83,7 +83,6 @@ __edit_project() {
 }
 
 zle -N __edit_project
-bindkey "^[[80;8u" __edit_project # cmd + p
 
 # ===================================== CD =====================================
 alias cdc='cd ~/.dotfiles'                                  # cd config
@@ -91,6 +90,8 @@ alias cdcl='cd ~/.dotfiles/local'                           # cd config local
 alias cdp='cd ~/projects'                                   # cd projects all
 alias cdpm='cd ~/projects-mine'                             # cd projects mine
 alias cdpn='cd ~/projects-not-mine'                         # cd projects not mine
+alias cdny='cd ~/projects/nyomda/print_works'
+alias cds='cd ~/projects/nyomda/data_service'
 
 alias cdt='cd ~/tmp'
 
