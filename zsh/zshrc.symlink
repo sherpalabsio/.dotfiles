@@ -50,8 +50,9 @@ zshaddhistory() {
 source "$HOME/.oh-my-zsh/oh-my-zsh.sh"
 
 # asdf config
-asdf_sh_path="$(brew --prefix asdf)/libexec/asdf.sh" # (homebrew install)
-[[ -s $asdf_sh_path ]] && source $asdf_sh_path
+# asdf_sh_path="$(brew --prefix asdf)/libexec/asdf.sh" # (homebrew install)
+# [[ -s $asdf_sh_path ]] && source $asdf_sh_path
+export PATH="$HOME/.asdf/bin:$HOME/.asdf/shims:$PATH"
 
 # Load all .sh files recursively
 _my_files=($DOTFILES_PATH/**/*.sh)
