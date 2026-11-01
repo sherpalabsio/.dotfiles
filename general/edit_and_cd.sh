@@ -73,17 +73,6 @@ __ec__select_folder() {
   echo "${selected_folder}"
 }
 
-__edit_project() {
-  local selected
-  selected=$(__select_project)
-
-  if [[ -n "$selected" ]]; then
-    code "$selected"
-  fi
-}
-
-zle -N __edit_project
-
 # ===================================== CD =====================================
 alias cdc='cd ~/.dotfiles'                                  # cd config
 alias cdcl='cd ~/.dotfiles/local'                           # cd config local
@@ -94,91 +83,3 @@ alias cdny='cd ~/projects/nyomda/print_works'
 alias cds='cd ~/projects/nyomda/data_service'
 
 alias cdt='cd ~/tmp'
-
-__cd_project() {
-  local selected
-  selected=$(__select_project)
-
-  if [[ -n "$selected" ]]; then
-    zle accept-line
-    cd "$selected"
-  fi
-}
-
-zle -N __cd_project
-bindkey "^[[79;8u" __cd_project # cmd + o
-
-# Open the selected project in the current terminal session and in VS Code
-__cd_and_edit_project() {
-  local selected
-  selected=$(__select_project)
-
-  if [[ -n "$selected" ]]; then
-    zle accept-line
-    cd "$selected"
-    code .
-  fi
-}
-
-zle -N __cd_and_edit_project
-bindkey "^[[79;9u" __cd_and_edit_project # shift + cmd + o
-
-# =================================== Utils ====================================
-
-__DOTFILES_BOOKMARK_FILE="$DOTFILES_PATH/tmp/project_bookmarks"
-
-setopt null_glob
-
-add_project_bookmark() {
-  local -r current_path="$(pwd)"
-
-  # Skip if already bookmarked
-  if grep -Fq "$current_path|" "$__DOTFILES_BOOKMARK_FILE"; then
-    return 0
-  fi
-
-  local name="$1"
-  if [ -z "$name" ]; then
-    name=$(
-      echo "$current_path" |
-        sed -e "s|^$HOME/projects/||" -e "s|^$HOME/projects-not-mine/||"
-    )
-  fi
-
-  echo "$current_path|$name" >> "$__DOTFILES_BOOKMARK_FILE"
-}
-
-edit_project_bookmarks() {
-  code "$__DOTFILES_BOOKMARK_FILE"
-}
-
-remove_project_bookmark() {
-  local -r current_dir=$(pwd)
-  sed -i '' "/^${current_dir//\//\\/}/d" "$__DOTFILES_BOOKMARK_FILE"
-}
-
-__select_project() {
-  local -r selected_bookmark=$(
-    cat "$__DOTFILES_BOOKMARK_FILE" |
-      fzf --delimiter='\|' \
-          --with-nth=2 \
-          --layout=reverse \
-          --border \
-          --info=inline \
-          --margin=19%,11% \
-          --padding=1 \
-          --cycle \
-          --border-label=" Projects "
-  )
-
-  [ -z "$selected_bookmark" ] && return
-
-  # Move the selected project to the top of the bookmarks file
-  local -r temp_file=$(mktemp)
-  grep -Fxv "$selected_bookmark" "$__DOTFILES_BOOKMARK_FILE" > "$temp_file"
-  echo "$selected_bookmark" > "$__DOTFILES_BOOKMARK_FILE"
-  cat "$temp_file" >> "$__DOTFILES_BOOKMARK_FILE"
-  rm "$temp_file"
-
-  echo "$selected_bookmark" | cut -d'|' -f1
-}

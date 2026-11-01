@@ -1,22 +1,11 @@
 alias cc="claude --dangerously-skip-permissions"
 
-# `ccr` resumes; any extra words become the picker's search term: `ccr asd asd`
-function ccr() {
-  if (( $# )); then
-    claude --dangerously-skip-permissions --resume "$*"
-  else
-    claude --dangerously-skip-permissions --resume
-  fi
-}
-
 alias manual_test_mr='cc "/mr-test-manual"'
 
 # Takes any number of context names: `ccc engine strategies/shelf`
 function ccc() {
   claude --dangerously-skip-permissions "/ctx-old $*"
 }
-
-alias cc_fork="cc --resume --fork-session"
 
 alias ccd='cc "/ctx"'
 
@@ -184,125 +173,9 @@ ccdl() {
 zle -N ccdl
 bindkey "^[[80;8u" ccdl # cmd + p
 
-# Turn transcript entries into the prompt text a human actually typed
-__CCRM_JQ_PRELUDE='
-  def clean:
-    gsub("<command-message>[^<]*</command-message>"; "")
-    | gsub("<command-name>(?<n>[^<]*)</command-name>"; "\(.n)")
-    | gsub("<command-args>(?<a>[^<]*)</command-args>"; " \(.a)")
-    | gsub("<[^>]*>"; " ")
-    | gsub("\\s+"; " ")
-    | sub("^ +"; "") | sub(" +$"; "");
-
-  def prompts:
-    [ .[]
-      | select(.type == "user" and (.isMeta | not) and (.isSidechain | not))
-      | (.message.content
-         | if type == "string" then . else [.[] | select(.type == "text").text] | join("\n") end)
-      | clean
-      | select(length > 0)
-    ];
-'
-
-__ccrm_ago() {
-  local -i secs=$(( EPOCHSECONDS - $1 ))
-  (( secs < 0 )) && secs=0
-
-  if (( secs < 3600 )); then
-    print -r -- "$(( secs / 60 ))m ago"
-  elif (( secs < 86400 )); then
-    print -r -- "$(( secs / 3600 ))h ago"
-  elif (( secs < 86400 * 30 )); then
-    print -r -- "$(( secs / 86400 ))d ago"
-  else
-    print -r -- "$(( secs / (86400 * 30) ))mo ago"
-  fi
-}
-
-# One row per session, newest first: transcript path <TAB> the columns fzf shows
-__ccrm_rows() {
-  local -a transcripts=("$1"/*.jsonl(.N))
-  (( $#transcripts )) || return 0
-
-  local transcript created branch prompt title line file value
-  local -a stats
-  local -A messages custom generated
-
-  # Process startup dominates here, so scan every file in one grep instead of
-  # spawning a pair per session
-  for line in ${(f)"$(grep -cH '"type":"user"' -- $transcripts)"}; do
-    messages[${line%:*}]=${line##*:}
-  done
-
-  # Titles can be rewritten mid session, so the last one in a file wins, and a
-  # /rename always outranks the generated title
-  for line in ${(f)"$(grep -oH -e '"customTitle":"[^"]*"' -e '"aiTitle":"[^"]*"' -- $transcripts)"}; do
-    file=${line%%:*}
-    value=${${line#*:*:\"}%\"}
-
-    if [[ $line == *'"customTitle":'* ]]; then
-      custom[$file]=$value
-    else
-      generated[$file]=$value
-    fi
-  done
-
-  for transcript in $transcripts; do
-    created= branch= prompt=
-    zstat -A stats +mtime "$transcript"
-    title=${custom[$transcript]:-${generated[$transcript]}}
-
-    # The head of the file holds all we need except the message count, and
-    # reading multi-megabyte transcripts in full is too slow for a picker
-    IFS=$'\t' read -r created branch prompt < <(
-      head -n 400 "$transcript" | jq -rs "
-        $__CCRM_JQ_PRELUDE
-        [ .[] | select(.timestamp).timestamp | sub(\"\\\\.[0-9]+Z\$\"; \"Z\") | fromdateiso8601 ] as \$times
-        | [ .[] | select(.gitBranch != null).gitBranch ] as \$branches
-        | [ prompts[] | select(. != \"/clear\") ] as \$asked
-        | (\$asked[0] // \"(no prompt)\") as \$first
-        | [ (\$times[0] // 0 | tostring),
-            (\$branches[0] // \"-\"),
-            # A bare '/ctx' tells nothing, so pull in the next prompt as well
-            (if (\$first | length) < 30 and (\$asked[1] // \"\") != \"\"
-             then \$first + \"  ·  \" + \$asked[1] else \$first end)
-          ] | @tsv
-      " 2>/dev/null
-    )
-
-    # Untitled sessions fall back to the first thing that was asked
-    [[ -n "$title" ]] || title=${prompt:-(no prompt)}
-
-    # The title is repeated as its own field so fzf can search it alone
-    printf '%s\t %-8s %-8s %5s  %-26.26s\t%s\t%s\n' \
-      "$stats[1]" \
-      "$(__ccrm_ago $stats[1])" \
-      "$(__ccrm_ago ${created:-$stats[1]})" \
-      "${messages[$transcript]:-0}" \
-      "${branch:--}" \
-      "$title" \
-      "$transcript"
-  done | sort -rn | cut -f2-
-}
-
-__ccrm_confirm() {
-  local -a lines=("$@")
-
-  [[ $(print -l "Delete" "Cancel" | fzf \
-        --height=$(( $#lines + 7 )) \
-        --tabstop=1 \
-        --layout=reverse \
-        --border \
-        --border-label=" Confirm " \
-        --header="${(F)lines}" \
-        --header-first \
-        --pointer='>' \
-        --no-info) == Delete ]]
-}
-
 # Projects can point Claude Code at their own config dir, so try those before
 # the global one and take whichever actually holds transcripts
-__ccrm_sessions_dir() {
+__claude_sessions_dir() {
   local -r slug="${1//[^a-zA-Z0-9]/-}"
   local config_dir sessions_dir fallback
   local -a transcripts
@@ -325,72 +198,40 @@ __ccrm_sessions_dir() {
   print -r -- "$fallback"
 }
 
-# Claude code rm: fzf-pick sessions of a project and delete their transcripts
-ccrm() {
-  local -r project_path="${${1:-$PWD}:A}"
+# Claude session opener: fzf over this project's sessions, newest first.
+# Enter: resume   Ctrl-F: fork   Ctrl-K: delete on the spot   Ctrl-B: this branch only
+__claude_sessions() {
+  local -r script=~/.dotfiles/general/claude_sessions.zsh
   local sessions_dir
-
-  if ! sessions_dir=$(__ccrm_sessions_dir "$project_path"); then
-    print -u2 "No Claude Code sessions for $project_path"
-    return 1
+  if ! sessions_dir=$(__claude_sessions_dir "$PWD"); then
+    zle -M "No Claude Code sessions for $PWD"
+    return 0
   fi
 
-  zmodload zsh/stat
-  zmodload zsh/datetime
+  # fzf runs the script again on each key, so it needs these too
+  local -x CCP_DIR=$sessions_dir CCP_BRANCH=$(git branch --show-current 2>/dev/null)
+  local -a out
+  out=("${(@f)$(
+    $script list | fzf \
+        --read0 --ansi --gap \
+        --delimiter=$'\t' --with-nth=2.. \
+        --layout=reverse --border --info=inline \
+        --margin=19%,11% --padding=1 --cycle \
+        --border-label=" Claude sessions: ${PWD:t} " \
+        --prompt='all > ' \
+        --expect=ctrl-f \
+        --bind="ctrl-k:transform:$script delete {1}" \
+        --bind="ctrl-b:transform:$script toggle"
+  )}")
 
-  export CCRM_JQ_PRELUDE="$__CCRM_JQ_PRELUDE"
+  local -r key=$out[1] id=${${out[2]%%$'\t'*}:t:r}
+  if [[ -n $id ]]; then
+    BUFFER="cc --resume $id"
+    [[ $key == ctrl-f ]] && BUFFER+=" --fork-session"
+    zle accept-line
+  fi
 
-  local rows picked transcript
-  local -a selected transcripts labels
-
-  while true; do
-    rows=$(__ccrm_rows "$sessions_dir")
-
-    if [[ -z "$rows" ]]; then
-      print -r -- "No sessions left in $sessions_dir"
-      break
-    fi
-
-    picked=$(print -r -- "$rows" | fzf \
-      --multi \
-      --delimiter=$'\t' \
-      --with-nth=..2 \
-      --nth=2 \
-      --tabstop=1 \
-      --layout=reverse \
-      --border \
-      --border-label=" Claude Code sessions: ${project_path:t} " \
-      --header=$' Modified Created   Msgs  Branch                     Title\n Tab: mark / unmark   Ctrl-A: mark all   Enter: delete marked   Esc: quit' \
-      --header-first \
-      --cycle \
-      --bind='ctrl-a:toggle-all' \
-      --marker='✓' \
-      --pointer='▸' \
-      --color='marker:bright-green,pointer:bright-blue' \
-      --info=inline-right \
-      --preview-window='down,60%,wrap' \
-      --preview 'head -n 4000 {3} | jq -rs "
-          $CCRM_JQ_PRELUDE
-          prompts | to_entries[] | \"[\(.key + 1)] \(.value[0:800])\n\"
-        "')
-
-    # Esc gives an empty string, and splitting that would yield one empty row
-    [[ -n "$picked" ]] || break
-
-    selected=("${(f)picked}")
-    transcripts=("${(@)selected##*$'\t'}")
-    labels=("${(@)selected%$'\t'*}")
-
-    if __ccrm_confirm "Delete $#transcripts session(s)?  (Esc: back to the list)" "" $labels ""; then
-      for transcript in $transcripts; do
-        rm -f  "$transcript"
-        # Sidecar folder with the tool results of the session
-        rm -rf "${transcript%.jsonl}"
-      done
-      print -r -- "Deleted $#transcripts session(s)"
-      break
-    fi
-  done
-
-  unset CCRM_JQ_PRELUDE
+  zle reset-prompt
 }
+zle -N __claude_sessions
+bindkey "^[[79;8u" __claude_sessions # cmd + o

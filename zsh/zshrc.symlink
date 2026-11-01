@@ -21,6 +21,7 @@ setopt HIST_FIND_NO_DUPS    # When searching for history entries, show matching 
 setopt HIST_IGNORE_ALL_DUPS # Remove duplicates before adding a new entry
 setopt HIST_IGNORE_SPACE    # Don't save commands starting with a space
 setopt HIST_IGNORE_DUPS     # Don't save the command if it was just run
+setopt NULL_GLOB           # A glob that matches nothing expands to nothing
 setopt HIST_SAVE_NO_DUPS
 setopt HIST_EXPIRE_DUPS_FIRST # Expire duplicate entries before unique ones when trimming history
 
