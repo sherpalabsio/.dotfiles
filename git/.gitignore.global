@@ -16,4 +16,4 @@
 # Project specific cSpell configuration
 .vscode/cspell.json
 
-.rspec_n
+CLAUDE.local.md
