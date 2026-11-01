@@ -11,15 +11,6 @@ e() {
 alias ec='code ~/.dotfiles'        # Edit config
 alias ecl='code ~/.dotfiles/local' # Edit config local
 alias eh='code $HISTFILE'          # Edit history
-alias eirbh='code $DROPBOX_PATH/backup/.dotfiles/.irb_history'
-alias ehr='code ~/.irb_history'    # Edit history Ruby
-
-alias ecge="__edit_config general" # Edit config Main/General
-alias ecgi="__edit_config git"     # Edit config Git
-alias ecd="__edit_config docker"   # Edit config Rails
-alias ecr="__edit_config ruby"     # Edit config Ruby
-alias ece="__edit_config elixir"   # Edit config Elixir
-alias ecv="__edit_config vs_code"  # Edit config VS Code
 
 # Edit config (.dotfiles)
 # It offers a list of folders in the dotfiles directory sorted by most recently
@@ -94,28 +85,12 @@ __edit_project() {
 zle -N __edit_project
 bindkey "^[[80;8u" __edit_project # cmd + p
 
-# Edit project not mine
-epn() {
-  local selected
-  selected=$(__select_project ~/projects-not-mine)
-
-  if [[ -n "$selected" ]]; then
-    code "$selected"
-  fi
-}
-
 # ===================================== CD =====================================
 alias cdc='cd ~/.dotfiles'                                  # cd config
 alias cdcl='cd ~/.dotfiles/local'                           # cd config local
 alias cdp='cd ~/projects'                                   # cd projects all
-alias cdps='cd ~/projects/local_sherpa/local_sherpa'        # cd project sherpa
 alias cdpm='cd ~/projects-mine'                             # cd projects mine
 alias cdpn='cd ~/projects-not-mine'                         # cd projects not mine
-alias cdr='cd "$(git rev-parse --show-toplevel || echo .)"' # cd root
-
-alias cdtu='cd ~/tutorials'
-alias cdtj='cd ~/tutorials/js'
-alias cdtr='cd ~/tutorials/ruby'
 
 alias cdt='cd ~/tmp'
 

@@ -16,16 +16,6 @@ grbi() {
   fi
 }
 
-# Rebase interactively the last n commits
-alias grbi2='grbi HEAD~2 --autostash'
-alias grbi3='grbi HEAD~3 --autostash'
-alias grbi4='grbi HEAD~4 --autostash'
-alias grbi5='grbi HEAD~5 --autostash'
-alias grbi6='grbi HEAD~6 --autostash'
-alias grbi7='grbi HEAD~7 --autostash'
-alias grbi8='grbi HEAD~8 --autostash'
-alias grbi9='grbi HEAD~9 --autostash'
-
 # Rebase interactive all - Rebase all commits of the current feature branch interactively
 grbia() {
   # If the current branch is the main branch, then return
@@ -42,9 +32,6 @@ grbia() {
   local -r commit_count=$(git rev-list --count HEAD ^$(git_main_branch))
   git rebase -i HEAD~$commit_count --autostash --no-autosquash
 }
-
-# Squash fixup commits
-alias grb_fixup='git rebase -i --autosquash $(git_main_branch)'
 
 # Rebase continue all - Continue the rebase without editing the commit message
 alias grbca='git add --all && GIT_EDITOR=true git rebase --continue'
@@ -89,10 +76,6 @@ gca() {
     git commit --verbose
   fi
 }
-
-# Commit update - Update the last commit message
-alias gcu="git commit --amend"
-alias gce="git commit --amend"
 
 # Amend - Amend all changes to the last commit
 alias gam='git add . && git commit --amend --no-edit'
@@ -192,32 +175,6 @@ alias gpc='git -C ~/.dotfiles push'
 # Push config local
 alias gpcl='git -C ~/.dotfiles/local push'
 
-# Bisect start
-alias gbss="gbs_start"
-# Bisect abort
-alias gbsa="git bisect reset"
-# Bisect good
-alias gbsg="git bisect old"
-# Bisect bad
-alias gbsb="git bisect new"
-
-# Bisect start - Start a bisect session
-#
-# Usage:
-#   gbs_start          - Start a bisect session with the commit selected interactively
-#   gbs_start <commit> - Start a bisect session with the provided commit
-gbs_start() {
-  if [ -n "$1" ]; then
-    local -r target_commit="$1"
-  else
-    local -r target_commit=$(git log -n 100 --oneline | fzf | awk '{print $1}')
-  fi
-
-  git bisect start
-  git bisect old "$target_commit"
-  git bisect new
-}
-
 # Diff remote
 #
 # Compare the current branch with its remote counterpart after fixing conflicts.
@@ -260,44 +217,8 @@ gco() {
   fi
 }
 
-# Checkout all - List the branches with less filtering
-gcoa() {
-  # Skip if not a git repository
-  [ ! -d .git ] && return
-
-  git branch |
-    grep -v "^\*" | # Exclude the current branch
-    grep -v "$(git_main_branch)" | # Exclude the main branch
-    sort -r |
-    fzf --height=20% \
-        --reverse \
-        --cycle \
-        --select-1 \
-        --info=inline |
-    xargs git checkout
-}
-
 # Checkout back
 alias gcb="git checkout -"
-
-# Cherry-pick
-#
-# Usage:
-#   gcp          - List all the branches and let the user select one
-#   gcp <commit> - Cherry-pick the provided commit
-unalias gcp
-gcp() {
-  if [ -z "$1" ]; then
-    # List all the branches and let the user select one if no arguments are provided
-    git log -n 200 --oneline --graph --all |
-      fzf --height=20% --reverse --info=inline |
-      grep -o "[a-f0-9]\{7\}" | sed -n "1p" |
-      xargs git cherry-pick
-  else
-    # Otherwise, fallback to the original behavior
-    git cherry-pick $@
-  fi
-}
 
 # Rename the current branch locally and remotely
 # Usage:

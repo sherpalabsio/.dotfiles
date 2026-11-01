@@ -86,7 +86,7 @@ rollb() {
     mix ecto.rollback
   # Is this a Rails project?
   elif [ -f Gemfile ]; then
-    rails_rollback "$@"
+    rollb_default
   else
     echo "Not an Elixir or Rails project"
   fi

@@ -54,7 +54,6 @@ rspec() {
 }
 
 alias rs='rspec'
-alias rsn='rspec_n -c "bin/rspec"'
 
 alias shorten_capybara_timeout='export CAPYBARA_TIMEOUT=5'
 alias reset_capybara_timeout='unset CAPYBARA_TIMEOUT'
@@ -101,36 +100,11 @@ alias rollb_default='r db:rollback'
 
 alias rollbt='RAILS_ENV=test r db:rollback'
 
-rails_rollback() {
-  local -r version="$1"
-
-  if [ -n "$version" ]; then
-    rollb_version $version
-  else
-    rollb_default
-  fi
-}
-
 rails_rollback_version() {
   r db:migrate:down VERSION=$1
 }
 
 alias seed='r db:seed'
-
-alias rg='r generate'
-alias rgs='r generate service'
-alias rgc='r generate controller'
-alias rgmig='r generate migration'
-alias rgmod='r generate model'
-alias rgs='r generate scaffold'
-
-alias cop='rubocop'
-alias lint='rubocop'
-alias lint_fix='rubocop --autocorrect-all'
-
-rails_translation_add() {
-  $HOME/projects/tools/rails_i18n_sherpa/add_or_update $1
-}
 
 # Find the file(s) where the given translated english string is referenced
 rails_find() {

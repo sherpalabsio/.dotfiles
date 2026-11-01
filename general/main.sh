@@ -14,8 +14,6 @@ alias rel="exec $SHELL -l"
 # Remove directory
 alias rmd="rm -rf"
 
-alias tm='tmux'
-alias tma='tmux a'
 
 alias vlc_backup_config='mv -v ~/Library/Preferences/org.videolan.vlc/vlcrc ~/.dotfiles/others/vlc/vlcrc && ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'
 alias vlc_restore_config='rmd ~/Library/Preferences/org.videolan.vlc/vlcrc ; ln -s ~/.dotfiles/others/vlc/vlcrc ~/Library/Preferences/org.videolan.vlc/vlcrc'

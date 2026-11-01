@@ -9,11 +9,7 @@ function ccr() {
   fi
 }
 
-alias ccu="cc \"/usage\""
 alias manual_test_mr='cc "/mr-test-manual"'
-
-# Claude Code temp
-alias cct="cc \"/clear\" --resume \"TMP 1\""
 
 # Takes any number of context names: `ccc engine strategies/shelf`
 function ccc() {
@@ -23,9 +19,6 @@ function ccc() {
 alias cc_fork="cc --resume --fork-session"
 
 alias ccd='cc "/ctx-old"'
-
-alias ecc='code /Users/peter/.dotfiles/local/silverfin/Claude'
-alias eccg='code /Users/peter/.claude'
 
 # Claude code list: fzf-pick a .claude/context(s)/**/* file, paste `ccc <name>` and run it
 ccl() {

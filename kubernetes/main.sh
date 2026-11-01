@@ -1,4 +1,3 @@
-alias k='kubectl'
 alias klogs='kubectl logs -f'
 alias pods='kubectl get pods'
 
@@ -18,4 +17,3 @@ kube_change_context() {
   [[ -n "$ctx" ]] && kubectl config use-context "$ctx"
 }
 
-alias kcont="kubectl config current-context"
