@@ -18,7 +18,7 @@ function ccc() {
 
 alias cc_fork="cc --resume --fork-session"
 
-alias ccd='cc "/ctx-old"'
+alias ccd='cc "/ctx"'
 
 # Claude code list: fzf-pick a .claude/context(s)/**/* file, paste `ccc <name>` and run it
 ccl() {
@@ -112,6 +112,7 @@ ccdl() {
   local -r docs_dir="$(git rev-parse --show-toplevel 2>/dev/null || pwd)/${CLAUDE_DOCS_DIR:-doc}"
   local -a files relative_files
   files=("$docs_dir"/**/*(.N))
+  files=(${files:#*_journal.md})
 
   # Print the error above a fresh prompt; `zle -M` leaves it pinned under the line
   if (( ! ${#files[@]} )); then
